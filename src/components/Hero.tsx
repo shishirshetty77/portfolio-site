@@ -53,7 +53,7 @@ export function Hero() {
       style={{
         background: theme === 'dark' 
           ? 'linear-gradient(45deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #1a1a2e 100%)'
-          : 'linear-gradient(45deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #f1f5f9 75%, #f8fafc 100%)'
+          : 'linear-gradient(45deg, #FFF8DC 0%, #FEF3C7 25%, #F4E4C7 50%, #FFF8DC 75%, #FEF3C7 100%)'
       }}
     >
       {/* Invisible clickable div */}
@@ -181,7 +181,7 @@ export function Hero() {
         />
       </div>
 
-      {/* Theme Toggle */}
+      {/* Theme Toggle - Stylish Switch */}
       <motion.button
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -189,20 +189,102 @@ export function Hero() {
         onClick={toggleTheme}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
-        className="fixed top-8 right-8 z-50 p-4 rounded-full bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/20 dark:border-gray-700 hover:bg-white/20 dark:hover:bg-gray-700/50 transition-all duration-300 group"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="fixed top-6 right-6 z-50 group"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <motion.div
-          animate={{ rotate: theme === 'dark' ? 0 : 180 }}
-          transition={{ duration: 0.5, type: "spring" }}
-        >
-          {theme === 'dark' ? (
-            <Sun className="w-6 h-6 text-yellow-400" />
-          ) : (
-            <Moon className="w-6 h-6 text-gray-700" />
-          )}
-        </motion.div>
+        {/* Switch Container */}
+        <div className="relative w-16 h-8 bg-gradient-to-r from-amber-200 to-orange-300 dark:from-indigo-600 dark:to-purple-700 rounded-full p-1 transition-all duration-500 shadow-lg">
+          {/* Switch Track */}
+          <div className="absolute inset-1 bg-white/20 dark:bg-black/20 rounded-full transition-all duration-500" />
+          
+          {/* Switch Thumb */}
+          <motion.div
+            className="relative w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center transition-all duration-500"
+            animate={{
+              x: theme === 'dark' ? 24 : 0,
+            }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          >
+            {/* Icon */}
+            <motion.div
+              animate={{ 
+                rotate: theme === 'dark' ? 360 : 0,
+                scale: theme === 'dark' ? 1.1 : 1
+              }}
+              transition={{ duration: 0.5, type: "spring" }}
+              className="text-xs"
+            >
+              {theme === 'dark' ? '🦉' : '☀️'}
+            </motion.div>
+          </motion.div>
+          
+          {/* Background Stars for Dark Mode */}
+          <AnimatePresence>
+            {theme === 'dark' && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 overflow-hidden rounded-full"
+              >
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white rounded-full"
+                    style={{
+                      left: `${20 + i * 20}%`,
+                      top: `${30 + i * 20}%`,
+                    }}
+                    animate={{
+                      opacity: [0.3, 1, 0.3],
+                      scale: [0.8, 1.2, 0.8]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: i * 0.5
+                    }}
+                  />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          {/* Background Rays for Light Mode */}
+          <AnimatePresence>
+            {theme === 'light' && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 overflow-hidden rounded-full"
+              >
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-px h-2 bg-yellow-400 origin-bottom"
+                    style={{
+                      left: '50%',
+                      bottom: '50%',
+                      transform: `translateX(-50%) rotate(${i * 60}deg)`,
+                      transformOrigin: 'bottom center'
+                    }}
+                    animate={{
+                      opacity: [0.5, 1, 0.5],
+                      scale: [0.8, 1.2, 0.8]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: i * 0.1
+                    }}
+                  />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </motion.button>
 
       {/* Main Content */}

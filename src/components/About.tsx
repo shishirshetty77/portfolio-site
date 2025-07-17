@@ -6,7 +6,10 @@ import { Download, User, Code, Heart } from 'lucide-react'
 export function About() {
   return (
     <section id="about" className="py-20 px-4 relative">
-      <div className="max-w-6xl mx-auto">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

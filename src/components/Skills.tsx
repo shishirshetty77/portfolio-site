@@ -36,7 +36,7 @@ export function Skills() {
   return (
     <section id="skills" className="py-20 px-4 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-800 dark:via-gray-900 dark:to-purple-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-purple-900/20" />
       
       {/* Floating Orbs */}
       <div className="absolute inset-0 overflow-hidden">
@@ -125,6 +125,17 @@ export function Skills() {
                   y: -30,
                   textShadow: "0 0 20px rgba(59, 130, 246, 0.6)",
                   transition: { duration: 0.2 }
+                }}
+                animate={{
+                  y: [0, -15, 0],
+                  x: [0, Math.sin(index * 0.5) * 10, 0],
+                  rotate: [0, Math.sin(index * 0.3) * 5, 0]
+                }}
+                transition={{
+                  duration: 4 + (index % 3),
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.2
                 }}
                 className={`
                   text-2xl md:text-3xl font-bold cursor-pointer select-none

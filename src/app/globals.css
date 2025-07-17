@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme - warm pastel background */
+  --background: #FFF8DC; /* Warm cream */
+  --foreground: #2D1B2B; /* Dark wine */
+  --background-soft: #FEF3C7; /* Soft yellow */
+  --background-accent: #F4E4C7; /* Light amber */
+  --text-primary: #2D1B2B;
+  --text-secondary: #5D4037;
+  --text-muted: #8D6E63;
 }
 
 @theme inline {
@@ -16,14 +22,67 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --background-soft: #1a1a1a;
+    --background-accent: #2a2a2a;
+    --text-primary: #ededed;
+    --text-secondary: #cccccc;
+    --text-muted: #999999;
   }
+}
+
+/* Theme-specific styles */
+.light {
+  --background: #FFF8DC;
+  --foreground: #2D1B2B;
+  --background-soft: #FEF3C7;
+  --background-accent: #F4E4C7;
+  --text-primary: #2D1B2B;
+  --text-secondary: #5D4037;
+  --text-muted: #8D6E63;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --background-soft: #1a1a1a;
+  --background-accent: #2a2a2a;
+  --text-primary: #ededed;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, cursor 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  line-height: 1.6;
+}
+
+/* Light mode specific typography */
+body:not(.dark) {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+body:not(.dark) h1,
+body:not(.dark) h2,
+body:not(.dark) h3,
+body:not(.dark) h4,
+body:not(.dark) h5,
+body:not(.dark) h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+body:not(.dark) p {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+body:not(.dark) .text-muted {
+  color: var(--text-muted);
 }
 
 /* Cat Mode Styles */
