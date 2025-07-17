@@ -26,23 +26,31 @@ export function CatModeProvider({ children }: { children: React.ReactNode }) {
       const savedCatMode = localStorage.getItem('catMode') === 'true'
       setIsCatMode(savedCatMode)
       
-      // TODO: Add meow sound functionality later
-      // For now, disable audio to avoid base64 encoding issues
-      // const sound = new Howl({
-      //   src: ['/path/to/meow.wav'], // Use actual audio file instead
-      //   volume: 0.5,
-      //   preload: false
-      // })
-      // setMeowSound(sound)
+      // Initialize cat meow sound
+      const sound = new Howl({
+        src: ['/cat.wav'], // Using cat.wav from public folder
+        volume: 0.8,
+        preload: true,
+        onload: () => {
+          console.log('Cat sound loaded successfully')
+        },
+        onloaderror: (id, error) => {
+          console.error('Error loading cat sound:', error)
+        },
+        onplayerror: (id, error) => {
+          console.error('Error playing cat sound:', error)
+        }
+      })
+      setMeowSound(sound)
 
       // Apply cat mode styles if active
       if (savedCatMode) {
         document.body.classList.add('cat-mode')
       }
 
-      // Cleanup function - no sound to unload for now
+      // Cleanup function
       return () => {
-        // if (sound) sound.unload()
+        if (sound) sound.unload()
       }
     }
   }, [])
@@ -97,9 +105,28 @@ export function CatModeProvider({ children }: { children: React.ReactNode }) {
   const activateCatMode = () => {
     setIsCatMode(true)
     
-    // Play meow sound
+    // Play meow sound with error handling
     if (meowSound) {
-      meowSound.play()
+      try {
+        console.log('Attempting to play cat sound...')
+        const playResult = meowSound.play()
+        
+        // Handle promise-based play result
+        if (playResult && typeof playResult.then === 'function') {
+          playResult.catch((error) => {
+            console.error('Failed to play cat sound:', error)
+            // Fallback: try to unlock audio context on user interaction
+            meowSound.once('unlock', () => {
+              console.log('Audio context unlocked, retrying...')
+              meowSound.play()
+            })
+          })
+        }
+      } catch (error) {
+        console.error('Error playing cat sound:', error)
+      }
+    } else {
+      console.warn('Meow sound not initialized')
     }
     
     // Trigger paw print confetti
