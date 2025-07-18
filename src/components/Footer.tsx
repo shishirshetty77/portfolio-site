@@ -7,18 +7,18 @@ export default function Footer() {
   const { toggleCatMode } = useCatMode();
 
   return (
-    <footer className="w-full py-8 px-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+    <footer className="w-full py-6 px-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © 2024 Your Name. All rights reserved.
+              © 2024 Shishir Shetty. All rights reserved.
             </p>
           </div>
 
           <div className="flex items-center gap-6">
             <div className="text-gray-600 dark:text-gray-400 text-sm">
-              Made with ❤️ and React
+              Made with ❤️
             </div>
 
             <motion.button
@@ -29,26 +29,6 @@ export default function Footer() {
             >
               Don&apos;t click here 🐾
             </motion.button>
-          </div>
-        </div>
-
-        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-            <div>Built with Next.js, TypeScript, and Tailwind CSS</div>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-              >
-                Terms of Service
-              </a>
-            </div>
           </div>
         </div>
       </div>
