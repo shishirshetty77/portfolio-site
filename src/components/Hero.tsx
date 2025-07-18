@@ -1,59 +1,64 @@
-'use client'
+'use client';
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Sun, Moon, Github, Linkedin, Mail, X } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
-import { useTheme } from '@/components/ThemeProvider'
-import { useCatMode } from '@/context/CatModeContext'
+import { useTheme } from '@/components/ThemeProvider';
+import { useCatMode } from '@/context/CatModeContext';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown, Github, Linkedin, Mail, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export function Hero() {
-  const { theme, toggleTheme } = useTheme()
-  const { isCatMode, toggleCatMode } = useCatMode()
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-  const [showMatrix, setShowMatrix] = useState(false)
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; opacity: number }>>([])
-  const [nameParticles, setNameParticles] = useState<Array<{ id: number; x: number; y: number; moveX: number; moveY: number }>>([])
-  const [isClient, setIsClient] = useState(false)
-  const heroRef = useRef<HTMLDivElement>(null)
+  const { theme, toggleTheme } = useTheme();
+  const { isCatMode, toggleCatMode } = useCatMode();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [showMatrix, setShowMatrix] = useState(false);
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; opacity: number }>
+  >([]);
+  const [nameParticles, setNameParticles] = useState<
+    Array<{ id: number; x: number; y: number; moveX: number; moveY: number }>
+  >([]);
+  const [isClient, setIsClient] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsClient(true)
-    
+    setIsClient(true);
+
     // Initialize particles only on client
     if (typeof window !== 'undefined') {
       const initialParticles = Array.from({ length: 50 }, (_, i) => ({
         id: i,
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        opacity: Math.random() * 0.5 + 0.2
-      }))
-      setParticles(initialParticles)
+        opacity: Math.random() * 0.5 + 0.2,
+      }));
+      setParticles(initialParticles);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const handleNameClick = () => {
-    setShowMatrix(true)
-    setTimeout(() => setShowMatrix(false), 3000)
-  }
+    setShowMatrix(true);
+    setTimeout(() => setShowMatrix(false), 3000);
+  };
 
   return (
-    <section 
+    <section
       ref={heroRef}
       className="min-h-screen flex items-center justify-center relative px-4 overflow-hidden cursor-none"
       style={{
-        background: theme === 'dark' 
-          ? 'linear-gradient(45deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #1a1a2e 100%)'
-          : 'linear-gradient(45deg, #FFF8DC 0%, #FEF3C7 25%, #F4E4C7 50%, #FFF8DC 75%, #FEF3C7 100%)'
+        background:
+          theme === 'dark'
+            ? 'linear-gradient(45deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #1a1a2e 100%)'
+            : 'linear-gradient(45deg, #FFF8DC 0%, #FEF3C7 25%, #F4E4C7 50%, #FFF8DC 75%, #FEF3C7 100%)',
       }}
     >
       {/* Invisible clickable div */}
@@ -79,7 +84,7 @@ export function Hero() {
         }}
         animate={{
           scale: isHovering ? 2 : 1,
-          opacity: isHovering ? 0.8 : 0.6
+          opacity: isHovering ? 0.8 : 0.6,
         }}
         transition={{ duration: 0.2 }}
       />
@@ -93,17 +98,17 @@ export function Hero() {
             background: theme === 'dark' ? '#60a5fa' : '#1e40af',
             left: particle.x,
             top: particle.y,
-            opacity: particle.opacity
+            opacity: particle.opacity,
           }}
           animate={{
             y: [particle.y, particle.y - 100, particle.y],
             x: [particle.x, particle.x + 50, particle.x],
-            scale: [1, 1.5, 1]
+            scale: [1, 1.5, 1],
           }}
           transition={{
             duration: 3 + Math.random() * 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
       ))}
@@ -123,15 +128,15 @@ export function Hero() {
                 className="absolute text-green-500 text-sm font-mono"
                 style={{
                   left: `${Math.random() * 100}%`,
-                  top: '-10px'
+                  top: '-10px',
                 }}
                 animate={{
-                  y: ['0vh', '110vh']
+                  y: ['0vh', '110vh'],
                 }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  delay: i * 0.1
+                  delay: i * 0.1,
                 }}
               >
                 {Math.random().toString(36).substring(2, 8)}
@@ -147,36 +152,36 @@ export function Hero() {
           className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-blue-500/30 rotate-45"
           animate={{
             rotate: [45, 225, 45],
-            scale: [1, 1.2, 1]
+            scale: [1, 1.2, 1],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-24 h-24 border-2 border-purple-500/30 rounded-full"
           animate={{
             scale: [1, 1.5, 1],
-            opacity: [0.3, 0.7, 0.3]
+            opacity: [0.3, 0.7, 0.3],
           }}
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
         <motion.div
           className="absolute top-1/2 right-1/3 w-16 h-16 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-sm"
           animate={{
             x: [0, 100, 0],
-            y: [0, -50, 0]
+            y: [0, -50, 0],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "linear"
+            ease: 'linear',
           }}
         />
       </div>
@@ -197,28 +202,28 @@ export function Hero() {
         <div className="relative w-16 h-8 bg-gradient-to-r from-amber-200 to-orange-300 dark:from-indigo-600 dark:to-purple-700 rounded-full p-1 transition-all duration-500 shadow-lg">
           {/* Switch Track */}
           <div className="absolute inset-1 bg-white/20 dark:bg-black/20 rounded-full transition-all duration-500" />
-          
+
           {/* Switch Thumb */}
           <motion.div
             className="relative w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center transition-all duration-500"
             animate={{
               x: theme === 'dark' ? 24 : 0,
             }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
           >
             {/* Icon */}
             <motion.div
-              animate={{ 
+              animate={{
                 rotate: theme === 'dark' ? 360 : 0,
-                scale: theme === 'dark' ? 1.1 : 1
+                scale: theme === 'dark' ? 1.1 : 1,
               }}
-              transition={{ duration: 0.5, type: "spring" }}
+              transition={{ duration: 0.5, type: 'spring' }}
               className="text-xs"
             >
               {theme === 'dark' ? '🦉' : '☀️'}
             </motion.div>
           </motion.div>
-          
+
           {/* Background Stars for Dark Mode */}
           <AnimatePresence>
             {theme === 'dark' && (
@@ -238,19 +243,19 @@ export function Hero() {
                     }}
                     animate={{
                       opacity: [0.3, 1, 0.3],
-                      scale: [0.8, 1.2, 0.8]
+                      scale: [0.8, 1.2, 0.8],
                     }}
                     transition={{
                       duration: 2,
                       repeat: Infinity,
-                      delay: i * 0.5
+                      delay: i * 0.5,
                     }}
                   />
                 ))}
               </motion.div>
             )}
           </AnimatePresence>
-          
+
           {/* Background Rays for Light Mode */}
           <AnimatePresence>
             {theme === 'light' && (
@@ -268,16 +273,16 @@ export function Hero() {
                       left: '50%',
                       bottom: '50%',
                       transform: `translateX(-50%) rotate(${i * 60}deg)`,
-                      transformOrigin: 'bottom center'
+                      transformOrigin: 'bottom center',
                     }}
                     animate={{
                       opacity: [0.5, 1, 0.5],
-                      scale: [0.8, 1.2, 0.8]
+                      scale: [0.8, 1.2, 0.8],
                     }}
                     transition={{
                       duration: 1.5,
                       repeat: Infinity,
-                      delay: i * 0.1
+                      delay: i * 0.1,
                     }}
                   />
                 ))}
@@ -293,7 +298,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
           className="mb-16"
         >
           <motion.div
@@ -304,13 +309,14 @@ export function Hero() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-7xl font-light tracking-wide mb-3"
               style={{
                 color: theme === 'dark' ? '#ffffff' : '#1f2937',
-                textShadow: theme === 'dark' 
-                  ? '0 0 30px rgba(96, 165, 250, 0.3)'
-                  : '0 0 30px rgba(30, 64, 175, 0.2)'
+                textShadow:
+                  theme === 'dark'
+                    ? '0 0 30px rgba(96, 165, 250, 0.3)'
+                    : '0 0 30px rgba(30, 64, 175, 0.2)',
               }}
             >
               {['S', 'h', 'i', 's', 'h', 'i', 'r'].map((letter, index) => (
@@ -319,10 +325,10 @@ export function Hero() {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-                  whileHover={{ 
+                  whileHover={{
                     y: -10,
                     scale: 1.2,
-                    color: theme === 'dark' ? '#60a5fa' : '#3b82f6'
+                    color: theme === 'dark' ? '#60a5fa' : '#3b82f6',
                   }}
                   className="inline-block transition-all duration-300"
                 >
@@ -336,10 +342,10 @@ export function Hero() {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: (index + 7) * 0.1 }}
-                  whileHover={{ 
+                  whileHover={{
                     y: -10,
                     scale: 1.2,
-                    color: theme === 'dark' ? '#a78bfa' : '#8b5cf6'
+                    color: theme === 'dark' ? '#a78bfa' : '#8b5cf6',
                   }}
                   className="inline-block transition-all duration-300"
                 >
@@ -347,47 +353,48 @@ export function Hero() {
                 </motion.span>
               ))}
             </motion.h1>
-            
+
             {/* Floating Particles around name */}
-            {isClient && Array.from({ length: 8 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  x: [0, Math.random() * 40 - 20],
-                  y: [0, Math.random() * 40 - 20],
-                  opacity: [0.3, 1, 0.3]
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: i * 0.2
-                }}
-                suppressHydrationWarning
-              />
-            ))}
+            {isClient &&
+              Array.from({ length: 8 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 bg-blue-400 rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    x: [0, Math.random() * 40 - 20],
+                    y: [0, Math.random() * 40 - 20],
+                    opacity: [0.3, 1, 0.3],
+                  }}
+                  transition={{
+                    duration: 3 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                  }}
+                  suppressHydrationWarning
+                />
+              ))}
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
             className="relative"
           >
-            <motion.p 
+            <motion.p
               className="text-xl md:text-2xl font-light text-gray-600 dark:text-gray-300 tracking-wider"
               animate={{
-                opacity: [0.7, 1, 0.7]
+                opacity: [0.7, 1, 0.7],
               }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             >
               Building the future, one line at a time
             </motion.p>
-            
+
             {/* Elegant Underline Animation */}
             <motion.div
               initial={{ scaleX: 0 }}
@@ -406,9 +413,21 @@ export function Hero() {
           className="flex justify-center space-x-12 mb-20"
         >
           {[
-            { icon: Github, href: "https://github.com/shishirshetty", color: "hover:bg-gray-600" },
-            { icon: Linkedin, href: "https://linkedin.com/in/shishirshetty", color: "hover:bg-blue-600" },
-            { icon: Mail, href: "mailto:shishir@example.com", color: "hover:bg-red-600" }
+            {
+              icon: Github,
+              href: 'https://github.com/shishirshetty77',
+              color: 'hover:bg-gray-600',
+            },
+            {
+              icon: Linkedin,
+              href: 'https://www.linkedin.com/in/shishir-shetty-715028230/',
+              color: 'hover:bg-blue-600',
+            },
+            {
+              icon: Mail,
+              href: 'mailto:shishirshetty77@gmail.com',
+              color: 'hover:bg-red-600',
+            },
           ].map(({ icon: Icon, href, color }, index) => (
             <motion.a
               key={index}
@@ -416,30 +435,29 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className={`p-6 rounded-full bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border border-white/20 dark:border-gray-700 ${color} transition-all duration-300`}
-              whileHover={{ 
-                scale: 1.3, 
+              whileHover={{
+                scale: 1.3,
                 rotate: 10,
-                y: -10
+                y: -10,
               }}
               whileTap={{ scale: 0.9 }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               animate={{
-                y: [0, -10, 0]
+                y: [0, -10, 0],
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
-                delay: index * 0.2
+                delay: index * 0.2,
               }}
             >
               <Icon className="w-8 h-8 text-gray-700 dark:text-gray-300" />
             </motion.a>
           ))}
         </motion.div>
-
       </div>
-      
+
       {/* Cat Mode Badge */}
       <AnimatePresence>
         {isCatMode && (
@@ -468,17 +486,17 @@ export function Hero() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0, y: 100 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1, 
+                animate={{
+                  opacity: 1,
+                  scale: 1,
                   y: [100, -100, 100],
-                  x: [0, Math.random() * 200 - 100, 0]
+                  x: [0, Math.random() * 200 - 100, 0],
                 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{
                   duration: 8 + Math.random() * 4,
                   repeat: Infinity,
-                  delay: i * 0.5
+                  delay: i * 0.5,
                 }}
                 className="absolute text-4xl select-none"
                 style={{
@@ -507,13 +525,13 @@ export function Hero() {
                   scale: [0, 1, 0],
                   y: ['-10vh', '110vh'],
                   x: [0, Math.random() * 100 - 50],
-                  rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)]
+                  rotate: [0, 360 * (Math.random() > 0.5 ? 1 : -1)],
                 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{
                   duration: 3 + Math.random() * 2,
                   repeat: Infinity,
-                  delay: i * 0.2
+                  delay: i * 0.2,
                 }}
                 className="absolute text-2xl select-none"
                 style={{
@@ -529,7 +547,7 @@ export function Hero() {
       </AnimatePresence>
 
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2.5 }}
@@ -543,7 +561,9 @@ export function Hero() {
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          <span className="text-sm font-medium tracking-wider">EXPLORE MORE</span>
+          <span className="text-sm font-medium tracking-wider">
+            EXPLORE MORE
+          </span>
           <motion.div
             animate={{ rotate: [0, 180, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -553,5 +573,5 @@ export function Hero() {
         </motion.a>
       </motion.div>
     </section>
-  )
+  );
 }

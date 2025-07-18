@@ -1,57 +1,82 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, MessageCircle } from 'lucide-react'
-import { useState } from 'react'
+import { motion } from 'framer-motion';
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Send,
+} from 'lucide-react';
+import { useState } from 'react';
 
 export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
-  })
+    message: '',
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-  }
+    e.preventDefault();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Message from ${formData.name}`);
+    const body = encodeURIComponent(
+      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    const mailtoLink = `mailto:shishirshetty217@gmail.com?subject=${subject}&body=${body}`;
+
+    // Open email client
+    window.open(mailtoLink, '_blank');
+
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <section id="contact" className="py-20 px-4 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
-      
+
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
             y: [0, -20, 0],
-            rotate: [0, 5, 0]
+            rotate: [0, 5, 0],
           }}
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
           className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-xl"
         />
         <motion.div
           animate={{
             y: [0, 20, 0],
-            rotate: [0, -5, 0]
+            rotate: [0, -5, 0],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
           className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-xl"
         />
@@ -65,7 +90,7 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -81,8 +106,9 @@ export function Contact() {
             viewport={{ once: true }}
             className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg"
           >
-            Ready to start a conversation? I&apos;d love to hear from you. Whether you have a question, 
-            project idea, or just want to say hello, don&apos;t hesitate to reach out.
+            Ready to start a conversation? I&apos;d love to hear from you.
+            Whether you have a question, project idea, or just want to say
+            hello.
           </motion.p>
         </motion.div>
 
@@ -100,9 +126,11 @@ export function Contact() {
                 <div className="p-3 bg-blue-500/20 rounded-full mr-4">
                   <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Let&apos;s Connect</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Let&apos;s Connect
+                </h3>
               </div>
-              
+
               <div className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -115,13 +143,18 @@ export function Contact() {
                     <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                    <a href="mailto:shishirshetty217@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      shishirshetty217@gmail.com
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Email
+                    </p>
+                    <a
+                      href="mailto:shishirshetty217@gmail.com"
+                      className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
+                      shishirshetty77@gmail.com
                     </a>
                   </div>
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -133,13 +166,18 @@ export function Contact() {
                     <Phone className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
-                    <a href="tel:+919483243509" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Phone
+                    </p>
+                    <a
+                      href="tel:+919483243509"
+                      className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
                       +91 9483243509
                     </a>
                   </div>
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -151,22 +189,33 @@ export function Contact() {
                     <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Location
+                    </p>
                     <span className="text-gray-900 dark:text-white font-medium">
                       Udupi, Karnataka
                     </span>
                   </div>
                 </motion.div>
               </div>
-              
+
               {/* Social Links */}
               <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Follow Me</h4>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Follow Me
+                </h4>
                 <div className="flex space-x-4">
                   {[
-                    { Icon: Github, href: "https://github.com/shishirshetty", label: "GitHub" },
-                    { Icon: Linkedin, href: "https://linkedin.com/in/shishirshetty", label: "LinkedIn" },
-                    { Icon: Twitter, href: "https://twitter.com/shishirshetty", label: "Twitter" }
+                    {
+                      Icon: Github,
+                      href: 'https://github.com/shishirshetty77',
+                      label: 'GitHub',
+                    },
+                    {
+                      Icon: Linkedin,
+                      href: 'https://www.linkedin.com/in/shishir-shetty-715028230/',
+                      label: 'LinkedIn',
+                    },
                   ].map(({ Icon, href, label }) => (
                     <motion.a
                       key={label}
@@ -193,8 +242,10 @@ export function Contact() {
             viewport={{ once: true }}
           >
             <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-3xl p-8 border border-white/20 dark:border-gray-700 shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
-              
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Send a Message
+              </h3>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -212,7 +263,7 @@ export function Contact() {
                     className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   />
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -229,7 +280,7 @@ export function Contact() {
                     className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   />
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -246,7 +297,7 @@ export function Contact() {
                     className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                   />
                 </motion.div>
-                
+
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -266,5 +317,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

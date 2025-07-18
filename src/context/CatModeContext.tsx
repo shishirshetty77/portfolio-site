@@ -112,8 +112,8 @@ export function CatModeProvider({ children }: { children: React.ReactNode }) {
         const playResult = meowSound.play()
         
         // Handle promise-based play result
-        if (playResult && typeof playResult.then === 'function') {
-          playResult.catch((error) => {
+        if (playResult && typeof playResult === 'object' && 'then' in playResult) {
+          (playResult as Promise<number>).catch((error) => {
             console.error('Failed to play cat sound:', error)
             // Fallback: try to unlock audio context on user interaction
             meowSound.once('unlock', () => {

@@ -114,11 +114,6 @@ export function Skills() {
                   x: 0,
                   y: 0
                 }}
-                transition={{ 
-                  duration: 1.5,
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
                 viewport={{ once: true }}
                 whileHover={{
                   scale: 1.3,
