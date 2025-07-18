@@ -116,8 +116,8 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                    <a href="mailto:shishir@example.com" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      shishir@example.com
+                    <a href="mailto:shishirshetty217@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      shishirshetty217@gmail.com
                     </a>
                   </div>
                 </motion.div>
@@ -134,8 +134,8 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
-                    <a href="tel:+1234567890" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                      +1 (555) 123-4567
+                    <a href="tel:+919483243509" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      +91 9483243509
                     </a>
                   </div>
                 </motion.div>
@@ -153,7 +153,7 @@ export function Contact() {
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
                     <span className="text-gray-900 dark:text-white font-medium">
-                      San Francisco, CA
+                      Udupi, Karnataka
                     </span>
                   </div>
                 </motion.div>

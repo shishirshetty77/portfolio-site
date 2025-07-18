@@ -2,8 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Download, User, Code, Heart } from 'lucide-react'
+import { useState } from 'react'
 
 export function About() {
+  const [showRealImage, setShowRealImage] = useState(false)
+  
+  const handleImageClick = () => {
+    setShowRealImage(!showRealImage)
+  }
   return (
     <section id="about" className="py-20 px-4 relative">
       {/* Background Effects */}
@@ -37,17 +43,40 @@ export function About() {
             viewport={{ once: true }}
             className="relative flex justify-center"
           >
-            <div className="relative group">
+            <div className="relative group cursor-pointer" onClick={handleImageClick}>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
-              <div className="relative w-80 h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center border-4 border-white/20 dark:border-gray-600">
-                {/* Placeholder for photo */}
-                <User className="w-32 h-32 text-gray-400 dark:text-gray-500" />
+              <motion.div 
+                className="relative w-80 h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 border-4 border-white/20 dark:border-gray-600"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Profile Image with Easter Egg */}
+                <motion.img 
+                  src={showRealImage ? "/profile.JPG" : "/rayuga.jpeg"} 
+                  alt={showRealImage ? "Shishir Shetty" : "Rayuga"}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                  key={showRealImage ? "profile" : "rayuga"}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              </div>
+                
+                {/* Click hint */}
+                <div className="absolute bottom-4 left-4 right-4 text-center">
+                  <motion.div
+                    className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ y: 10, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                  >
+                    {showRealImage ? "Click to see Rayuga" : "Click to see real me"}
+                  </motion.div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -80,9 +109,7 @@ export function About() {
                 viewport={{ once: true }}
                 className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
               >
-                I&apos;m a passionate tech enthusiast who loves turning ideas into reality through code. 
-                With a deep fascination for emerging technologies and a commitment to continuous learning, 
-                I strive to create innovative solutions that make a meaningful impact.
+                Hey, I&apos;m Shishir — just a tech-savvy guy who loves building things that leave an impact.
               </motion.p>
               
               <motion.p
@@ -92,21 +119,19 @@ export function About() {
                 viewport={{ once: true }}
                 className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
               >
-                My journey in technology is driven by curiosity and the desire to solve complex problems. 
-                I believe in the power of technology to transform lives and businesses, and I&apos;m always 
-                excited to explore new possibilities.
+                I make decisions based on intuition and mood, and I genuinely enjoy solving complex problems in the simplest way possible. Right now, I&apos;m on a journey of exploring different fields, experimenting with ideas, and trying to figure out what truly gives my work meaning.
               </motion.p>
               
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
-                className="flex items-center text-gray-600 dark:text-gray-300 mb-8"
+                className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
               >
-                <Heart className="w-5 h-5 text-red-500 mr-2" />
-                <span className="font-medium">Passionate about creating exceptional user experiences</span>
-              </motion.div>
+                Still curious, still learning — and always building.
+              </motion.p>
+              
               
               <motion.button
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -115,7 +140,7 @@ export function About() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.open('/resume.pdf', '_blank')}
+                onClick={() => window.open('https://drive.google.com/file/d/1GcNTg5ODJDDCy-8cU9W0Qdqxpeo2uTDl/view?usp=drive_link', '_blank')}
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
