@@ -53,7 +53,7 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative px-4 overflow-hidden cursor-none"
+      className="min-h-screen flex items-center justify-center relative px-4 overflow-hidden cursor-none pt-16"
       style={{
         background:
           theme === 'dark'
@@ -186,111 +186,6 @@ export function Hero() {
         />
       </div>
 
-      {/* Theme Toggle - Stylish Switch */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        onClick={toggleTheme}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        className="fixed top-6 right-6 z-50 group"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        {/* Switch Container */}
-        <div className="relative w-16 h-8 bg-gradient-to-r from-amber-200 to-orange-300 dark:from-indigo-600 dark:to-purple-700 rounded-full p-1 transition-all duration-500 shadow-lg">
-          {/* Switch Track */}
-          <div className="absolute inset-1 bg-white/20 dark:bg-black/20 rounded-full transition-all duration-500" />
-
-          {/* Switch Thumb */}
-          <motion.div
-            className="relative w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center transition-all duration-500"
-            animate={{
-              x: theme === 'dark' ? 24 : 0,
-            }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-          >
-            {/* Icon */}
-            <motion.div
-              animate={{
-                rotate: theme === 'dark' ? 360 : 0,
-                scale: theme === 'dark' ? 1.1 : 1,
-              }}
-              transition={{ duration: 0.5, type: 'spring' }}
-              className="text-xs"
-            >
-              {theme === 'dark' ? '🦉' : '☀️'}
-            </motion.div>
-          </motion.div>
-
-          {/* Background Stars for Dark Mode */}
-          <AnimatePresence>
-            {theme === 'dark' && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 overflow-hidden rounded-full"
-              >
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-white rounded-full"
-                    style={{
-                      left: `${20 + i * 20}%`,
-                      top: `${30 + i * 20}%`,
-                    }}
-                    animate={{
-                      opacity: [0.3, 1, 0.3],
-                      scale: [0.8, 1.2, 0.8],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.5,
-                    }}
-                  />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Background Rays for Light Mode */}
-          <AnimatePresence>
-            {theme === 'light' && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 overflow-hidden rounded-full"
-              >
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-px h-2 bg-yellow-400 origin-bottom"
-                    style={{
-                      left: '50%',
-                      bottom: '50%',
-                      transform: `translateX(-50%) rotate(${i * 60}deg)`,
-                      transformOrigin: 'bottom center',
-                    }}
-                    animate={{
-                      opacity: [0.5, 1, 0.5],
-                      scale: [0.8, 1.2, 0.8],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      delay: i * 0.1,
-                    }}
-                  />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.button>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto text-center relative z-10">
@@ -465,7 +360,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed top-8 left-8 z-50 bg-purple-500/90 backdrop-blur-lg rounded-full px-6 py-3 flex items-center space-x-2 border border-purple-400/30"
+            className="fixed top-20 left-8 z-40 bg-purple-500/90 backdrop-blur-lg rounded-full px-6 py-3 flex items-center space-x-2 border border-purple-400/30"
           >
             <span className="text-white font-medium">Cat Mode ON 🐾</span>
             <button
