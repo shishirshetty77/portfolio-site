@@ -139,218 +139,35 @@ const navItems = [
 - Animation speeds and patterns
 - Glassmorphism opacity levels
 
-## 🛠️ Technical Architecture & Stack
+## 🛠️ Technical Stack
 
-### 🚀 **Core Framework & Runtime**
+### Core Technologies
+- **Next.js 15.4.1**: React framework with App Router for optimal performance
+- **TypeScript**: Full type safety and enhanced developer experience
+- **Tailwind CSS 4.0**: Utility-first CSS framework with JIT compilation
+- **Framer Motion**: Advanced animations and smooth interactions
 
-#### **Next.js 15.4.1** - *The Foundation*
-- **App Router**: Latest routing system for better performance and developer experience
-- **Server Components**: Reduced JavaScript bundle size and faster initial page loads
-- **Built-in Optimizations**: Automatic code splitting, image optimization, and font optimization
-- **Edge Runtime Support**: Lightning-fast edge deployments on Vercel
-- **API Routes**: Serverless functions for AI chat and summarization features
-- **Static Generation**: Pre-built pages for optimal performance
-- **Why it's Great**: Provides enterprise-level performance with minimal configuration
+### Key Libraries
+- **Lucide React**: Lightweight SVG icon system
+- **Canvas Confetti**: Particle effects and celebrations
+- **Howler.js**: Audio management for interactive sounds
+- **React Confetti**: Additional particle systems
 
-#### **TypeScript 5.0** - *Type Safety Champion*
-- **Compile-time Error Detection**: Catches bugs before they reach production
-- **IntelliSense Support**: Enhanced developer experience with autocomplete
-- **Interface Definitions**: Ensures consistent data structures across components
-- **Generic Types**: Flexible, reusable component patterns
-- **Why it's Great**: Eliminates 90% of runtime errors and improves code maintainability
+### Development Tools
+- **ESLint 9**: Code quality and consistency
+- **PostCSS**: CSS processing and optimization
+- **Autoprefixer**: Cross-browser compatibility
 
-### 🎨 **Styling & Design System**
-
-#### **Tailwind CSS 4.0** - *Utility-First Powerhouse*
-- **Just-in-Time Compilation**: Only generates CSS for classes you actually use
-- **Custom Design Tokens**: Consistent spacing, colors, and typography
-- **Responsive Design**: Mobile-first approach with intuitive breakpoints
-- **Dark Mode**: Built-in class-based theme switching
-- **Performance**: Tiny CSS bundles (~10KB) compared to traditional frameworks
-- **Why it's Great**: Rapid prototyping without sacrificing performance or maintainability
-
-#### **CSS-in-JS Patterns**
-- **Dynamic Styling**: Conditional classes based on state and props
-- **Glassmorphism Effects**: Advanced backdrop-filter and blur implementations
-- **Gradient Systems**: Complex multi-stop gradients for magical effects
-- **Custom Properties**: CSS variables for consistent theming
-
-### ✨ **Animation & Interaction Engine**
-
-#### **Framer Motion 12.23** - *Animation Masterpiece*
-- **Physics-Based Animations**: Natural spring and inertia-based movements
-- **Layout Animations**: Smooth transitions when components change position/size
-- **Gesture Recognition**: Touch and mouse interactions with velocity tracking
-- **Orchestrated Sequences**: Coordinated animations across multiple elements
-- **Performance Optimized**: GPU-accelerated transforms for 60fps animations
-- **Advanced Features Used**:
-  ```typescript
-  // Layout ID for seamless transitions
-  layoutId="activeTab"
-  
-  // Complex animation sequences
-  animate={{
-    y: [0, -100, 0],
-    rotate: [0, 360],
-    scale: [1, 1.2, 1]
-  }}
-  
-  // Gesture-based interactions
-  whileHover={{ scale: 1.1, rotate: 5 }}
-  whileTap={{ scale: 0.95 }}
-  ```
-- **Why it's Great**: Creates fluid, professional-grade animations that delight users
-
-### 🎪 **Interactive Effects Libraries**
-
-#### **Canvas Confetti** - *Celebration Engine*
-- **Particle Physics**: Realistic confetti gravity and wind effects
-- **Customizable Properties**: Colors, shapes, spread patterns, and velocities
-- **Performance Optimized**: WebGL-accelerated rendering
-- **Usage**: Cat mode celebrations and achievement unlocks
-
-#### **Howler.js** - *Audio Management*
-- **Cross-browser Compatibility**: Works on all modern browsers
-- **Audio Sprites**: Efficient loading of multiple sound effects
-- **Spatial Audio**: 3D positioning for immersive sound effects
-- **Usage**: Cat mode meow sounds and UI interaction feedback
-
-#### **React Confetti** - *Additional Particle Systems*
-- **Customizable Particles**: Different shapes, sizes, and behaviors
-- **Physics Simulation**: Realistic falling and bouncing effects
-- **Usage**: Paw print confetti in cat mode
-
-### 🤖 **AI & Machine Learning Integration**
-
-#### **OpenAI API Integration**
-- **GPT-4 Turbo**: Latest language model for natural conversations
-- **Streaming Responses**: Real-time message generation
-- **Context Management**: Maintains conversation history
-- **Error Handling**: Graceful fallbacks and retry mechanisms
-- **Usage**: Premium chat experience with human-like responses
-
-#### **Hugging Face Integration**
-- **Free Tier Access**: 1000+ requests per month
-- **Multiple Models**: Access to various open-source LLMs
-- **Inference API**: Direct model access without hosting
-- **Usage**: Cost-effective AI alternative for budget-conscious deployments
-
-#### **Mock AI System**
-- **Development Friendly**: No API keys required for testing
-- **Realistic Responses**: Pre-written conversational patterns
-- **Instant Feedback**: Zero latency for development
-- **Usage**: Development, testing, and demo environments
-
-### 🎯 **UI Component Library**
-
-#### **Lucide React** - *Icon System*
-- **Consistent Design**: Cohesive visual language across all icons
-- **SVG-Based**: Crisp rendering at any size
-- **Tree Shakeable**: Only imports icons you actually use
-- **Customizable**: Easy color, size, and stroke-width modifications
-- **Performance**: Lightweight and optimized SVGs
-
-### 🔧 **Development & Build Tools**
-
-#### **ESLint 9** - *Code Quality Guardian*
-- **Next.js Rules**: Framework-specific best practices
-- **TypeScript Integration**: Type-aware linting rules
-- **Custom Rules**: Project-specific coding standards
-- **Auto-fix**: Automatic code formatting and issue resolution
-
-#### **PostCSS & Autoprefixer**
-- **Browser Compatibility**: Automatic vendor prefix generation
-- **CSS Optimization**: Minification and dead code elimination
-- **Modern CSS Features**: Support for latest CSS specifications
-
-### 🚀 **Performance Optimizations**
-
-#### **Built-in Next.js Optimizations**
+### Performance Features
 - **Automatic Code Splitting**: Loads only necessary JavaScript
-- **Image Optimization**: WebP conversion and responsive loading
-- **Font Optimization**: Preloads and optimizes Google Fonts
-- **Bundle Analysis**: Visualize and optimize bundle sizes
+- **Image Optimization**: WebP conversion and lazy loading
+- **Font Optimization**: Preloaded and optimized Google Fonts
+- **Mobile Optimizations**: Reduced effects and smaller bundles on mobile devices
 
-#### **Custom Performance Enhancements**
-```typescript
-// Lazy loading for performance
-const LazyComponent = dynamic(() => import('./HeavyComponent'), {
-  loading: () => <Skeleton />
-});
-
-// Client-side only rendering for interactive elements
-const [isClient, setIsClient] = useState(false);
-useEffect(() => setIsClient(true), []);
-
-// Optimized particle systems
-particles.length = window.innerWidth < 768 ? 3 : 50;
-```
-
-#### **Responsive Performance**
-- **Mobile Optimizations**: Reduced particles and effects on smaller screens
-- **Progressive Enhancement**: Core functionality works without JavaScript
-- **Bandwidth Awareness**: Smaller assets and fewer requests on mobile
-
-### 🔒 **Security & Best Practices**
-
-#### **Environment Variable Management**
-- **Secure API Keys**: Never exposed to client-side code
-- **Runtime Validation**: Ensures required variables are present
-- **Type Safety**: TypeScript interfaces for environment variables
-
-#### **Content Security Policy**
-- **XSS Protection**: Prevents malicious script injection
-- **CSRF Mitigation**: Secure form handling
-- **Secure Headers**: HTTPS enforcement and security headers
-
-### 📊 **Monitoring & Analytics Ready**
-
-#### **Performance Monitoring**
-- **Web Vitals**: Core web vitals tracking integration
-- **Error Boundaries**: Graceful error handling and reporting
-- **Bundle Analysis**: Size and performance impact monitoring
-
-#### **User Analytics**
-- **Event Tracking**: Custom events for user interactions
-- **Conversion Funnels**: Track user journey through portfolio
-- **A/B Testing Ready**: Infrastructure for design experiments
-
-### 🌐 **Deployment & Infrastructure**
-
-#### **Vercel Optimization**
-- **Edge Functions**: Global distribution for minimal latency
-- **Automatic HTTPS**: SSL certificates and security headers
-- **Preview Deployments**: Test changes before going live
-- **Analytics Integration**: Built-in performance and user metrics
-
-#### **CDN & Caching**
-- **Static Asset Optimization**: Images, fonts, and icons cached globally
-- **Intelligent Caching**: Dynamic content caching strategies
-- **Cache Invalidation**: Automatic cache updates on deployments
-
-### 🧪 **Development Experience**
-
-#### **Hot Module Replacement**
-- **Instant Updates**: See changes without full page reloads
-- **State Preservation**: Maintains component state during development
-- **Error Recovery**: Automatic error recovery and highlighting
-
-#### **TypeScript Integration**
-- **Path Mapping**: Clean import statements with @ aliases
-- **Strict Mode**: Comprehensive type checking
-- **IDE Support**: Full IntelliSense and error highlighting
-
----
-
-**Why This Stack is Exceptional:**
-
-1. **Performance**: Sub-second load times with aggressive optimization
-2. **Developer Experience**: Type safety, hot reloading, and excellent tooling
-3. **Scalability**: Can handle high traffic with edge distribution
-4. **Maintainability**: Clean architecture with separation of concerns
-5. **Future-Proof**: Latest web standards and framework versions
-6. **User Experience**: Smooth animations and responsive design
-7. **Accessibility**: Semantic HTML and keyboard navigation support
+### Deployment
+- **Vercel**: Edge deployment with global CDN
+- **Environment Variables**: Secure configuration management
+- **Preview Deployments**: Test changes before production
 
 ## 📱 Responsive Breakpoints
 
