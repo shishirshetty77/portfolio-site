@@ -98,25 +98,32 @@ export function Navbar() {
           background: isScrolled 
             ? `linear-gradient(135deg, 
                 ${theme === 'dark' 
-                  ? 'rgba(17, 24, 39, 0.1) 0%, rgba(55, 65, 81, 0.15) 50%, rgba(75, 85, 99, 0.1) 100%'
-                  : 'rgba(255, 255, 255, 0.1) 0%, rgba(249, 250, 251, 0.15) 50%, rgba(243, 244, 246, 0.1) 100%'
+                  ? 'rgba(17, 24, 39, 0.15) 0%, rgba(55, 65, 81, 0.25) 25%, rgba(99, 102, 241, 0.1) 50%, rgba(139, 92, 246, 0.1) 75%, rgba(75, 85, 99, 0.15) 100%'
+                  : 'rgba(255, 248, 220, 0.15) 0%, rgba(254, 243, 199, 0.25) 25%, rgba(251, 191, 36, 0.1) 50%, rgba(245, 158, 11, 0.1) 75%, rgba(243, 244, 246, 0.15) 100%'
                 })`
-            : 'transparent'
+            : theme === 'dark' 
+              ? 'linear-gradient(135deg, rgba(17, 24, 39, 0.05) 0%, rgba(55, 65, 81, 0.05) 100%)'
+              : 'linear-gradient(135deg, rgba(255, 248, 220, 0.05) 0%, rgba(254, 243, 199, 0.05) 100%)'
         }}
       >
         {/* Animated Background Gradient */}
         <motion.div
           className="absolute inset-0 opacity-20"
           animate={{
-            background: [
-              'linear-gradient(45deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(147, 51, 234, 0.1) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.1) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%)'
+            background: theme === 'dark' ? [
+              'linear-gradient(45deg, transparent 0%, rgba(99, 102, 241, 0.15) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(147, 51, 234, 0.15) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.15) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%)'
+            ] : [
+              'linear-gradient(45deg, transparent 0%, rgba(251, 191, 36, 0.12) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(245, 158, 11, 0.12) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(217, 119, 6, 0.12) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(251, 191, 36, 0.12) 50%, transparent 100%)'
             ]
           }}
           transition={{
-            duration: 8,
+            duration: theme === 'dark' ? 8 : 6,
             repeat: Infinity,
             ease: 'linear'
           }}
@@ -126,7 +133,9 @@ export function Navbar() {
         <motion.div
           className="absolute top-0 left-0 w-full h-full pointer-events-none"
           animate={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.05), transparent 40%)`
+            background: theme === 'dark' 
+              ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.08), transparent 40%)`
+              : `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.06), transparent 40%)`
           }}
           transition={{ duration: 0.3 }}
         />
@@ -135,7 +144,9 @@ export function Navbar() {
         {isNavHovered && typeof window !== 'undefined' && window.innerWidth >= 768 && Array.from({ length: 6 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full pointer-events-none"
+            className={`absolute w-1 h-1 rounded-full pointer-events-none ${
+              theme === 'dark' ? 'bg-purple-400' : 'bg-yellow-400'
+            }`}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
               opacity: [0, 1, 0],

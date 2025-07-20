@@ -186,7 +186,6 @@ export function Hero() {
         />
       </div>
 
-
       {/* Main Content */}
       <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* Elegant Name Typography */}
@@ -287,7 +286,7 @@ export function Hero() {
               }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             >
-              Building the future, one line at a time
+              Dream it Build it.
             </motion.p>
 
             {/* Elegant Underline Animation */}
