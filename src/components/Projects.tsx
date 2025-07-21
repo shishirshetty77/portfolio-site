@@ -23,6 +23,8 @@ export function Projects() {
         'NeonDB',
         'TypeScript',
         'SecureStore',
+        'Redis',
+        'Socket.io',
       ],
       github: 'https://github.com/shishirshetty',
       demo: 'https://findonspot.com',
@@ -31,12 +33,12 @@ export function Projects() {
       gradient: 'from-emerald-400 to-cyan-400',
     },
     {
-      title: 'Portfolio Website',
+      title: 'MoneyDash.',
       description:
-        'A modern, responsive portfolio website with smooth animations, dark/light mode toggle, and optimized performance.',
-      technologies: ['React', 'Tailwind CSS', 'Framer Motion', 'Next.js'],
-      github: 'https://github.com/shishirshetty',
-      demo: 'https://demo.com',
+        'A modern personal finance tracker that lets users manage income and expenses, set savings goals, and view data through interactive charts. Includes currency selector and sleek 2025-inspired UI.',
+      technologies: ['Tailwind CSS', 'Framer Motion', 'Next.js'],
+      github: 'https://github.com/shishirshetty77/MoneyDash.',
+      demo: 'https://money-dash.vercel.app/',
       featured: false,
       icon: <Palette className="w-6 h-6" />,
       gradient: 'from-purple-400 to-pink-400',
@@ -44,7 +46,7 @@ export function Projects() {
     {
       title: 'Interview Platform',
       description:
-        'A modern web-based interview platform built with Next.js, Prisma, NextAuth, and WebRTC. Features seamless scheduling, video calls, real-time code collaboration, and session management with 6-digit join codes.',
+        'A modern web-based interview platform built with Next.js, Prisma, NextAuth, and WebRTC, Socket.io. Features seamless scheduling, video calls, real-time code collaboration, and session management with 6-digit join codes.',
       technologies: [
         'Next.js',
         'Prisma',
