@@ -157,8 +157,7 @@ export function About() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
                   window.open(
-                    'https://drive.google.com/file/d/1GcNTg5ODJDDCy-8cU9W0Qdqxpeo2uTDl/view?usp=drive_link',
-                    '_blank'
+                    'https://drive.google.com/file/d/18HrkA_pEJEOhqNaFsAsuC38xTU1R-DrJ/view?usp=drive_link'
                   )
                 }
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25"

@@ -5,6 +5,9 @@ import {
   Code,
   ExternalLink,
   Github,
+  Server,
+  Cpu,
+  Box,
   Palette,
   Smartphone,
   Sparkles,
@@ -33,50 +36,45 @@ export function Projects() {
       gradient: 'from-emerald-400 to-cyan-400',
     },
     {
-      title: 'MoneyDash.',
+      title: 'E-COMMERCE DEVOPS IMPLEMENTATION',
       description:
-        'A modern personal finance tracker that lets users manage income and expenses, set savings goals, and view data through interactive charts. Includes currency selector and sleek 2025-inspired UI.',
-      technologies: ['Tailwind CSS', 'Framer Motion', 'Next.js'],
-      github: 'https://github.com/shishirshetty77/MoneyDash.',
-      demo: 'https://money-dash.vercel.app/',
+        'Implemented DevOps practices for a demo e-commerce project including containerization, orchestration, Infrastructure as Code (Terraform), and CI/CD pipelines. Automated CI/CD for Java microservices using GitHub Actions and Argo CD. Configured AWS networking, VPCs, Load Balancers, and secured frontend exposure with Route 53 DNS.',
+      technologies: [
+        'Docker',
+        'Kubernetes',
+        'Terraform',
+        'CI/CD',
+        'AWS',
+        'Argo CD',
+        'Load Balancer',
+      ],
+      github: 'https://github.com/shishirshetty/ecommerce-devops', // placeholder
+      demo: 'https://demo.com/ecommerce', // placeholder
       featured: false,
-      icon: <Palette className="w-6 h-6" />,
-      gradient: 'from-purple-400 to-pink-400',
+      icon: <Cpu className="w-6 h-6" />,
+      gradient: 'from-blue-400 to-indigo-400',
     },
     {
-      title: 'Interview Platform',
+      title: 'GITHUB JIRA Automation using Python',
       description:
-        'A modern web-based interview platform built with Next.js, Prisma, NextAuth, and WebRTC, Socket.io. Features seamless scheduling, video calls, real-time code collaboration, and session management with 6-digit join codes.',
-      technologies: [
-        'Next.js',
-        'Prisma',
-        'NextAuth',
-        'WebRTC',
-        'Socket.io',
-        'SQLite',
-      ],
-      github: 'https://github.com/shishirshetty77/Interview-Platform',
-      demo: 'https://demo.com',
+        'Integrated GitHub webhooks with Python Flask applications to automate JIRA ticket creation. Reduced manual ticketing and improved workflow efficiency by triggering JIRA APIs directly from GitHub events.',
+      technologies: ['Python', 'Flask', 'GitHub', 'JIRA', 'Webhooks'],
+      github: 'https://github.com/shishirshetty/github-jira-automation', // placeholder
+      demo: 'https://demo.com/github-jira', // placeholder
       featured: false,
       icon: <Code className="w-6 h-6" />,
-      gradient: 'from-blue-400 to-purple-400',
+      gradient: 'from-green-400 to-teal-400',
     },
     {
-      title: 'NoSnooze – Smart Clock App',
+      title: 'SUPACHAT – Real-time Chat App / Faculty Locator System',
       description:
-        'A polished, production-ready alarm app built with React Native featuring math challenge missions, smooth animations, haptic feedback, and AsyncStorage persistence with premium UX design.',
-      technologies: [
-        'React Native',
-        'TypeScript',
-        'Zustand',
-        'AsyncStorage',
-        'Reanimated',
-      ],
-      github: 'https://github.com/shishirshetty77/NoSnooze',
-      demo: 'https://demo.com',
+        'Developed a real-time chat app with WebSockets, secure authentication, file sharing, presence and typing indicators. Also built a Next.js + Prisma platform to locate faculty cabins with session validation.',
+      technologies: ['Next.js', 'Prisma', 'WebSockets', 'Authentication', 'File Sharing'],
+      github: 'https://github.com/shishirshetty77/Supachat', // placeholder
+      demo: 'https://nittetrail.vercel.app/', // placeholder
       featured: false,
-      icon: <Smartphone className="w-6 h-6" />,
-      gradient: 'from-orange-400 to-red-400',
+      icon: <Box className="w-6 h-6" />,
+      gradient: 'from-purple-400 to-pink-400',
     },
   ];
 
