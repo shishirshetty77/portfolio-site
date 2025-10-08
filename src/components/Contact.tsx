@@ -27,7 +27,8 @@ export function Contact() {
     const body = encodeURIComponent(
       `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    const mailtoLink = `mailto:shishirshetty217@gmail.com?subject=${subject}&body=${body}`;
+    // Use canonical contact email (keep consistent with visible link)
+    const mailtoLink = `mailto:shishirshetty77@gmail.com?subject=${subject}&body=${body}`;
 
     // Open email client
     window.open(mailtoLink, '_blank');

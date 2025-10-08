@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://shishirshetty.vercel.app/sitemap.xml
+
+# Crawl-delay can be added if needed for low-rate hosting
+# Crawl-delay: 10
