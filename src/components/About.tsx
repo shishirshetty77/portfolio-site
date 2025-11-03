@@ -30,7 +30,7 @@ export function About() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            About Me
+            The DevOps Way
           </motion.h2>
         </motion.div>
 
@@ -120,7 +120,7 @@ export function About() {
                 viewport={{ once: true }}
                 className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
               >
-                Hey, I&apos;m Shishir — just a tech-savvy guy who loves building and learning 
+                Hey, I&apos;m Shishir — just a tech-savvy guy who loves building and learning
                 things that I Love.
               </motion.p>
 
