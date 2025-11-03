@@ -91,9 +91,9 @@ jobs:
           grep "tag:" "$FILE"
 
       - name: Commit and push Helm chart update
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
         run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add .
-          git commit -m "🔄 Update Helm image tag to ${{ github.run_number }}"
-          git push https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git HEAD:main
+          git commit -m "🔄 Update Helm image tag to ${{ github.run_number }}" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
