@@ -131,11 +131,9 @@ export function About() {
                 viewport={{ once: true }}
                 className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
               >
-                I make decisions based on intuition and mood, and I genuinely
-                enjoy solving complex problems in the simplest way possible.
-                Right now, I&apos;m on a journey of exploring different fields,
-                experimenting with ideas, and trying to figure out what truly
-                gives my work meaning.
+                I enjoy building systems that are reliable, automated, and scalable — where code moves smoothly from idea to deployment. DevOps, to me, is more than just tools; it’s a mindset of collaboration, continuous learning, and constant improvement.
+
+Every day, I try to learn something new — be it a better CI/CD workflow, a cleaner infrastructure setup, or a smarter way to solve a problem.
               </motion.p>
 
               <motion.p
