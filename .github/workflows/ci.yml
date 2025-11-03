@@ -10,7 +10,7 @@ on:
       - 'README.md'
 
 jobs:
-
+  # 🧹 Step 1 — Code Quality + Tests
   code-quality:
     name: Code Quality & Tests
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - name: Run tests
         run: npm test --if-present
 
-
+  # 🐋 Step 2 — Build and Push Docker Image
   build-and-push:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
@@ -67,7 +67,7 @@ jobs:
         id: vars
         run: echo "TAG=${{ github.run_number }}" >> $GITHUB_ENV
 
-
+  # ⚓ Step 3 — Update Helm Chart tag dynamically
   update-helm:
     name: Update Helm Chart Version
     runs-on: ubuntu-latest
@@ -82,15 +82,18 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-      - name: Update image tag in Helm values.yaml
+      - name: Find values.yaml and update image tag
         run: |
-          sed -i "s/tag:.*/tag: \"${{ github.run_number }}\"/g" helm/portfolio-site-chart/values.yml
-          cat portfolio-site-chart/values.yaml
+          FILE=$(find . -type f -name "values.yaml" | head -n 1)
+          echo "Found Helm values file at: $FILE"
+          sed -i "s/tag:.*/tag: \"${{ github.run_number }}\"/g" "$FILE"
+          echo "Updated image tag:"
+          grep "tag:" "$FILE"
 
       - name: Commit and push Helm chart update
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
-          git add helm/portfolio-site-chart/values.yaml
-          git commit -m "🔄 Update image tag to ${{ github.run_number }}"
+          git add .
+          git commit -m "🔄 Update Helm image tag to ${{ github.run_number }}"
           git push https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git HEAD:main
