@@ -109,7 +109,7 @@ export function Contact() {
           >
             Ready to start a conversation? I&apos;d love to hear from you.
             Whether you have a question, project idea, or just want to say
-            hello.
+            hello you can ping me hear.
           </motion.p>
         </motion.div>
 
