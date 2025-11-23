@@ -27,19 +27,6 @@ export function Hero() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto text-center relative z-10">
         
-        {/* Status Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-block mb-8"
-        >
-          <div className="px-4 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-mono font-bold text-sm tracking-wide rounded-full border border-green-200 dark:border-green-800 flex items-center gap-2">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            AVAILABLE FOR WORK
-          </div>
-        </motion.div>
-
         {/* Name Typography */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -97,7 +84,7 @@ export function Hero() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-8 py-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl font-oswald font-bold text-lg tracking-wide shadow-sm hover:shadow-md hover:border-primary hover:text-primary transition-all flex items-center gap-3"
+              className="group relative px-8 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl font-oswald font-bold text-lg tracking-wide shadow-sm hover:shadow-md hover:border-primary hover:text-primary text-gray-900 dark:text-white transition-all flex items-center gap-3"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
             >

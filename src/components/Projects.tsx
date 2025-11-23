@@ -47,7 +47,7 @@ export function Projects() {
           </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
             <motion.div
               key={project.title}
@@ -57,98 +57,61 @@ export function Projects() {
               viewport={{ once: true }}
               className="group relative"
             >
-              <div className="neo-card h-full flex flex-col">
+              <div className="h-full bg-gray-50 dark:bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col">
                 
-                {project.featured && (
-                  <div className="absolute top-4 right-4 z-20">
-                    <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 px-3 py-1 text-xs font-bold font-mono rounded-full flex items-center border border-yellow-200 dark:border-yellow-800">
-                      <Sparkles className="w-3 h-3 mr-1" />
-                      FEATURED
-                    </div>
-                  </div>
-                )}
-
-                {/* Project Icon */}
-                <div className="mb-6 relative z-10">
-                  <div
-                    className={`w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary`}
-                  >
+                {/* Header / Icon Area */}
+                <div className="p-8 pb-0 flex justify-between items-start">
+                  <div className="w-16 h-16 rounded-2xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
                     {project.icon}
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white dark:bg-gray-800 text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors"
+                      title="View Code"
+                    >
+                      <Github className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white dark:bg-gray-800 text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors"
+                      title="Live Demo"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
                   </div>
                 </div>
 
-                {/* Project Content */}
-                <div className="relative z-10 flex-grow">
-                  <motion.h3
-                    className="text-2xl font-oswald font-bold text-foreground mb-3 uppercase"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    viewport={{ once: true }}
-                  >
+                {/* Content */}
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-oswald font-bold text-foreground mb-3 uppercase group-hover:text-primary transition-colors">
                     {project.title}
-                  </motion.h3>
-
-                  <motion.p
-                    className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-sm font-medium"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    viewport={{ once: true }}
-                  >
+                  </h3>
+                  
+                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed text-sm font-medium">
                     {project.description}
-                  </motion.p>
+                  </p>
 
                   {/* Technologies */}
-                  <motion.div
-                    className="flex flex-wrap gap-2 mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    viewport={{ once: true }}
-                  >
+                  <div className="flex flex-wrap gap-2 mt-auto">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold font-mono rounded-md"
+                        className="px-3 py-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold font-mono rounded-full"
                       >
                         {tech}
                       </span>
                     ))}
-                  </motion.div>
+                  </div>
                 </div>
-
-                {/* Action Buttons */}
-                <motion.div
-                  className="flex space-x-4 mt-auto pt-4 border-t border-gray-100 dark:border-gray-800"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 text-sm font-bold font-mono text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>CODE</span>
-                  </motion.a>
-                  <motion.a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 text-sm font-bold font-mono text-primary bg-primary/10 px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-all"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>LIVE DEMO</span>
-                  </motion.a>
-                </motion.div>
+                
+                {/* Bottom Highlight Line */}
+                <div className="h-1 w-0 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500" />
               </div>
             </motion.div>
           ))}

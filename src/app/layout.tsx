@@ -85,6 +85,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { KonamiCode } from '@/components/KonamiCode'
 
 export default function RootLayout({
   children,
@@ -158,6 +159,7 @@ export default function RootLayout({
         className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
+          <KonamiCode />
           {children}
         </ThemeProvider>
       </body>

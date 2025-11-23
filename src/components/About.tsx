@@ -5,11 +5,6 @@ import { Code, Download, User } from 'lucide-react';
 import { useState } from 'react';
 
 export function About() {
-  const [showRealImage, setShowRealImage] = useState(false);
-
-  const handleImageClick = () => {
-    setShowRealImage(!showRealImage);
-  };
   return (
     <section id="about" className="py-20 px-4 relative overflow-hidden">
       {/* Background Pattern */}
@@ -48,10 +43,7 @@ export function About() {
             viewport={{ once: true }}
             className="relative flex justify-center"
           >
-            <div
-              className="relative group cursor-pointer"
-              onClick={handleImageClick}
-            >
+            <div className="relative group">
               {/* Background Offset */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
               
@@ -61,20 +53,11 @@ export function About() {
                   className="relative w-full h-full overflow-hidden rounded-xl"
                 >
                   {/* Profile Image */}
-                  <motion.img
-                    src={showRealImage ? '/munnar.jpeg' : '/rayuga.jpeg'}
-                    alt={showRealImage ? 'Shishir Shetty' : 'Rayuga'}
+                  <img
+                    src="/munnar.jpeg"
+                    alt="Shishir Shetty"
                     className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                    key={showRealImage ? 'profile' : 'rayuga'}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
                   />
-                  
-                  {/* Click hint */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm text-white text-center py-2 font-mono text-xs font-bold uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                    {showRealImage ? 'REVEAL AVATAR' : 'REVEAL HUMAN'}
-                  </div>
                 </motion.div>
               </div>
             </div>

@@ -22,6 +22,15 @@ export default function Footer() {
               <span className="px-3 py-1 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold font-mono text-xs rounded-md border border-gray-200 dark:border-gray-700">TAILWIND</span>
               <span className="px-3 py-1 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold font-mono text-xs rounded-md border border-gray-200 dark:border-gray-700">MOTION</span>
             </div>
+            
+            {/* Easter Egg: Konami Code Hint */}
+            <motion.div 
+              className="text-[10px] text-gray-300 dark:text-gray-700 font-mono cursor-help"
+              whileHover={{ scale: 1.1, color: '#6366F1' }}
+              title="Try: ↑ ↑ ↓ ↓ ← → ← → B A"
+            >
+              Are you a player?
+            </motion.div>
           </div>
         </div>
       </div>

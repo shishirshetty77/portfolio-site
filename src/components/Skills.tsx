@@ -54,8 +54,22 @@ export function Skills() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
+              animate={{
+                opacity: [0.5, 1, 0.5],
+                scale: [0.95, 1.05, 0.95],
+                filter: [
+                  'brightness(1)',
+                  'brightness(1.3)',
+                  'brightness(1)',
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: index * 0.2,
+                ease: "easeInOut"
+              }}
+              whileHover={{ scale: 1.1, opacity: 1, filter: 'brightness(1.2)' }}
               className="relative group cursor-pointer select-none"
             >
               <div className="bg-white dark:bg-gray-800 px-6 py-3 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
