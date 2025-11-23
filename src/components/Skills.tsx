@@ -11,8 +11,19 @@ export function Skills() {
     setIsClient(true)
   }, [])
 
+  const glowColors = [
+    '#ef4444', // red
+    '#3b82f6', // blue
+    '#f97316', // orange
+    '#a855f7', // purple
+    '#22c55e', // green
+    '#ec4899', // pink
+    '#06b6d4', // cyan
+    '#eab308', // yellow
+  ];
+
   return (
-    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-800/50">
+    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -48,37 +59,53 @@ export function Skills() {
 
         {/* Skills Grid */}
         <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-          {skillsData.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              animate={{
-                opacity: [0.5, 1, 0.5],
-                scale: [0.95, 1.05, 0.95],
-                filter: [
-                  'brightness(1)',
-                  'brightness(1.3)',
-                  'brightness(1)',
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: index * 0.2,
-                ease: "easeInOut"
-              }}
-              whileHover={{ scale: 1.1, opacity: 1, filter: 'brightness(1.2)' }}
-              className="relative group cursor-pointer select-none"
-            >
-              <div className="bg-white dark:bg-gray-800 px-6 py-3 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
-                <span className="text-lg font-oswald font-bold text-gray-700 dark:text-gray-200 uppercase tracking-wide group-hover:text-primary transition-colors">
-                  {skill.name}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+          {skillsData.map((skill, index) => {
+            const color = glowColors[index % glowColors.length];
+            
+            return (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                animate={{
+                  boxShadow: [
+                    `0 0 0px ${color}00`,
+                    `0 0 20px ${color}60`,
+                    `0 0 0px ${color}00`,
+                  ],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: index * 0.1,
+                  ease: "easeInOut"
+                }}
+                whileHover={{ 
+                  scale: 1.1, 
+                  boxShadow: `0 0 30px ${color}`,
+                  transition: { duration: 0.2 } 
+                }}
+                className="relative group cursor-pointer select-none rounded-2xl"
+              >
+                {/* Liquid Glass Container */}
+                <div 
+                  className="relative px-6 py-3 rounded-2xl border border-white/40 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl shadow-sm overflow-hidden"
+                >
+                  {/* Glossy Reflection Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 pointer-events-none" />
+                  
+                  <span 
+                    className="relative z-10 text-lg font-oswald font-bold text-gray-800 dark:text-white uppercase tracking-wide"
+                    style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
+                  >
+                    {skill.name}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
