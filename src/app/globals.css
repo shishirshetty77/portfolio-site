@@ -1,138 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  /* Light theme - warm pastel background */
-  --background: #FFF8DC; /* Warm cream */
-  --foreground: #2D1B2B; /* Dark wine */
-  --background-soft: #FEF3C7; /* Soft yellow */
-  --background-accent: #F4E4C7; /* Light amber */
-  --text-primary: #2D1B2B;
-  --text-secondary: #5D4037;
-  --text-muted: #8D6E63;
+  /* Soft Tech Palette */
+  --background: #EFECE3; /* Warm Sand (User Requested) */
+  --foreground: #1F2937; /* Gray 800 - Softer than pure black */
+  
+  /* Soft Tech Accents */
+  --primary: #6366F1; /* Indigo */
+  --secondary: #EC4899; /* Pink */
+  --tertiary: #14B8A6; /* Teal */
+  
+  /* UI Elements */
+  --border-color: #E5E7EB; /* Gray 200 */
+  --card-bg: #FFFFFF;
+  --radius: 12px;
+}
+
+.dark {
+  --background: #313647; /* Slate Night (User Requested) */
+  --foreground: #F9FAFB; /* Gray 50 */
+  --border-color: #4B5563; /* Gray 600 */
+  --card-bg: #1F2937; /* Gray 800 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --background-soft: #1a1a1a;
-    --background-accent: #2a2a2a;
-    --text-primary: #ededed;
-    --text-secondary: #cccccc;
-    --text-muted: #999999;
-  }
-}
-
-/* Theme-specific styles */
-.light {
-  --background: #FFF8DC;
-  --foreground: #2D1B2B;
-  --background-soft: #FEF3C7;
-  --background-accent: #F4E4C7;
-  --text-primary: #2D1B2B;
-  --text-secondary: #5D4037;
-  --text-muted: #8D6E63;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --background-soft: #1a1a1a;
-  --background-accent: #2a2a2a;
-  --text-primary: #ededed;
-  --text-secondary: #cccccc;
-  --text-muted: #999999;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-oswald);
+  --font-mono: var(--font-mono);
+  
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  
+  --radius-card: var(--radius);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: background-color 0.5s ease, color 0.5s ease;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Light mode specific typography */
-body:not(.dark) {
-  font-weight: 400;
-  letter-spacing: 0.01em;
+/* Soft Tech Utilities */
+
+/* Soft Card */
+.neo-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-body:not(.dark) h1,
-body:not(.dark) h2,
-body:not(.dark) h3,
-body:not(.dark) h4,
-body:not(.dark) h5,
-body:not(.dark) h6 {
-  color: var(--text-primary);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-body:not(.dark) p {
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-body:not(.dark) .text-muted {
-  color: var(--text-muted);
-}
-
-/* Cat Mode Styles */
-body.cat-mode {
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #ff6b6b);
-  background-size: 400% 400%;
-  animation: catModeGradient 5s ease infinite;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ff6b6b"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'), auto;
-}
-
-@keyframes catModeGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Cat Mode specific overrides */
-body.cat-mode .hero-section,
-body.cat-mode .skills-section,
-body.cat-mode .projects-section,
-body.cat-mode .contact-section {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 20px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* Cat Mode text styling */
-body.cat-mode h1,
-body.cat-mode h2,
-body.cat-mode h3,
-body.cat-mode p {
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Cat Mode button styling */
-body.cat-mode button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  color: white;
-  transition: all 0.3s ease;
-}
-
-body.cat-mode button:hover {
-  background: rgba(255, 255, 255, 0.3);
+.neo-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary);
 }
+
+/* Soft Button */
+.neo-button {
+  @apply font-bold uppercase tracking-wide px-6 py-3 bg-primary text-white rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:bg-indigo-600 hover:-translate-y-0.5 shadow-sm hover:shadow-md;
+}
+
+.neo-button-secondary {
+  @apply font-bold uppercase tracking-wide px-6 py-3 bg-white dark:bg-gray-800 text-foreground border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:border-primary hover:text-primary hover:-translate-y-0.5 shadow-sm;
+}
+
+/* High Density Dot Grid */
+.bg-dots {
+  background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
+  background-size: 16px 16px; /* Tighter grid */
+  opacity: 0.07; /* Very subtle */
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.02em; /* Reduced spacing */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 5px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+

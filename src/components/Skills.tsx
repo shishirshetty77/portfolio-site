@@ -11,41 +11,19 @@ export function Skills() {
     setIsClient(true)
   }, [])
 
+  const glowColors = [
+    '#ef4444', // red
+    '#3b82f6', // blue
+    '#f97316', // orange
+    '#a855f7', // purple
+    '#22c55e', // green
+    '#ec4899', // pink
+    '#06b6d4', // cyan
+    '#eab308', // yellow
+  ];
+
   return (
-    <section id="skills" className="py-20 px-4 relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-purple-900/20" />
-
-      {/* Floating Orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 120, 0],
-            y: [0, -120, 0],
-            rotate: [0, 180, 360]
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'linear'
-          }}
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -120, 0],
-            y: [0, 120, 0],
-            rotate: [360, 180, 0]
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear'
-          }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
-        />
-      </div>
-
+    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -54,114 +32,80 @@ export function Skills() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <div className="inline-block mb-4">
+            <div className="bg-tertiary/10 text-tertiary px-4 py-1 font-mono font-bold text-sm uppercase tracking-widest rounded-full">
+              Arsenal
+            </div>
+          </div>
           <motion.h2
-            className="text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+            className="text-5xl md:text-6xl font-oswald font-bold text-foreground mb-4 uppercase tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Skills & Technologies
+            TECH STACK
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg"
+            className="text-gray-600 dark:text-gray-300 font-medium max-w-2xl mx-auto text-lg"
           >
-            A colorful and dynamic overview of my technical skills
+            My arsenal of tools for building digital worlds.
           </motion.p>
         </motion.div>
 
-        {/* Magical Floating Skills */}
-        <div className="relative min-h-[600px] flex items-center justify-center">
-          <div className="absolute inset-0 flex flex-wrap justify-center items-center gap-8 p-8">
-            {skillsData.map((skill, index) => (
+        {/* Skills Grid */}
+        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+          {skillsData.map((skill, index) => {
+            const color = glowColors[index % glowColors.length];
+            
+            return (
               <motion.div
                 key={skill.name}
-                initial={{
-                  opacity: 0,
-                  scale: 0.8,
-                  x: isClient ? Math.random() * 400 - 200 : 0,
-                  y: isClient ? Math.random() * 400 - 200 : 0
-                }}
-                whileInView={{
-                  opacity: 1,
-                  scale: 1,
-                  x: 0,
-                  y: 0
-                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                whileHover={{
-                  scale: 1.5,
-                  y: -25,
-                  textShadow: `0 0 8px rgba(255,255,255,0.8), 0 0 20px ${skill.color.replace('text-', '')}`,
-                  transition: { duration: 0.2 }
-                }}
                 animate={{
-                  y: [0, -10 - Math.random() * 10, 0],
-                  x: [0, Math.sin(index * 0.5) * 10, 0],
-                  rotate: [0, Math.sin(index * 0.3) * 5, 0]
+                  boxShadow: [
+                    `0 0 0px ${color}00`,
+                    `0 0 20px ${color}60`,
+                    `0 0 0px ${color}00`,
+                  ],
+                  scale: [1, 1.05, 1],
                 }}
                 transition={{
-                  duration: 4 + (index % 3),
+                  duration: 3,
                   repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: index * 0.1
+                  delay: index * 0.1,
+                  ease: "easeInOut"
                 }}
-                className={`
-                  text-2xl md:text-3xl font-bold cursor-pointer select-none
-                  ${skill.color}
-                  hover:z-10 relative
-                  transition-all duration-300
-                  drop-shadow-lg
-                `}
-                style={{
-                  filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.3))'
+                whileHover={{ 
+                  scale: 1.1, 
+                  boxShadow: `0 0 30px ${color}`,
+                  transition: { duration: 0.2 } 
                 }}
-                suppressHydrationWarning
+                className="relative group cursor-pointer select-none rounded-2xl"
               >
-                {skill.name}
-
-                {/* Sparkle effect on hover */}
-                <motion.div
-                  className="absolute -top-2 -right-2 w-2 h-2 bg-yellow-400 rounded-full"
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileHover={{
-                    opacity: [0, 1, 0],
-                    scale: [0, 1.5, 0],
-                    rotate: [0, 180, 360]
-                  }}
-                  transition={{ duration: 0.5 }}
-                />
+                {/* Liquid Glass Container */}
+                <div 
+                  className="relative px-6 py-3 rounded-2xl border border-white/40 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl shadow-sm overflow-hidden"
+                >
+                  {/* Glossy Reflection Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 pointer-events-none" />
+                  
+                  <span 
+                    className="relative z-10 text-lg font-oswald font-bold text-gray-800 dark:text-white uppercase tracking-wide"
+                    style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
+                  >
+                    {skill.name}
+                  </span>
+                </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Neon Particles */}
-          {Array.from({ length: 30 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className={`absolute w-1.5 h-1.5 rounded-full`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                backgroundColor: `hsl(${Math.random() * 360}, 80%, 60%)`
-              }}
-              animate={{
-                scale: [0, 1, 0],
-                opacity: [0, 1, 0],
-                x: [0, Math.random() * 100 - 50],
-                y: [0, Math.random() * 100 - 50]
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
-            />
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
