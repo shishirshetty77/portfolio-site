@@ -52,36 +52,9 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-20 px-4 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
-
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-xl"
-        />
-      </div>
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -91,25 +64,30 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <div className="inline-block mb-4">
+            <div className="flex items-center space-x-2 text-cyan-500 mb-2">
+              <span className="h-px w-8 bg-cyan-500"></span>
+              <span className="font-mono text-sm tracking-widest uppercase">Communication</span>
+              <span className="h-px w-8 bg-cyan-500"></span>
+            </div>
+          </div>
           <motion.h2
-            className="text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4"
+            className="text-4xl md:text-5xl font-bold text-white mb-4 font-mono tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Get In Touch
+            &lt;GetInTouch /&gt;
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg"
+            className="text-gray-400 max-w-2xl mx-auto text-lg font-light"
           >
-            Ready to start a conversation? I&apos;d love to hear from you.
-            Whether you have a question, project idea, or just want to say
-            hello you can ping me hear.
+            Initialize communication sequence.
           </motion.p>
         </motion.div>
 
@@ -122,116 +100,124 @@ export function Contact() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-3xl p-8 border border-white/20 dark:border-gray-700 shadow-xl">
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-blue-500/20 rounded-full mr-4">
-                  <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="border border-gray-800 bg-black/40 backdrop-blur-sm p-8 relative group">
+              <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center mb-6">
+                  <div className="p-3 border border-cyan-500/30 bg-cyan-900/10 mr-4">
+                    <MessageCircle className="w-6 h-6 text-cyan-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white font-mono">
+                    Connect_Nodes
+                  </h3>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Let&apos;s Connect
-                </h3>
-              </div>
 
-              <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-4 group"
-                >
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                    <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Email
-                    </p>
-                    <a
-                      href="mailto:shishirshetty217@gmail.com"
-                      className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      shishirshetty77@gmail.com
-                    </a>
-                  </div>
-                </motion.div>
+                <div className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-4 group/item"
+                  >
+                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
+                      <Mail className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-mono">
+                        Email_Protocol
+                      </p>
+                      <a
+                        href="mailto:shishirshetty217@gmail.com"
+                        className="text-white font-medium hover:text-cyan-400 transition-colors font-mono"
+                      >
+                        shishirshetty77@gmail.com
+                      </a>
+                    </div>
+                  </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-4 group"
-                >
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                    <Phone className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Phone
-                    </p>
-                    <a
-                      href="tel:+919483243509"
-                      className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      +91 9483243509
-                    </a>
-                  </div>
-                </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-4 group/item"
+                  >
+                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
+                      <Phone className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-mono">
+                        Voice_Link
+                      </p>
+                      <a
+                        href="tel:+919483243509"
+                        className="text-white font-medium hover:text-cyan-400 transition-colors font-mono"
+                      >
+                        +91 9483243509
+                      </a>
+                    </div>
+                  </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-4 group"
-                >
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                    <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Location
-                    </p>
-                    <span className="text-gray-900 dark:text-white font-medium">
-                      Udupi, Karnataka
-                    </span>
-                  </div>
-                </motion.div>
-              </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-4 group/item"
+                  >
+                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
+                      <MapPin className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-mono">
+                        Geo_Coordinates
+                      </p>
+                      <span className="text-white font-medium font-mono">
+                        Udupi, Karnataka
+                      </span>
+                    </div>
+                  </motion.div>
+                </div>
 
-              {/* Social Links */}
-              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Follow Me
-                </h4>
-                <div className="flex space-x-4">
-                  {[
-                    {
-                      Icon: Github,
-                      href: 'https://github.com/shishirshetty77',
-                      label: 'GitHub',
-                    },
-                    {
-                      Icon: Linkedin,
-                      href: 'https://www.linkedin.com/in/shishir-shetty-715028230/',
-                      label: 'LinkedIn',
-                    },
-                  ].map(({ Icon, href, label }) => (
-                    <motion.a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 group"
-                    >
-                      <Icon className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-white" />
-                    </motion.a>
-                  ))}
+                {/* Social Links */}
+                <div className="mt-8 pt-8 border-t border-gray-800">
+                  <h4 className="text-lg font-semibold text-white mb-4 font-mono">
+                    Social_Uplink
+                  </h4>
+                  <div className="flex space-x-4">
+                    {[
+                      {
+                        Icon: Github,
+                        href: 'https://github.com/shishirshetty77',
+                        label: 'GitHub',
+                      },
+                      {
+                        Icon: Linkedin,
+                        href: 'https://www.linkedin.com/in/shishir-shetty-715028230/',
+                        label: 'LinkedIn',
+                      },
+                    ].map(({ Icon, href, label }) => (
+                      <motion.a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 border border-gray-700 bg-gray-900 hover:border-cyan-500 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-300 group"
+                      >
+                        <Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-400" />
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </div>
+              
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-gray-700 group-hover:border-cyan-500 transition-colors" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-gray-700 group-hover:border-cyan-500 transition-colors" />
             </div>
           </motion.div>
 
@@ -242,9 +228,9 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-3xl p-8 border border-white/20 dark:border-gray-700 shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Send a Message
+            <div className="border border-gray-800 bg-black/40 backdrop-blur-sm p-8 relative">
+              <h3 className="text-2xl font-bold text-white mb-6 font-mono">
+                Transmit_Message
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -257,11 +243,11 @@ export function Contact() {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Your Name"
+                    placeholder="ID_Name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 font-mono placeholder-gray-600"
                   />
                 </motion.div>
 
@@ -274,11 +260,11 @@ export function Contact() {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Your Email"
+                    placeholder="Return_Address"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 font-mono placeholder-gray-600"
                   />
                 </motion.div>
 
@@ -290,12 +276,12 @@ export function Contact() {
                 >
                   <textarea
                     name="message"
-                    placeholder="Your Message"
+                    placeholder="Data_Packet"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 resize-none font-mono placeholder-gray-600"
                   />
                 </motion.div>
 
@@ -307,12 +293,16 @@ export function Contact() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 flex items-center justify-center space-x-2 group"
+                  className="w-full bg-cyan-900/20 border border-cyan-500/50 text-cyan-400 py-4 font-semibold hover:bg-cyan-500 hover:text-black transition-all duration-300 flex items-center justify-center space-x-2 group font-mono uppercase tracking-wider"
                 >
                   <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  <span>Send Message</span>
+                  <span>Execute_Send</span>
                 </motion.button>
               </form>
+              
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-gray-700" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-gray-700" />
             </div>
           </motion.div>
         </div>

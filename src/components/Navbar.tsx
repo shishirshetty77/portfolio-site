@@ -91,39 +91,26 @@ export function Navbar() {
         onMouseLeave={() => setIsNavHovered(false)}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-hidden ${
           isScrolled
-            ? 'bg-white/10 dark:bg-gray-900/10 backdrop-blur-xl border-b border-white/30 dark:border-gray-700/30'
+            ? 'bg-black/80 backdrop-blur-xl border-b border-cyan-500/20'
             : 'bg-transparent'
         }`}
         style={{
           background: isScrolled 
-            ? `linear-gradient(135deg, 
-                ${theme === 'dark' 
-                  ? 'rgba(17, 24, 39, 0.15) 0%, rgba(55, 65, 81, 0.25) 25%, rgba(99, 102, 241, 0.1) 50%, rgba(139, 92, 246, 0.1) 75%, rgba(75, 85, 99, 0.15) 100%'
-                  : 'rgba(255, 248, 220, 0.15) 0%, rgba(254, 243, 199, 0.25) 25%, rgba(251, 191, 36, 0.1) 50%, rgba(245, 158, 11, 0.1) 75%, rgba(243, 244, 246, 0.15) 100%'
-                })`
-            : theme === 'dark' 
-              ? 'linear-gradient(135deg, rgba(17, 24, 39, 0.05) 0%, rgba(55, 65, 81, 0.05) 100%)'
-              : 'linear-gradient(135deg, rgba(255, 248, 220, 0.05) 0%, rgba(254, 243, 199, 0.05) 100%)'
+            ? 'rgba(2, 4, 8, 0.8)'
+            : 'transparent'
         }}
       >
         {/* Animated Background Gradient */}
         <motion.div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-10"
           animate={{
-            background: theme === 'dark' ? [
-              'linear-gradient(45deg, transparent 0%, rgba(99, 102, 241, 0.15) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(147, 51, 234, 0.15) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.15) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%)'
-            ] : [
-              'linear-gradient(45deg, transparent 0%, rgba(251, 191, 36, 0.12) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(245, 158, 11, 0.12) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(217, 119, 6, 0.12) 50%, transparent 100%)',
-              'linear-gradient(45deg, transparent 0%, rgba(251, 191, 36, 0.12) 50%, transparent 100%)'
+            background: [
+              'linear-gradient(45deg, transparent 0%, rgba(0, 240, 255, 0.1) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(112, 0, 255, 0.1) 50%, transparent 100%)',
             ]
           }}
           transition={{
-            duration: theme === 'dark' ? 8 : 6,
+            duration: 8,
             repeat: Infinity,
             ease: 'linear'
           }}
@@ -133,9 +120,31 @@ export function Navbar() {
         <motion.div
           className="absolute top-0 left-0 w-full h-full pointer-events-none"
           animate={{
-            background: theme === 'dark' 
-              ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.08), transparent 40%)`
-              : `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(251, 191, 36, 0.06), transparent 40%)`
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 240, 255, 0.05), transparent 40%)`
+          }}
+          transition={{ duration: 0.3 }}
+        />
+        {/* Animated Background Gradient */}
+        <motion.div
+          className="absolute inset-0 opacity-10"
+          animate={{
+            background: [
+              'linear-gradient(45deg, transparent 0%, rgba(0, 240, 255, 0.1) 50%, transparent 100%)',
+              'linear-gradient(45deg, transparent 0%, rgba(112, 0, 255, 0.1) 50%, transparent 100%)',
+            ]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'linear'
+          }}
+        />
+
+        {/* Dynamic Light Beam */}
+        <motion.div
+          className="absolute top-0 left-0 w-full h-full pointer-events-none"
+          animate={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 240, 255, 0.05), transparent 40%)`
           }}
           transition={{ duration: 0.3 }}
         />
@@ -144,9 +153,7 @@ export function Navbar() {
         {isNavHovered && typeof window !== 'undefined' && window.innerWidth >= 768 && Array.from({ length: 6 }).map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute w-1 h-1 rounded-full pointer-events-none ${
-              theme === 'dark' ? 'bg-purple-400' : 'bg-yellow-400'
-            }`}
+            className="absolute w-1 h-1 rounded-full pointer-events-none bg-cyan-400"
             initial={{ opacity: 0, scale: 0 }}
             animate={{
               opacity: [0, 1, 0],
@@ -170,13 +177,13 @@ export function Navbar() {
             {/* Desktop Navigation - Centered */}
             <div className="hidden lg:flex items-center justify-center flex-1">
               <motion.div 
-                className="relative bg-white/5 dark:bg-gray-800/20 backdrop-blur-md rounded-2xl p-1.5 lg:p-2 border border-white/20 dark:border-gray-700/30"
+                className="relative bg-black/40 backdrop-blur-md rounded-none p-1.5 lg:p-2 border border-cyan-500/30"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 {/* Glowing border effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-sm"
+                  className="absolute inset-0 rounded-none bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-cyan-500/20 blur-sm"
                   animate={{
                     opacity: isNavHovered ? 0.8 : 0.3
                   }}
@@ -191,10 +198,10 @@ export function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                       onClick={() => handleNavClick(item.href)}
-                      className={`relative px-2 lg:px-4 py-1.5 lg:py-2 rounded-lg lg:rounded-xl text-xs lg:text-sm font-medium transition-all duration-300 group ${
+                      className={`relative px-2 lg:px-4 py-1.5 lg:py-2 rounded-none text-xs lg:text-sm font-mono transition-all duration-300 group ${
                         activeSection === item.id
-                          ? 'text-white shadow-lg'
-                          : 'text-gray-700 dark:text-gray-300 hover:text-white'
+                          ? 'text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.3)]'
+                          : 'text-gray-400 hover:text-cyan-200'
                       }`}
                       whileHover={{ 
                         scale: 1.1, 
@@ -208,7 +215,7 @@ export function Navbar() {
                         <>
                           <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl"
+                            className="absolute inset-0 bg-cyan-500/10 border border-cyan-500/50"
                             initial={false}
                             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                           />
@@ -224,27 +231,27 @@ export function Navbar() {
                               repeat: Infinity
                             }}
                           >
-                            <Sparkles className="w-2 lg:w-3 h-2 lg:h-3 text-yellow-300" />
+                            <Sparkles className="w-2 lg:w-3 h-2 lg:h-3 text-cyan-300" />
                           </motion.div>
                         </>
                       )}
                       
                       {/* Hover glow effect */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-pink-400/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="absolute inset-0 bg-cyan-400/10 rounded-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         whileHover={{
-                          boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
+                          boxShadow: '0 0 20px rgba(0, 240, 255, 0.2)'
                         }}
                       />
                       
-                      <span className="relative z-10 font-semibold tracking-wide">{item.label}</span>
+                      <span className="relative z-10 tracking-wide uppercase text-xs">{item.label}</span>
                       
                       {/* Animated underline */}
                       <motion.div
-                        className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-                        initial={{ width: 0, x: '-50%' }}
+                        className="absolute bottom-0 left-0 h-[2px] bg-cyan-500"
+                        initial={{ width: 0 }}
                         animate={{
-                          width: activeSection === item.id ? '80%' : 0
+                          width: activeSection === item.id ? '100%' : 0
                         }}
                         transition={{ duration: 0.3 }}
                       />
@@ -266,7 +273,7 @@ export function Navbar() {
             >
               {/* Magical glow effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-amber-400/50 to-purple-500/50 dark:from-indigo-500/50 dark:to-pink-500/50 rounded-full blur-md"
+                className="absolute inset-0 bg-cyan-500/20 rounded-full blur-md"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.5, 0.8, 0.5]
@@ -277,44 +284,16 @@ export function Navbar() {
                 }}
               />
               
-              <div className="relative w-14 lg:w-16 h-7 lg:h-8 bg-gradient-to-r from-amber-300 via-orange-400 to-amber-300 dark:from-indigo-500 dark:via-purple-600 dark:to-indigo-500 rounded-full p-1 transition-all duration-500 shadow-lg border-2 border-white/30 dark:border-gray-700/30">
+              <div className="relative w-14 lg:w-16 h-7 lg:h-8 bg-black border border-cyan-500/50 rounded-full p-1 transition-all duration-500 shadow-lg">
                 {/* Track decoration */}
-                <div className="absolute inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-full" />
-                
-                {/* Floating particles around toggle */}
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-yellow-400 dark:bg-blue-400 rounded-full"
-                    animate={{
-                      x: [0, Math.sin(i * 2) * 10, 0],
-                      y: [0, Math.cos(i * 2) * 10, 0],
-                      opacity: [0.3, 1, 0.3],
-                      scale: [0.5, 1, 0.5]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.5
-                    }}
-                    style={{
-                      left: `${20 + i * 20}%`,
-                      top: '10%'
-                    }}
-                  />
-                ))}
+                <div className="absolute inset-1 bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full" />
                 
                 <motion.div
-                  className="relative w-5 lg:w-6 h-5 lg:h-6 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transition-all duration-500 border border-gray-200 dark:border-gray-600"
+                  className="relative w-5 lg:w-6 h-5 lg:h-6 bg-cyan-900 rounded-full shadow-lg flex items-center justify-center transition-all duration-500 border border-cyan-500"
                   animate={{
                     x: theme === 'dark' ? 20 : 0,
                   }}
                   transition={{ type: 'spring', stiffness: 700, damping: 30 }}
-                  whileHover={{
-                    boxShadow: theme === 'dark' 
-                      ? '0 0 20px rgba(147, 51, 234, 0.5)'
-                      : '0 0 20px rgba(251, 191, 36, 0.5)'
-                  }}
                 >
                   <motion.div
                     animate={{
@@ -327,24 +306,8 @@ export function Navbar() {
                     }}
                     className="text-sm lg:text-base"
                   >
-                    {theme === 'dark' ? '🦉' : '☀️'}
+                    {theme === 'dark' ? '🌙' : '☀️'}
                   </motion.div>
-                  
-                  {/* Inner glow */}
-                  <motion.div
-                    className={`absolute inset-0 rounded-full ${
-                      theme === 'dark' 
-                        ? 'bg-gradient-to-r from-purple-400/20 to-blue-400/20'
-                        : 'bg-gradient-to-r from-yellow-400/20 to-orange-400/20'
-                    }`}
-                    animate={{
-                      opacity: [0.2, 0.6, 0.2]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity
-                    }}
-                  />
                 </motion.div>
               </div>
             </motion.button>
