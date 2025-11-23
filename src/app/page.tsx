@@ -6,6 +6,8 @@ import { Skills } from '@/components/Skills'
 import { Experience } from '@/components/Experience'
 import { Contact } from '@/components/Contact'
 import Footer from '@/components/Footer'
+import { ScrollToTop } from '@/components/ScrollToTop'
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
@@ -17,6 +19,8 @@ export default function Home() {
       <Experience />
       <Contact />
       <Footer />
+      <ScrollToTop />
     </main>
   )
 }
+

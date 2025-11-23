@@ -1,6 +1,30 @@
 version: "3.9"
+
 services:
-  portfolio:
-    build: .
+  # Development service with hot reloading
+  dev:
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: base
+    command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Production service
+  prod:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+    restart: always
+
