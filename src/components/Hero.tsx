@@ -14,7 +14,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-4 overflow-hidden bg-dots pt-20">
+    <section className="min-h-screen flex items-center justify-center relative px-4 overflow-hidden pt-20">
+      
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-dots pointer-events-none" />
       
       {/* Decorative Background Elements - Soft Tech Blobs */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl hidden md:block animate-pulse" />

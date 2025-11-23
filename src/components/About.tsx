@@ -11,7 +11,9 @@ export function About() {
     setShowRealImage(!showRealImage);
   };
   return (
-    <section id="about" className="py-20 px-4 relative overflow-hidden bg-dots">
+    <section id="about" className="py-20 px-4 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-dots pointer-events-none" />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
