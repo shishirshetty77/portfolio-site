@@ -1,27 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  /* Cyber-Industrial Palette */
-  --background: #020408; /* Void Black */
-  --foreground: #E2E8F0; /* Slate 200 */
+  /* Soft Tech Palette */
+  --background: #EFECE3; /* Warm Sand (User Requested) */
+  --foreground: #1F2937; /* Gray 800 - Softer than pure black */
   
-  /* Neon Accents */
-  --primary: #00F0FF; /* Cyber Cyan */
-  --primary-dim: rgba(0, 240, 255, 0.1);
-  --secondary: #7000FF; /* Electric Violet */
-  --secondary-dim: rgba(112, 0, 255, 0.1);
+  /* Soft Tech Accents */
+  --primary: #6366F1; /* Indigo */
+  --secondary: #EC4899; /* Pink */
+  --tertiary: #14B8A6; /* Teal */
   
-  /* Technical Elements */
-  --grid-color: rgba(255, 255, 255, 0.05);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(10, 10, 15, 0.7);
+  /* UI Elements */
+  --border-color: #E5E7EB; /* Gray 200 */
+  --card-bg: #FFFFFF;
+  --radius: 12px;
+}
+
+.dark {
+  --background: #313647; /* Slate Night (User Requested) */
+  --foreground: #F9FAFB; /* Gray 50 */
+  --border-color: #4B5563; /* Gray 600 */
+  --card-bg: #1F2937; /* Gray 800 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-oswald);
+  --font-mono: var(--font-mono);
+  
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  
+  --radius-card: var(--radius);
 }
 
 body {
@@ -29,81 +42,64 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Technical Grid Background */
-.bg-grid {
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+/* Soft Tech Utilities */
+
+/* Soft Card */
+.neo-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Cyber Scrollbar */
+.neo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary);
+}
+
+/* Soft Button */
+.neo-button {
+  @apply font-bold uppercase tracking-wide px-6 py-3 bg-primary text-white rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:bg-indigo-600 hover:-translate-y-0.5 shadow-sm hover:shadow-md;
+}
+
+.neo-button-secondary {
+  @apply font-bold uppercase tracking-wide px-6 py-3 bg-white dark:bg-gray-800 text-foreground border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:border-primary hover:text-primary hover:-translate-y-0.5 shadow-sm;
+}
+
+/* High Density Dot Grid */
+.bg-dots {
+  background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
+  background-size: 16px 16px; /* Tighter grid */
+  opacity: 0.07; /* Very subtle */
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.02em; /* Reduced spacing */
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #CBD5E1;
+  border-radius: 5px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
-}
-
-/* Utility: Glowing Text */
-.text-glow {
-  text-shadow: 0 0 10px var(--primary-dim), 0 0 20px var(--primary-dim);
-}
-
-/* Utility: Tech Border */
-.tech-border {
-  position: relative;
-  border: 1px solid var(--border-color);
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-}
-
-/* Corner accents for tech cards */
-.tech-border::before,
-.tech-border::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 1px solid var(--primary);
-  transition: all 0.3s ease;
-}
-
-.tech-border::before {
-  top: -1px;
-  left: -1px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.tech-border::after {
-  bottom: -1px;
-  right: -1px;
-  border-left: none;
-  border-top: none;
-}
-
-.tech-border:hover::before,
-.tech-border:hover::after {
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-}
-
-/* Cat Mode Overrides (Keeping the fun, but adapting it) */
-body.cat-mode {
-  --primary: #FF6B6B;
-  --secondary: #4ECDC4;
-  background: #1a1a1a;
 }
 

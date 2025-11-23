@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const oswald = Oswald({
+  variable: "--font-oswald",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -80,7 +85,6 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from '@/components/ThemeProvider'
-import { CatModeProvider } from '@/context/CatModeContext'
 
 export default function RootLayout({
   children,
@@ -151,12 +155,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-grid`}
+        className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
-          <CatModeProvider>
-            {children}
-          </CatModeProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -32,19 +32,13 @@ export function ScrollToTop() {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-3 bg-black/80 border border-cyan-500/50 text-cyan-400 backdrop-blur-sm shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:bg-cyan-500 hover:text-black transition-all duration-300 group"
-          whileHover={{ y: -5 }}
-          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-8 right-8 z-50 p-4 bg-primary text-white rounded-full shadow-lg shadow-primary/30 hover:bg-primary/90 hover:scale-110 active:scale-95 transition-all duration-200"
         >
-          <ArrowUp className="w-6 h-6 group-hover:animate-bounce" />
-          
-          {/* Corner Accents */}
-          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500 opacity-50" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500 opacity-50" />
+          <ArrowUp className="w-6 h-6 stroke-[3]" />
         </motion.button>
       )}
     </AnimatePresence>

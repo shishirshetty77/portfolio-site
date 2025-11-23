@@ -51,11 +51,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
-
+    <section id="contact" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-800/50">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -65,27 +61,25 @@ export function Contact() {
           className="text-center mb-16"
         >
           <div className="inline-block mb-4">
-            <div className="flex items-center space-x-2 text-cyan-500 mb-2">
-              <span className="h-px w-8 bg-cyan-500"></span>
-              <span className="font-mono text-sm tracking-widest uppercase">Communication</span>
-              <span className="h-px w-8 bg-cyan-500"></span>
+            <div className="bg-tertiary/10 text-tertiary px-4 py-1 font-mono font-bold text-sm uppercase tracking-widest rounded-full">
+              Communication
             </div>
           </div>
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-white mb-4 font-mono tracking-tight"
+            className="text-5xl md:text-6xl font-oswald font-bold text-foreground mb-4 uppercase tracking-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            &lt;GetInTouch /&gt;
+            GET IN TOUCH
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-400 max-w-2xl mx-auto text-lg font-light"
+            className="text-gray-600 dark:text-gray-300 font-medium max-w-2xl mx-auto text-lg"
           >
             Initialize communication sequence.
           </motion.p>
@@ -100,16 +94,15 @@ export function Contact() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="border border-gray-800 bg-black/40 backdrop-blur-sm p-8 relative group">
-              <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="neo-card p-8 relative h-full">
               
               <div className="relative z-10">
                 <div className="flex items-center mb-6">
-                  <div className="p-3 border border-cyan-500/30 bg-cyan-900/10 mr-4">
-                    <MessageCircle className="w-6 h-6 text-cyan-400" />
+                  <div className="p-3 bg-primary/10 rounded-xl mr-4 text-primary">
+                    <MessageCircle className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white font-mono">
-                    Connect_Nodes
+                  <h3 className="text-3xl font-oswald font-bold text-foreground uppercase">
+                    Connect
                   </h3>
                 </div>
 
@@ -121,16 +114,16 @@ export function Contact() {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4 group/item"
                   >
-                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
-                      <Mail className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
+                      <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 font-mono">
-                        Email_Protocol
+                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
+                        Email
                       </p>
                       <a
                         href="mailto:shishirshetty217@gmail.com"
-                        className="text-white font-medium hover:text-cyan-400 transition-colors font-mono"
+                        className="text-foreground font-bold hover:text-primary transition-colors font-mono"
                       >
                         shishirshetty77@gmail.com
                       </a>
@@ -144,16 +137,16 @@ export function Contact() {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4 group/item"
                   >
-                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
-                      <Phone className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
+                      <Phone className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 font-mono">
-                        Voice_Link
+                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
+                        Phone
                       </p>
                       <a
                         href="tel:+919483243509"
-                        className="text-white font-medium hover:text-cyan-400 transition-colors font-mono"
+                        className="text-foreground font-bold hover:text-primary transition-colors font-mono"
                       >
                         +91 9483243509
                       </a>
@@ -167,14 +160,14 @@ export function Contact() {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4 group/item"
                   >
-                    <div className="p-3 border border-gray-700 bg-gray-900 group-hover/item:border-cyan-500 group-hover/item:text-cyan-400 transition-all duration-300">
-                      <MapPin className="w-5 h-5 text-gray-400 group-hover/item:text-cyan-400" />
+                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
+                      <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 font-mono">
-                        Geo_Coordinates
+                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
+                        Location
                       </p>
-                      <span className="text-white font-medium font-mono">
+                      <span className="text-foreground font-bold font-mono">
                         Udupi, Karnataka
                       </span>
                     </div>
@@ -182,9 +175,9 @@ export function Contact() {
                 </div>
 
                 {/* Social Links */}
-                <div className="mt-8 pt-8 border-t border-gray-800">
-                  <h4 className="text-lg font-semibold text-white mb-4 font-mono">
-                    Social_Uplink
+                <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
+                  <h4 className="text-lg font-bold text-foreground mb-4 font-oswald uppercase">
+                    Social Links
                   </h4>
                   <div className="flex space-x-4">
                     {[
@@ -206,18 +199,14 @@ export function Contact() {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="p-3 border border-gray-700 bg-gray-900 hover:border-cyan-500 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-300 group"
+                        className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-sm border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary hover:border-primary/30 transition-all duration-300"
                       >
-                        <Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-400" />
+                        <Icon className="w-5 h-5" />
                       </motion.a>
                     ))}
                   </div>
                 </div>
               </div>
-              
-              {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-gray-700 group-hover:border-cyan-500 transition-colors" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-gray-700 group-hover:border-cyan-500 transition-colors" />
             </div>
           </motion.div>
 
@@ -228,9 +217,9 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="border border-gray-800 bg-black/40 backdrop-blur-sm p-8 relative">
-              <h3 className="text-2xl font-bold text-white mb-6 font-mono">
-                Transmit_Message
+            <div className="neo-card p-8 relative">
+              <h3 className="text-3xl font-oswald font-bold text-foreground mb-6 uppercase">
+                Send Message
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -243,11 +232,11 @@ export function Contact() {
                   <input
                     type="text"
                     name="name"
-                    placeholder="ID_Name"
+                    placeholder="YOUR NAME"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 font-mono placeholder-gray-600"
+                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 font-mono font-bold placeholder-gray-400"
                   />
                 </motion.div>
 
@@ -260,11 +249,11 @@ export function Contact() {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Return_Address"
+                    placeholder="YOUR EMAIL"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 font-mono placeholder-gray-600"
+                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 font-mono font-bold placeholder-gray-400"
                   />
                 </motion.div>
 
@@ -276,12 +265,12 @@ export function Contact() {
                 >
                   <textarea
                     name="message"
-                    placeholder="Data_Packet"
+                    placeholder="YOUR MESSAGE"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-4 bg-black/50 border border-gray-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none transition-all duration-300 resize-none font-mono placeholder-gray-600"
+                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 resize-none font-mono font-bold placeholder-gray-400"
                   />
                 </motion.div>
 
@@ -293,16 +282,12 @@ export function Contact() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-cyan-900/20 border border-cyan-500/50 text-cyan-400 py-4 font-semibold hover:bg-cyan-500 hover:text-black transition-all duration-300 flex items-center justify-center space-x-2 group font-mono uppercase tracking-wider"
+                  className="w-full bg-primary text-white py-4 rounded-xl font-bold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-300 flex items-center justify-center space-x-2 group font-oswald uppercase tracking-wider text-lg"
                 >
                   <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  <span>Execute_Send</span>
+                  <span>SEND IT</span>
                 </motion.button>
               </form>
-              
-              {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-gray-700" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-gray-700" />
             </div>
           </motion.div>
         </div>
