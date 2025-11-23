@@ -56,7 +56,7 @@ export function About() {
                   <img
                     src="/munnar.jpeg"
                     alt="Shishir Shetty"
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                    className="w-full h-full object-cover transition-all duration-300"
                   />
                 </motion.div>
               </div>

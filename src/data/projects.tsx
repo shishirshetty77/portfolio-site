@@ -4,6 +4,7 @@ import {
   CheckCircle,
   Code,
   Cpu,
+  Database,
   Server,
   Smartphone,
 } from 'lucide-react';
@@ -21,6 +22,25 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
+  {
+    title: 'Three-Tier App – GKE DevOps',
+    description:
+      'A full-stack React, Node.js, and MongoDB application engineered with complete DevOps implementation. Features containerization, Kubernetes orchestration on GKE, Ingress load balancing, and automated CI/CD pipelines.',
+    technologies: [
+      'React',
+      'Node.js',
+      'MongoDB',
+      'GKE',
+      'Docker',
+      'Ingress',
+      'CI/CD',
+    ],
+    github: 'https://github.com/shishirshetty77/ThreeTierAppDevOpsified',
+    demo: 'https://github.com/shishirshetty77/ThreeTierAppDevOpsified',
+    featured: true,
+    icon: <Database className="w-6 h-6" />,
+    gradient: 'from-orange-400 to-red-400',
+  },
   {
     title: 'Microservices Multistack App',
     description:

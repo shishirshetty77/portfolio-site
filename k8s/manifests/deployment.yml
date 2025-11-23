@@ -17,5 +17,6 @@ spec:
       containers:
         - name: portfolio-container
           image: shishir77/portfolio-site:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
