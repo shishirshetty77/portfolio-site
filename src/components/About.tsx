@@ -47,7 +47,7 @@ export function About() {
 
             <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed">
               <p>
-                I'm a DevOps Engineer and Cloud Architect driven by a simple philosophy: <span className="text-foreground font-medium">automate everything that can be automated.</span>
+                I&apos;m a DevOps Engineer and Cloud Architect driven by a simple philosophy: <span className="text-foreground font-medium">automate everything that can be automated.</span>
               </p>
               
               <p>
@@ -55,7 +55,7 @@ export function About() {
               </p>
 
               <p>
-                When I'm not configuring Kubernetes clusters or writing Terraform modules, I'm exploring new technologies, contributing to open source, or finding the perfect cup of coffee.
+                When I&apos;m not configuring Kubernetes clusters or writing Terraform modules, I&apos;m exploring new technologies, contributing to open source, or finding the perfect cup of coffee.
               </p>
             </div>
 

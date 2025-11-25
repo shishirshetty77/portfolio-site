@@ -2,7 +2,7 @@
 
 import { experienceData } from '@/data/experience';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export function Experience() {
   return (

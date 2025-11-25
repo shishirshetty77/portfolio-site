@@ -1,6 +1,5 @@
 'use client';
 
-import { useTheme } from '@/components/ThemeProvider';
 import { motion, useTransform, useSpring, useMotionValue, MotionValue } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Server, Cloud, Database, Zap, LucideIcon } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';

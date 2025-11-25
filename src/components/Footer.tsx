@@ -10,10 +10,10 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <div>
             <h2 className="text-5xl md:text-7xl font-oswald font-bold tracking-tighter mb-8">
-              LET'S WORK <br />
+              LET&apos;S WORK <br />
               <span className="text-gray-400">TOGETHER</span>
             </h2>
-            <a 
+            <a  
               href="mailto:shishirshetty77@gmail.com"
               className="inline-flex items-center gap-3 text-xl md:text-2xl font-light hover:text-primary transition-colors group"
             >

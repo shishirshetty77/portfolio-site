@@ -25,7 +25,7 @@ export function Contact() {
             GET IN <span className="text-gray-400 font-light">TOUCH</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            Have a project in mind or just want to say hello? I'm always open to discussing new opportunities and ideas.
+            Have a project in mind or just want to say hello? I&apos;m always open to discussing new opportunities and ideas.
           </p>
         </motion.div>
 
