@@ -13,6 +13,11 @@ import {
 export function Contact() {
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
+      {/* Ambient background */}
+      <div className="absolute inset-0 bg-dots opacity-20" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl" />
+      
       <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +42,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl hover:border-primary/50 transition-all duration-300"
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
           >
             <div className="flex justify-between items-start mb-8">
               <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
@@ -56,7 +61,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="group p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl hover:border-primary/50 transition-all duration-300"
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
           >
             <div className="flex justify-between items-start mb-8">
               <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
@@ -74,7 +79,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="group p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl hover:border-primary/50 transition-all duration-300"
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
           >
             <div className="flex justify-between items-start mb-8">
               <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
@@ -91,7 +96,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="group p-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl hover:border-primary/50 transition-all duration-300 flex flex-col justify-between"
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden flex flex-col justify-between"
           >
             <div className="flex gap-4 mb-8">
               <a 

@@ -11,8 +11,10 @@ import {
 export function Projects() {
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-dots opacity-30" />
+      {/* Multi-layered Background */}
+      <div className="absolute inset-0 bg-dots opacity-20" />
+      <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -39,12 +41,15 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="neo-card group flex flex-col h-full"
+              className="neo-card group flex flex-col h-full backdrop-blur-xl bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10"
             >
+              {/* Ambient glow on hover */}
+              <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/0 via-secondary/0 to-tertiary/0 group-hover:from-primary/10 group-hover:via-secondary/5 group-hover:to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
               {/* Card Header */}
-              <div className="p-8 pb-0 flex-grow">
+              <div className="p-8 pb-0 flex-grow relative z-10">
                 <div className="flex justify-between items-start mb-6">
-                  <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-foreground/5 to-foreground/10 text-foreground group-hover:from-primary group-hover:to-secondary group-hover:text-white transition-all duration-500 shadow-lg">
                     {project.icon}
                   </div>
                   <div className="flex gap-3">
@@ -77,13 +82,13 @@ export function Projects() {
               </div>
 
               {/* Card Footer - Tech Stack */}
-              <div className="p-8 pt-0 mt-auto">
+              <div className="p-8 pt-0 mt-auto relative z-10">
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent mb-6" />
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tag, tagIndex) => (
                     <span 
                       key={tagIndex} 
-                      className="px-3 py-1 text-xs font-mono font-medium text-gray-500 dark:text-gray-400 bg-foreground/5 rounded-full border border-transparent hover:border-foreground/10 transition-colors cursor-default"
+                      className="px-4 py-1.5 text-xs font-mono font-semibold text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-white/10 backdrop-blur-sm rounded-full border border-black/10 dark:border-white/20 hover:border-primary/50 hover:bg-white dark:hover:bg-white/20 hover:scale-105 transition-all duration-300 cursor-default shadow-sm"
                     >
                       {tag}
                     </span>

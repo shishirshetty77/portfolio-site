@@ -7,6 +7,11 @@ import Image from 'next/image';
 export function About() {
   return (
     <section id="about" className="py-32 relative overflow-hidden">
+      {/* Ambient background */}
+      <div className="absolute inset-0 bg-dots opacity-20" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Photo Section - Minimal & Clean */}
@@ -18,13 +23,15 @@ export function About() {
             className="relative order-2 lg:order-1"
           >
             <div className="relative aspect-square max-w-md mx-auto lg:mx-0">
-              <div className="absolute inset-0 bg-gradient-to-tr from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl transform rotate-3 transition-transform duration-500 hover:rotate-0" />
-              <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl">
+              {/* Ambient glow behind image */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-2xl scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-gray-200 to-gray-100 dark:from-white/10 dark:to-white/5 rounded-3xl transform rotate-3 transition-transform duration-500 hover:rotate-0 border border-black/5 dark:border-white/10" />
+              <div className="relative h-full w-full rounded-3xl overflow-hidden shadow-2xl dark:shadow-primary/20 border border-white/20">
                 <Image
                   src="/munnar.jpeg"
                   alt="Shishir Shetty"
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  className="object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
             </div>

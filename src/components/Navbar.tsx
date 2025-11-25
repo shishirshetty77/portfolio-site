@@ -80,8 +80,8 @@ export function Navbar() {
         <div className="max-w-5xl mx-auto px-6">
           <div className={`relative flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ${
             isScrolled 
-              ? 'bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-lg shadow-black/5' 
-              : 'bg-transparent'
+              ? 'bg-white/80 dark:bg-black/80 backdrop-blur-2xl border border-black/10 dark:border-white/20 shadow-xl dark:shadow-2xl dark:shadow-primary/10' 
+              : 'bg-white/50 dark:bg-black/50 backdrop-blur-md border border-black/5 dark:border-white/10'
           }`}>
             
             {/* Logo / Brand */}
@@ -116,7 +116,7 @@ export function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full bg-foreground/5 text-foreground hover:bg-foreground/10 transition-all"
+                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-white/10 border border-black/10 dark:border-white/20 text-foreground hover:bg-white dark:hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-md"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? '🌙' : '☀️'}
