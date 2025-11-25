@@ -5,22 +5,22 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="w-full py-20 px-4 relative overflow-hidden border-t border-foreground/10">
+    <footer className="w-full py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden border-t border-foreground/10">
       {/* Ambient footer background */}
       <div className="absolute inset-0 bg-dots opacity-20" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-secondary/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 mb-20">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16 md:mb-20">
           <div>
-            <h2 className="text-5xl md:text-7xl font-oswald font-bold tracking-tighter mb-8">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-oswald font-bold tracking-tighter mb-6 sm:mb-8">
               LET&apos;S WORK <br />
               <span className="text-gray-400">TOGETHER</span>
             </h2>
             <a  
               href="mailto:shishirshetty77@gmail.com"
-              className="inline-flex items-center gap-3 text-xl md:text-2xl font-light hover:text-primary transition-colors group"
+              className="inline-flex items-center gap-2 sm:gap-3 text-lg sm:text-xl md:text-2xl font-light hover:text-primary transition-colors group break-all"
             >
               shishirshetty77@gmail.com
               <ArrowUpRight className="w-6 h-6 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />

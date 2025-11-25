@@ -2,7 +2,7 @@
 
 import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 // Color mapping for vibrant gradients
 const colorMap: { [key: string]: { from: string; to: string; glow: string; shadow: string } } = {
@@ -25,32 +25,45 @@ const colorMap: { [key: string]: { from: string; to: string; glow: string; shado
 };
 
 export function Skills() {
+  // Audio ref for playing the sound on skill click
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0; // Reset to beginning
+      audioRef.current.play().catch(err => console.error('Audio playback failed:', err));
+    }
+  };
+
   return (
-    <section id="skills" className="py-32 relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
+      {/* Audio element */}
+      <audio ref={audioRef} src="/jadu.mp3" preload="auto" />
+      
       {/* Ambient background elements */}
       <div className="absolute inset-0 bg-dots opacity-30" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-secondary/5 rounded-full blur-3xl" />
       
-      <div className="max-w-5xl mx-auto px-4 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 tracking-tight px-4">
             DEVOPS & CLOUD <span className="text-gray-400 font-light">STACK</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed px-4">
             Production-proven tools and technologies I leverage to build, deploy, and scale cloud-native infrastructure with enterprise-grade reliability.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-4">
           {skillsData.map((skill, index) => (
-            <SkillCard key={skill.name} skill={skill} index={index} />
+            <SkillCard key={skill.name} skill={skill} index={index} playSound={playSound} />
           ))}
         </div>
       </div>
@@ -58,7 +71,7 @@ export function Skills() {
   )
 }
 
-function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: number }) {
+function SkillCard({ skill, index, playSound }: { skill: typeof skillsData[0], index: number, playSound: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
   const colors = colorMap[skill.color] || colorMap['text-blue-500'];
   
@@ -70,7 +83,8 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
       transition={{ duration: 0.4, delay: index * 0.03 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-2xl hover:border-transparent transition-all duration-500 hover:scale-110 overflow-hidden cursor-default"
+      onClick={playSound}
+      className="group relative p-4 sm:p-5 md:p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-xl sm:rounded-2xl hover:border-transparent transition-all duration-500 hover:scale-105 sm:hover:scale-110 overflow-hidden cursor-pointer active:scale-95"
       style={{
         boxShadow: isHovered 
           ? `0 20px 40px ${colors.shadow}, 0 0 30px ${colors.glow}` 
@@ -96,13 +110,13 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
           repeat: isHovered ? Infinity : 0,
           ease: "easeInOut"
         }}
-        className="absolute -top-12 -right-12 w-40 h-40 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+        className="absolute -top-12 -right-12 w-32 h-32 sm:w-40 sm:h-40 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
         style={{
           background: `radial-gradient(circle, ${colors.from}, ${colors.to})`
         }}
       />
       
-      <div className="flex items-center gap-4 relative z-10">
+      <div className="flex items-center gap-2 sm:gap-3 md:gap-4 relative z-10">
         {/* Animated icon/dot with gradient glow */}
         <motion.div 
           animate={isHovered ? {
@@ -114,7 +128,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
             repeat: isHovered ? Infinity : 0,
             ease: "easeInOut"
           }}
-          className="relative w-3 h-3 rounded-full transition-transform duration-300"
+          className="relative w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-transform duration-300 flex-shrink-0"
           style={{
             background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
             boxShadow: isHovered ? `0 0 20px ${colors.glow}, 0 0 40px ${colors.shadow}` : 'none'
@@ -141,7 +155,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
         </motion.div>
         
         <span 
-          className="font-mono text-base font-bold transition-all duration-300"
+          className="font-mono text-xs sm:text-sm md:text-base font-bold transition-all duration-300 break-words"
           style={{
             color: isHovered ? colors.from : undefined
           }}
@@ -162,7 +176,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
           repeat: isHovered ? Infinity : 0,
           ease: "easeInOut"
         }}
-        className="absolute top-0 right-0 w-16 h-16 rounded-tr-2xl opacity-0 pointer-events-none"
+        className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 rounded-tr-xl sm:rounded-tr-2xl opacity-0 pointer-events-none"
         style={{
           background: `linear-gradient(135deg, ${colors.from}40, transparent)`
         }}

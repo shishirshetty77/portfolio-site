@@ -74,11 +74,11 @@ export function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'py-4' : 'py-6'
+          isScrolled ? 'py-3 sm:py-4' : 'py-4 sm:py-6'
         }`}
       >
-        <div className="max-w-5xl mx-auto px-6">
-          <div className={`relative flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ${
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className={`relative flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-500 ${
             isScrolled 
               ? 'bg-[#F5E7C6]/60 dark:bg-black/80 backdrop-blur-2xl border border-[#E5D7B6]/30 dark:border-white/20 shadow-lg dark:shadow-2xl dark:shadow-primary/10' 
               : 'bg-[#F5E7C6]/40 dark:bg-black/50 backdrop-blur-md border border-[#E5D7B6]/20 dark:border-white/10'

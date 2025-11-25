@@ -36,7 +36,7 @@ export function Hero() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden pt-20 selection:bg-primary/30"
+      className="min-h-screen flex flex-col items-center justify-center relative px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 selection:bg-primary/30"
     >
       
       {/* Multi-layered Background System */}
@@ -52,7 +52,7 @@ export function Hero() {
             y: moveY,
             background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 100%)'
           }}
-          className="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-glow-pulse"
+          className="absolute top-[10%] left-[5%] w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full opacity-30 blur-3xl animate-glow-pulse"
         />
         <motion.div 
           style={{ 
@@ -60,10 +60,10 @@ export function Hero() {
             y: moveYReverse,
             background: 'radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%)'
           }}
-          className="absolute bottom-[5%] right-[10%] w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
+          className="absolute bottom-[5%] right-[10%] w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full opacity-25 blur-3xl"
         />
         <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full opacity-20 blur-3xl"
           style={{
             background: 'radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)'
           }}
@@ -71,10 +71,10 @@ export function Hero() {
       </div>
 
       {/* Main Content Container */}
-      <div className="max-w-7xl w-full mx-auto relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl w-full mx-auto relative z-10 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
         
         {/* Left Column: Typography & CTA */}
-        <div className="text-left space-y-10 relative">
+        <div className="text-left space-y-8 sm:space-y-10 relative">
           
           {/* Status Badge - Refined with glow */}
           <motion.div
@@ -95,7 +95,7 @@ export function Hero() {
           {/* Headline - Premium Typography */}
           <div className="relative overflow-hidden">
             <motion.h1 
-              className="text-7xl md:text-9xl font-oswald font-bold tracking-tighter leading-[0.85]"
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-oswald font-bold tracking-tighter leading-[0.85]"
             >
               <motion.div
                 initial={{ x: -200, opacity: 0, color: '#3B82F6' }}
@@ -119,7 +119,7 @@ export function Hero() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 0.6, ease: "circOut" }}
-              className="h-px w-32 bg-gradient-to-r from-foreground to-transparent mt-8 origin-left opacity-50"
+              className="h-px w-24 sm:w-32 bg-gradient-to-r from-foreground to-transparent mt-6 sm:mt-8 origin-left opacity-50"
             />
           </div>
 
@@ -128,7 +128,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl"
+            className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl"
           >
             <span className="font-medium text-foreground">DevOps Engineer</span> & <span className="font-medium text-foreground">Cloud Architect</span> specializing in Kubernetes, AWS, Terraform, and building production-grade cloud-native infrastructure.
           </motion.p>
@@ -138,7 +138,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap gap-3"
+            className="flex flex-wrap gap-2 sm:gap-3"
           >
             {['Kubernetes', 'AWS', 'Terraform', 'CI/CD', 'Python'].map((tech, i) => (
               <motion.span 
@@ -146,7 +146,7 @@ export function Hero() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 + (i * 0.1) }}
-                className="px-5 py-2 text-sm font-mono font-semibold tracking-wide border-2 border-gray-300 dark:border-white/20 rounded-full text-gray-800 dark:text-gray-200 bg-white/90 dark:bg-white/10 backdrop-blur-md hover:bg-white dark:hover:bg-white/20 hover:border-primary/50 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default"
+                className="px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-mono font-semibold tracking-wide border-2 border-gray-300 dark:border-white/20 rounded-full text-gray-800 dark:text-gray-200 bg-white/90 dark:bg-white/10 backdrop-blur-md hover:bg-white dark:hover:bg-white/20 hover:border-primary/50 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default"
               >
                 {tech}
               </motion.span>
@@ -158,7 +158,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-5 pt-4"
+            className="flex flex-wrap gap-4 sm:gap-5 pt-4"
           >
             <a 
               href="#projects"
@@ -180,7 +180,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex gap-6 pt-4"
+            className="flex gap-5 sm:gap-6 pt-4"
           >
             {[
               { icon: Github, href: 'https://github.com/shishirshetty77' },

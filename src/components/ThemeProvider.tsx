@@ -12,7 +12,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme) {
       setTheme(savedTheme)
     } else {
-      // Default to light for Bold Pop theme
-      setTheme('light')
+      // Default to dark mode
+      setTheme('dark')
     }
   }, [])
 
@@ -51,7 +51,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {!mounted ? (
-        <div className="min-h-screen bg-white">{children}</div>
+        <div className="min-h-screen bg-black dark">{children}</div>
       ) : (
         children
       )}
@@ -63,7 +63,7 @@ export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {
     return {
-      theme: 'light' as Theme,
+      theme: 'dark' as Theme,
       toggleTheme: () => {}
     }
   }
