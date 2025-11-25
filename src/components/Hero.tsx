@@ -45,74 +45,73 @@ export function Hero() {
       <div className="absolute inset-0 bg-dots z-0" />
       <div className="absolute inset-0 bg-noise z-0 mix-blend-overlay" />
       
-      {/* Dynamic Gradient Orbs */}
+      {/* Premium Spotlight Effect */}
       <motion.div 
         style={{ x: moveX, y: moveY }}
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-primary/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none" 
+        className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent rounded-full blur-[120px] opacity-60 pointer-events-none mix-blend-screen dark:mix-blend-screen" 
       />
       <motion.div 
         style={{ x: moveXReverse, y: moveYReverse }}
-        className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-secondary/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen pointer-events-none" 
+        className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-gradient-to-tl from-tertiary/20 via-primary/10 to-transparent rounded-full blur-[120px] opacity-50 pointer-events-none mix-blend-screen dark:mix-blend-screen" 
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-tertiary/10 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Main Content Container */}
-      <div className="max-w-7xl w-full mx-auto relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl w-full mx-auto relative z-10 grid lg:grid-cols-2 gap-16 items-center">
         
         {/* Left Column: Typography & CTA */}
-        <div className="text-left space-y-8 relative">
+        <div className="text-left space-y-10 relative">
           
-          {/* Status Badge */}
+          {/* Status Badge - Refined */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-sm"
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
-            <span className="text-xs font-mono font-medium tracking-wider uppercase text-gray-600 dark:text-gray-300">
+            <span className="text-xs font-mono font-medium tracking-widest uppercase text-gray-600 dark:text-gray-300">
               Available for new projects
             </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline - Premium Typography */}
           <div className="relative">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-6xl md:text-8xl lg:text-9xl font-oswald font-bold tracking-tighter leading-[0.9] text-foreground"
+              className="text-7xl md:text-9xl font-oswald font-bold tracking-tighter leading-[0.85] text-foreground"
             >
               SHISHIR
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary animate-gradient-x bg-[length:200%_auto]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-gray-500 to-foreground animate-gradient-x bg-[length:200%_auto]">
                 SHETTY
               </span>
             </motion.h1>
             
-            {/* Decorative line */}
+            {/* Decorative line - Minimal */}
             <motion.div 
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: 0.5, ease: "circOut" }}
-              className="h-1 w-32 bg-foreground mt-6 origin-left"
+              transition={{ duration: 1.2, delay: 0.5, ease: "circOut" }}
+              className="h-px w-32 bg-gradient-to-r from-foreground to-transparent mt-8 origin-left opacity-50"
             />
           </div>
 
-          {/* Subheadline */}
+          {/* Subheadline - Clean & Readable */}
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light leading-relaxed max-w-xl"
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl"
           >
-            <span className="font-semibold text-foreground">DevOps Engineer</span> & <span className="font-semibold text-foreground">Cloud Architect</span> crafting scalable infrastructure and automating the future of software delivery.
+            <span className="font-medium text-foreground">DevOps Engineer</span> & <span className="font-medium text-foreground">Cloud Architect</span> crafting scalable infrastructure and automating the future of software delivery.
           </motion.p>
 
-          {/* Tech Stack Pills */}
+          {/* Tech Stack Pills - Glassy */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -120,40 +119,40 @@ export function Hero() {
             className="flex flex-wrap gap-3"
           >
             {['Kubernetes', 'AWS', 'Terraform', 'CI/CD', 'Python'].map((tech) => (
-              <span key={tech} className="px-3 py-1 text-sm font-mono border border-gray-200 dark:border-white/10 rounded-md text-gray-500 dark:text-gray-400 bg-white/30 dark:bg-white/5 backdrop-blur-sm">
+              <span key={tech} className="px-4 py-1.5 text-xs font-mono font-medium tracking-wide border border-black/5 dark:border-white/10 rounded-full text-gray-600 dark:text-gray-300 bg-white/50 dark:bg-white/5 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-white/10 transition-colors cursor-default">
                 {tech}
               </span>
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Handcrafted */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-4 pt-4"
+            className="flex flex-wrap gap-5 pt-4"
           >
             <a 
               href="#projects"
-              className="group relative px-8 py-4 bg-foreground text-background rounded-none font-oswald font-bold text-lg tracking-widest overflow-hidden"
+              className="neo-button"
             >
-              <div className="absolute inset-0 w-full h-full bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              <span className="relative z-10 group-hover:text-white transition-colors">VIEW WORK</span>
+              <span className="relative z-10">View Work</span>
+              <ArrowDown className="w-4 h-4 relative z-10" />
             </a>
             <a 
               href="mailto:shishirshetty77@gmail.com"
-              className="group px-8 py-4 border border-foreground/20 hover:border-foreground text-foreground rounded-none font-oswald font-bold text-lg tracking-widest transition-all duration-300"
+              className="neo-button-secondary"
             >
-              CONTACT ME
+              Contact Me
             </a>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social Links - Minimal */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex gap-6 pt-8"
+            className="flex gap-6 pt-4"
           >
             {[
               { icon: Github, href: 'https://github.com/shishirshetty77' },
@@ -165,73 +164,66 @@ export function Hero() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors transform hover:scale-110"
+                className="text-gray-400 hover:text-foreground transition-colors transform hover:scale-110"
               >
-                <social.icon className="w-6 h-6" />
+                <social.icon className="w-5 h-5" />
               </a>
             ))}
           </motion.div>
         </div>
 
-        {/* Right Column: Abstract Visual */}
+        {/* Right Column: Abstract Visual - Refined Glass Cards */}
         <div className="relative hidden lg:block h-[600px] w-full perspective-1000">
           <FloatingCard 
             icon={Server} 
             title="Infrastructure" 
             subtitle="IaC & Cloud Native" 
-            color="bg-blue-500" 
             delay={0} 
-            x={-50} y={-100} 
+            x={-40} y={-120} 
             mouseX={mouseX} mouseY={mouseY}
           />
           <FloatingCard 
             icon={Cloud} 
             title="Cloud Architecture" 
             subtitle="AWS & GCP" 
-            color="bg-purple-500" 
             delay={0.2} 
-            x={150} y={-50} 
+            x={160} y={-60} 
             mouseX={mouseX} mouseY={mouseY}
           />
           <FloatingCard 
             icon={Zap} 
             title="Automation" 
             subtitle="CI/CD Pipelines" 
-            color="bg-yellow-500" 
             delay={0.4} 
-            x={-20} y={100} 
+            x={-30} y={110} 
             mouseX={mouseX} mouseY={mouseY}
           />
           <FloatingCard 
             icon={Database} 
             title="Scalability" 
             subtitle="High Availability" 
-            color="bg-emerald-500" 
             delay={0.6} 
-            x={180} y={120} 
+            x={190} y={130} 
             mouseX={mouseX} mouseY={mouseY}
           />
           
-          {/* Central Abstract Shape */}
+          {/* Central Abstract Shape - Subtle Pulse */}
           <motion.div 
             animate={{ 
-              rotate: 360,
-              scale: [1, 1.1, 1],
+              scale: [1, 1.05, 1],
+              opacity: [0.5, 0.8, 0.5]
             }}
             transition={{ 
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              scale: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-foreground/10 rounded-full flex items-center justify-center"
-          >
-            <div className="w-48 h-48 border border-foreground/10 rounded-full flex items-center justify-center">
-               <div className="w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-xl" />
-            </div>
-          </motion.div>
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-tr from-primary/10 via-secondary/5 to-transparent rounded-full blur-3xl pointer-events-none"
+          />
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Minimal */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
@@ -239,13 +231,48 @@ export function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer"
         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Scroll</span>
-          <ArrowDown className="w-5 h-5 text-gray-400" />
+        <div className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
+          <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Scroll</span>
+          <ArrowDown className="w-4 h-4" />
         </div>
       </motion.div>
     </section>
   );
+}
+
+interface FloatingCardProps {
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  delay: number;
+  x: number;
+  y: number;
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+}
+
+function FloatingCard({ icon: Icon, title, subtitle, delay, x, y, mouseX, mouseY }: FloatingCardProps) {
+  const xMotion = useTransform(mouseX, [0, 1], [x - 15, x + 15]);
+  const yMotion = useTransform(mouseY, [0, 1], [y - 15, y + 15]);
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+      transition={{ duration: 1, delay, ease: "easeOut" }}
+      style={{ x: xMotion, y: yMotion, left: '50%', top: '50%' }}
+      className="absolute p-5 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/10 rounded-2xl shadow-xl shadow-black/5 flex items-center gap-4 w-64 z-20 hover:scale-105 hover:bg-white/80 dark:hover:bg-black/60 transition-all duration-300 cursor-default group"
+    >
+      <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+        <Icon className="w-5 h-5" />
+      </div>
+      <div>
+        <h3 className="font-bold text-sm text-foreground tracking-wide">{title}</h3>
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">{subtitle}</p>
+      </div>
+    </motion.div>
+  );
+}
 }
 
 interface FloatingCardProps {

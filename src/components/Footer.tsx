@@ -1,35 +1,51 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="w-full py-12 px-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-center md:text-left">
-            <p className="font-oswald font-bold text-xl uppercase tracking-wide text-foreground">
-              © 2025 Shishir Shetty
-            </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mt-1">
-              Designed & Built with Precision & Passion
-            </p>
+    <footer className="w-full py-20 px-4 relative overflow-hidden border-t border-foreground/5">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid md:grid-cols-2 gap-12 mb-20">
+          <div>
+            <h2 className="text-5xl md:text-7xl font-oswald font-bold tracking-tighter mb-8">
+              LET'S WORK <br />
+              <span className="text-gray-400">TOGETHER</span>
+            </h2>
+            <a 
+              href="mailto:shishirshetty77@gmail.com"
+              className="inline-flex items-center gap-3 text-xl md:text-2xl font-light hover:text-primary transition-colors group"
+            >
+              shishirshetty77@gmail.com
+              <ArrowUpRight className="w-6 h-6 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
-
-          <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex gap-2">
-              <span className="px-3 py-1 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold font-mono text-xs rounded-md border border-gray-200 dark:border-gray-700">NEXT.JS</span>
-              <span className="px-3 py-1 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold font-mono text-xs rounded-md border border-gray-200 dark:border-gray-700">TAILWIND</span>
-              <span className="px-3 py-1 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold font-mono text-xs rounded-md border border-gray-200 dark:border-gray-700">MOTION</span>
+          
+          <div className="flex flex-col justify-end items-start md:items-end">
+            <div className="flex flex-col gap-4 text-left md:text-right">
+              <a href="https://github.com/shishirshetty77" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-foreground transition-colors">GitHub</a>
+              <a href="https://www.linkedin.com/in/shishir-shetty-715028230/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-foreground transition-colors">LinkedIn</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-foreground transition-colors">Twitter</a>
             </div>
-            
-            {/* Easter Egg: Konami Code Hint */}
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-foreground/5">
+          <p className="text-sm text-gray-500 font-mono">
+            © 2025 Shishir Shetty. All rights reserved.
+          </p>
+          
+          <div className="flex items-center gap-6 mt-4 md:mt-0">
+            <span className="text-xs text-gray-400 font-mono">
+              Built with Next.js & Tailwind
+            </span>
             <motion.div 
-              className="text-[10px] text-gray-300 dark:text-gray-700 font-mono cursor-help"
+              className="text-[10px] text-gray-300 dark:text-gray-700 font-mono cursor-help uppercase tracking-widest"
               whileHover={{ scale: 1.1, color: '#6366F1' }}
               title="Try: ↑ ↑ ↓ ↓ ← → ← → B A"
             >
-              Are you a player?
+              Konami Code Enabled
             </motion.div>
           </div>
         </div>

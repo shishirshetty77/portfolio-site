@@ -4,101 +4,45 @@ import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
 
 export function Skills() {
-  const glowColors = [
-    '#ef4444', // red
-    '#3b82f6', // blue
-    '#f97316', // orange
-    '#a855f7', // purple
-    '#22c55e', // green
-    '#ec4899', // pink
-    '#06b6d4', // cyan
-    '#eab308', // yellow
-  ];
-
   return (
-    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="skills" className="py-32 relative overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <div className="inline-block mb-4">
-            <div className="bg-tertiary/10 text-tertiary px-4 py-1 font-mono font-bold text-sm uppercase tracking-widest rounded-full">
-              Arsenal
-            </div>
-          </div>
-          <motion.h2
-            className="text-5xl md:text-6xl font-oswald font-bold text-foreground mb-4 uppercase tracking-tight"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            TECH STACK
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-gray-600 dark:text-gray-300 font-medium max-w-2xl mx-auto text-lg"
-          >
-            My arsenal of tools for building digital worlds.
-          </motion.p>
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
+            TECHNICAL <span className="text-gray-400 font-light">ARSENAL</span>
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            A curated stack of technologies I use to build resilient, scalable, and automated systems.
+          </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-          {skillsData.map((skill, index) => {
-            const color = glowColors[index % glowColors.length];
-            
-            return (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                animate={{
-                  boxShadow: [
-                    `0 0 0px ${color}00`,
-                    `0 0 20px ${color}60`,
-                    `0 0 0px ${color}00`,
-                  ],
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: index * 0.1,
-                  ease: "easeInOut"
-                }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  boxShadow: `0 0 30px ${color}`,
-                  transition: { duration: 0.2 } 
-                }}
-                className="relative group cursor-pointer select-none rounded-2xl"
-              >
-                {/* Liquid Glass Container */}
-                <div 
-                  className="relative px-6 py-3 rounded-2xl border border-white/40 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl shadow-sm overflow-hidden"
-                >
-                  {/* Glossy Reflection Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 pointer-events-none" />
-                  
-                  <span 
-                    className="relative z-10 text-lg font-oswald font-bold text-gray-800 dark:text-white uppercase tracking-wide"
-                    style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
-                  >
-                    {skill.name}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {skillsData.map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="group relative p-4 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl hover:border-primary/50 transition-colors duration-300"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-2 h-2 rounded-full ${skill.color.replace('text-', 'bg-')} opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300`} />
+                <span className="font-mono text-sm font-medium text-gray-600 dark:text-gray-300 group-hover:text-foreground transition-colors">
+                  {skill.name}
+                </span>
+              </div>
+              
+              {/* Subtle corner accent */}
+              <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-primary/5 to-transparent rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
