@@ -50,7 +50,7 @@ export function Contact() {
               </div>
               <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </div>
-            <h3 className="text-lg font-medium text-gray-500 dark:text-gray-400 mb-2">Email</h3>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Email</h3>
             <p className="text-xl md:text-2xl font-bold text-foreground break-all">shishirshetty77@gmail.com</p>
           </motion.a>
 
@@ -69,7 +69,7 @@ export function Contact() {
               </div>
               <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </div>
-            <h3 className="text-lg font-medium text-gray-500 dark:text-gray-400 mb-2">Phone</h3>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Phone</h3>
             <p className="text-xl md:text-2xl font-bold text-foreground">+91 9483243509</p>
           </motion.a>
 
@@ -86,7 +86,7 @@ export function Contact() {
                 <MapPin className="w-6 h-6" />
               </div>
             </div>
-            <h3 className="text-lg font-medium text-gray-500 dark:text-gray-400 mb-2">Location</h3>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Location</h3>
             <p className="text-xl md:text-2xl font-bold text-foreground">Udupi, Karnataka</p>
           </motion.div>
 
@@ -117,7 +117,7 @@ export function Contact() {
               </a>
             </div>
             <div>
-              <h3 className="text-lg font-medium text-gray-500 dark:text-gray-400 mb-2">Social Profiles</h3>
+              <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Social Profiles</h3>
               <p className="text-xl md:text-2xl font-bold text-foreground">Connect with me</p>
             </div>
           </motion.div>

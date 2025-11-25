@@ -52,7 +52,7 @@ export function About() {
               <div className="h-px w-20 bg-foreground/20" />
             </div>
 
-            <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+            <div className="space-y-6 text-lg text-gray-700 dark:text-gray-400 font-light leading-relaxed">
               <p>
                 I&apos;m a DevOps Engineer and Cloud Architect driven by a simple philosophy: <span className="text-foreground font-medium">automate everything that can be automated.</span>
               </p>

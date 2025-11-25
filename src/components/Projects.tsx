@@ -76,7 +76,7 @@ export function Projects() {
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed text-sm">
+                <p className="text-gray-700 dark:text-gray-400 mb-6 leading-relaxed text-sm font-medium">
                   {project.description}
                 </p>
               </div>

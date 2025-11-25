@@ -67,7 +67,7 @@ export function Experience() {
                 {exp.description.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
-                    className="text-gray-600 dark:text-gray-400 leading-relaxed text-base pl-4 border-l-2 border-gray-200 dark:border-white/10 hover:border-primary/50 hover:text-foreground transition-all duration-300"
+                    className="text-gray-700 dark:text-gray-400 leading-relaxed text-base pl-4 border-l-2 border-gray-300 dark:border-white/10 hover:border-primary/50 hover:text-foreground transition-all duration-300"
                   >
                     {item}
                   </li>

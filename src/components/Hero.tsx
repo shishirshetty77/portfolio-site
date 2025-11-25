@@ -81,7 +81,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/90 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/20 shadow-lg"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/95 dark:bg-white/10 backdrop-blur-xl border-2 border-gray-300 dark:border-white/20 shadow-lg"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -139,7 +139,7 @@ export function Hero() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 + (i * 0.1) }}
-                className="px-5 py-2 text-sm font-mono font-semibold tracking-wide border border-black/10 dark:border-white/20 rounded-full text-gray-700 dark:text-gray-200 bg-white/70 dark:bg-white/10 backdrop-blur-md hover:bg-white dark:hover:bg-white/20 hover:border-primary/50 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default"
+                className="px-5 py-2 text-sm font-mono font-semibold tracking-wide border-2 border-gray-300 dark:border-white/20 rounded-full text-gray-800 dark:text-gray-200 bg-white/90 dark:bg-white/10 backdrop-blur-md hover:bg-white dark:hover:bg-white/20 hover:border-primary/50 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default"
               >
                 {tech}
               </motion.span>
