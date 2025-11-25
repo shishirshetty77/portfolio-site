@@ -19,15 +19,15 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = 'https://shishirshetty.vercel.app'; // update if you have a custom domain
 const FULL_NAME = 'Shishir Shetty';
-const DESC = 'DevOps Engineer in Bangalore — building scalable, cloud-native infrastructure, CI/CD automation, and production-grade systems on AWS & GCP.';
+const DESC = 'Senior DevOps Engineer & Cloud Architect specializing in Kubernetes, AWS, GCP, Terraform, CI/CD automation, and building production-grade cloud-native infrastructure. Expert in Docker, GitOps, ArgoCD, Jenkins, and Infrastructure as Code.';
 
 export const metadata: Metadata = {
   title: {
-    default: `${FULL_NAME} — DevOps Engineer`,
+    default: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect`,
     template: `%s | ${FULL_NAME}`,
   },
   description: DESC,
-  applicationName: "Shishir Shetty — Portfolio",
+  applicationName: "Shishir Shetty — DevOps Portfolio",
   authors: [
     {
       name: FULL_NAME,
@@ -35,27 +35,62 @@ export const metadata: Metadata = {
     },
   ],
   keywords: [
-    'shishir shetty',
-    'devops engineer portfolio',
-    'cloud engineer portfolio',
-    'shishir shetty devops',
-    'aws gcp kubernetes engineer',
-    'terraform ci/cd automation',
-    'devops automation',
-    'kubernetes engineer',
+    // Primary Keywords
+    'shishir shetty devops engineer',
+    'shishir shetty cloud architect',
+    'senior devops engineer india',
+    'kubernetes expert engineer',
+    'aws cloud engineer india',
+    
+    // Technical Skills
+    'kubernetes devops engineer',
+    'terraform infrastructure as code',
+    'docker container orchestration',
+    'aws gcp cloud engineer',
+    'ci cd automation engineer',
+    'gitops argocd specialist',
+    'jenkins pipeline automation',
+    'ansible configuration management',
+    
+    // Location Based
+    'devops engineer bangalore',
+    'cloud architect udupi',
+    'devops engineer karnataka india',
+    
+    // Service Keywords
+    'cloud migration specialist',
+    'infrastructure automation',
+    'microservices architecture',
+    'production infrastructure design',
+    'scalable cloud solutions',
+    'site reliability engineering',
+    
+    // Platform Specific
+    'aws eks kubernetes',
+    'gcp gke deployment',
+    'azure devops engineer',
+    'multi cloud architecture',
+    
+    // Portfolio Keywords
+    'devops portfolio projects',
+    'cloud engineer resume',
+    'infrastructure engineer portfolio',
+    
+    // Brand
+    'shishir shetty portfolio',
     'site:shishirshetty.vercel.app',
   ],
   openGraph: {
-    title: `${FULL_NAME} — DevOps Engineer`,
+    title: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect | Kubernetes, AWS, Terraform`,
     description: DESC,
     url: SITE_URL,
-    siteName: `${FULL_NAME} Portfolio`,
+    siteName: `${FULL_NAME} — DevOps & Cloud Engineering Portfolio`,
     images: [
       {
         url: `${SITE_URL}/munnar.jpeg`,
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME}`,
+        alt: `${FULL_NAME} - DevOps Engineer & Cloud Architect`,
       },
     ],
     locale: 'en_IN',
@@ -63,7 +98,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${FULL_NAME} — DevOps Engineer`,
+    title: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect`,
     description: DESC,
     images: [`${SITE_URL}/munnar.jpeg`],
   },
@@ -81,6 +116,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+  },
+  other: {
+    'google-site-verification': 'add-your-verification-code-here',
   },
 };
 
@@ -104,46 +142,38 @@ export default function RootLayout({
       "https://www.linkedin.com/in/shishir-shetty-715028230/",
       SITE_URL
     ],
-    "jobTitle": "DevOps Engineer / Cloud Engineer",
+    "jobTitle": "Senior DevOps Engineer & Cloud Architect",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Cloud Infrastructure Specialist"
+    },
+    "knowsAbout": [
+      "DevOps Engineering",
+      "Cloud Architecture",
+      "Kubernetes",
+      "Docker",
+      "AWS",
+      "GCP",
+      "Terraform",
+      "CI/CD Automation",
+      "Infrastructure as Code",
+      "GitOps",
+      "ArgoCD",
+      "Jenkins",
+      "Ansible",
+      "Site Reliability Engineering",
+      "Microservices Architecture",
+      "Container Orchestration"
+    ],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Bangalore",
+      "addressLocality": "Udupi",
+      "addressRegion": "Karnataka",
       "addressCountry": "IN"
     },
-    "description": DESC
-  };
-
-  const projectsSchema = {
-    "@context": "https://schema.org",
-    "@type": "Collection",
-    "name": `${FULL_NAME} Projects`,
-    "url": SITE_URL,
-    "hasPart": [
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "Find – Gig Platform",
-        "description": "A full-stack gig economy platform connecting local service providers with users in real-time, featuring OTP-based login, secure payments, and role-based dashboards.",
-        "programmingLanguage": "TypeScript",
-        "codeRepository": "https://github.com/shishirshetty",
-        "url": "https://findonspot.com"
-      },
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "E-COMMERCE DEVOPS IMPLEMENTATION",
-        "description": "DevOps for an e-commerce demo: containerization, orchestration, IaC with Terraform, CI/CD automation and AWS infra.",
-        "programmingLanguage": "Shell / Terraform",
-        "codeRepository": "https://github.com/shishirshetty/ecommerce-devops",
-        "url": "https://demo.com/ecommerce"
-      },
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "GITHUB JIRA Automation",
-        "description": "Automated JIRA ticket creation via GitHub webhooks using a Python Flask integration.",
-        "programmingLanguage": "Python",
-        "codeRepository": "https://github.com/shishirshetty/github-jira-automation",
-        "url": "https://demo.com/github-jira"
-      }
-    ]
+    "description": DESC,
+    "email": "shishirshetty77@gmail.com",
+    "telephone": "+91-9483243509"
   };
 
   return (

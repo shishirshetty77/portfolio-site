@@ -6,21 +6,22 @@ import confetti from 'canvas-confetti';
 
 export function KonamiCode() {
   const [showEasterEgg, setShowEasterEgg] = useState(false);
-  const konamiCode = [
-    'ArrowUp',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowDown',
-    'ArrowLeft',
-    'ArrowRight',
-    'ArrowLeft',
-    'ArrowRight',
-    'b',
-    'a',
-  ];
   const [inputHistory, setInputHistory] = useState<string[]>([]);
 
   useEffect(() => {
+    const konamiCode = [
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
+      'b',
+      'a',
+    ];
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const newHistory = [...inputHistory, e.key];
       if (newHistory.length > konamiCode.length) {

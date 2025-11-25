@@ -6,288 +6,119 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
-  Send,
+  ArrowUpRight
 } from 'lucide-react';
-import { useState } from 'react';
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Message from ${formData.name}`);
-    const body = encodeURIComponent(
-      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    // Use canonical contact email (keep consistent with visible link)
-    const mailtoLink = `mailto:shishirshetty77@gmail.com?subject=${subject}&body=${body}`;
-
-    // Open email client
-    window.open(mailtoLink, '_blank');
-
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-    });
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
-    <section id="contact" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-800/50">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="contact" className="py-32 relative overflow-hidden">
+      {/* Ambient background */}
+      <div className="absolute inset-0 bg-dots opacity-20" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl" />
+      
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20 text-center"
         >
-          <div className="inline-block mb-4">
-            <div className="bg-tertiary/10 text-tertiary px-4 py-1 font-mono font-bold text-sm uppercase tracking-widest rounded-full">
-              Communication
-            </div>
-          </div>
-          <motion.h2
-            className="text-5xl md:text-6xl font-oswald font-bold text-foreground mb-4 uppercase tracking-tight"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            GET IN TOUCH
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-gray-600 dark:text-gray-300 font-medium max-w-2xl mx-auto text-lg"
-          >
-            Initialize communication sequence.
-          </motion.p>
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
+            GET IN <span className="text-gray-400 font-light">TOUCH</span>
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            Have a project in mind or just want to say hello? I&apos;m always open to discussing new opportunities and ideas.
+          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Email Card */}
+          <motion.a
+            href="mailto:shishirshetty77@gmail.com"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            transition={{ duration: 0.5 }}
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
           >
-            <div className="neo-card p-8 relative h-full">
-              
-              <div className="relative z-10">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-primary/10 rounded-xl mr-4 text-primary">
-                    <MessageCircle className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-3xl font-oswald font-bold text-foreground uppercase">
-                    Connect
-                  </h3>
-                </div>
+            <div className="flex justify-between items-start mb-8">
+              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <Mail className="w-6 h-6" />
+              </div>
+              <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Email</h3>
+            <p className="text-xl md:text-2xl font-bold text-foreground break-all">shishirshetty77@gmail.com</p>
+          </motion.a>
 
-                <div className="space-y-6">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-4 group/item"
-                  >
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
-                      <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
-                        Email
-                      </p>
-                      <a
-                        href="mailto:shishirshetty217@gmail.com"
-                        className="text-foreground font-bold hover:text-primary transition-colors font-mono"
-                      >
-                        shishirshetty77@gmail.com
-                      </a>
-                    </div>
-                  </motion.div>
+          {/* Phone Card */}
+          <motion.a
+            href="tel:+919483243509"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
+          >
+            <div className="flex justify-between items-start mb-8">
+              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <Phone className="w-6 h-6" />
+              </div>
+              <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Phone</h3>
+            <p className="text-xl md:text-2xl font-bold text-foreground">+91 9483243509</p>
+          </motion.a>
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-4 group/item"
-                  >
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
-                      <Phone className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
-                        Phone
-                      </p>
-                      <a
-                        href="tel:+919483243509"
-                        className="text-foreground font-bold hover:text-primary transition-colors font-mono"
-                      >
-                        +91 9483243509
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-4 group/item"
-                  >
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all duration-300">
-                      <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover/item:text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 font-mono font-bold uppercase">
-                        Location
-                      </p>
-                      <span className="text-foreground font-bold font-mono">
-                        Udupi, Karnataka
-                      </span>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Social Links */}
-                <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
-                  <h4 className="text-lg font-bold text-foreground mb-4 font-oswald uppercase">
-                    Social Links
-                  </h4>
-                  <div className="flex space-x-4">
-                    {[
-                      {
-                        Icon: Github,
-                        href: 'https://github.com/shishirshetty77',
-                        label: 'GitHub',
-                      },
-                      {
-                        Icon: Linkedin,
-                        href: 'https://www.linkedin.com/in/shishir-shetty-715028230/',
-                        label: 'LinkedIn',
-                      },
-                    ].map(({ Icon, href, label }) => (
-                      <motion.a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-sm border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary hover:border-primary/30 transition-all duration-300"
-                      >
-                        <Icon className="w-5 h-5" />
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
+          {/* Location Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
+          >
+            <div className="flex justify-between items-start mb-8">
+              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <MapPin className="w-6 h-6" />
               </div>
             </div>
+            <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Location</h3>
+            <p className="text-xl md:text-2xl font-bold text-foreground">Udupi, Karnataka</p>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Socials Card */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden flex flex-col justify-between"
           >
-            <div className="neo-card p-8 relative">
-              <h3 className="text-3xl font-oswald font-bold text-foreground mb-6 uppercase">
-                Send Message
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="YOUR NAME"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 font-mono font-bold placeholder-gray-400"
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="YOUR EMAIL"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 font-mono font-bold placeholder-gray-400"
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <textarea
-                    name="message"
-                    placeholder="YOUR MESSAGE"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={4}
-                    className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-300 resize-none font-mono font-bold placeholder-gray-400"
-                  />
-                </motion.div>
-
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full bg-primary text-white py-4 rounded-xl font-bold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-300 flex items-center justify-center space-x-2 group font-oswald uppercase tracking-wider text-lg"
-                >
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  <span>SEND IT</span>
-                </motion.button>
-              </form>
+            <div className="flex gap-4 mb-8">
+              <a 
+                href="https://github.com/shishirshetty77" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 rounded-xl bg-foreground/5 text-foreground hover:bg-primary hover:text-white transition-colors duration-300"
+              >
+                <Github className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/shishir-shetty-715028230/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 rounded-xl bg-foreground/5 text-foreground hover:bg-primary hover:text-white transition-colors duration-300"
+              >
+                <Linkedin className="w-6 h-6" />
+              </a>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Social Profiles</h3>
+              <p className="text-xl md:text-2xl font-bold text-foreground">Connect with me</p>
             </div>
           </motion.div>
         </div>

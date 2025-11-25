@@ -1,30 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  /* Soft Tech Palette */
-  --background: #EFECE3; /* Warm Sand (User Requested) */
-  --foreground: #1F2937; /* Gray 800 - Softer than pure black */
+  /* Sophisticated Light Mode - Multi-tonal warmth inspired by Linear/Arc */
+  --background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F7 50%, #F0F0F2 100%);
+  --background-solid: #F8F8FA;
+  --foreground: #0A0A0A;
   
-  /* Soft Tech Accents */
-  --primary: #6366F1; /* Indigo */
-  --secondary: #EC4899; /* Pink */
-  --tertiary: #14B8A6; /* Teal */
+  /* Layered depth colors */
+  --surface-1: rgba(255, 255, 255, 0.95);
+  --surface-2: rgba(255, 255, 255, 0.85);
+  --surface-3: rgba(255, 255, 255, 0.7);
+  
+  /* Refined Accents - vibrant but sophisticated */
+  --primary: #3B82F6;
+  --primary-light: #60A5FA;
+  --primary-dark: #2563EB;
+  --secondary: #8B5CF6;
+  --secondary-light: #A78BFA;
+  --tertiary: #10B981;
+  --tertiary-light: #34D399;
+  
+  /* Ambient colors for depth */
+  --ambient-warm: rgba(251, 191, 36, 0.12);
+  --ambient-cool: rgba(59, 130, 246, 0.10);
+  --ambient-purple: rgba(139, 92, 246, 0.08);
   
   /* UI Elements */
-  --border-color: #E5E7EB; /* Gray 200 */
-  --card-bg: #FFFFFF;
-  --radius: 12px;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --radius: 20px;
+  
+  /* Shadows - multi-layered depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12), 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.16), 0 10px 25px rgba(0, 0, 0, 0.10);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  --gradient-warm: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+  --gradient-cool: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
 }
 
 .dark {
-  --background: #313647; /* Slate Night (User Requested) */
-  --foreground: #F9FAFB; /* Gray 50 */
-  --border-color: #4B5563; /* Gray 600 */
-  --card-bg: #1F2937; /* Gray 800 */
+  /* Sophisticated Dark Mode - Rich charcoal with depth, not flat black */
+  --background: linear-gradient(135deg, #0F0F10 0%, #0A0A0B 50%, #050506 100%);
+  --background-solid: #0D0D0E;
+  --foreground: #F5F5F7;
+  
+  /* Layered depth colors */
+  --surface-1: rgba(255, 255, 255, 0.06);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.02);
+  
+  /* Refined Accents - brighter for dark mode */
+  --primary: #60A5FA;
+  --primary-light: #93C5FD;
+  --primary-dark: #3B82F6;
+  --secondary: #A78BFA;
+  --secondary-light: #C4B5FD;
+  --tertiary: #34D399;
+  --tertiary-light: #6EE7B7;
+  
+  /* Ambient colors for depth */
+  --ambient-warm: rgba(251, 191, 36, 0.04);
+  --ambient-cool: rgba(59, 130, 246, 0.06);
+  --ambient-purple: rgba(139, 92, 246, 0.05);
+  
+  /* UI Elements */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.04);
+  
+  /* Shadows - glow-based for dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 8px rgba(96, 165, 250, 0.04);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 16px rgba(96, 165, 250, 0.06);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(96, 165, 250, 0.08);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 32px rgba(96, 165, 250, 0.1);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
+  --gradient-warm: linear-gradient(135deg, #FBBF24 0%, #F87171 100%);
+  --gradient-cool: linear-gradient(135deg, #22D3EE 0%, #60A5FA 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--background-solid);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-oswald);
@@ -38,68 +102,264 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--background-solid);
+  background-image: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
-/* Soft Tech Utilities */
+/* Multi-layered ambient background effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--ambient-cool), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 50%, var(--ambient-purple), transparent),
+    radial-gradient(ellipse 60% 60% at 20% 80%, var(--ambient-warm), transparent);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
 
-/* Soft Card */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.dark body::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+/* --- Premium Utilities --- */
+
+/* Premium Glass Panel - Refined with depth */
+.glass-panel {
+  background: var(--surface-1);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* Neo-Card - Premium with multi-layer depth */
 .neo-card {
-  background-color: var(--card-bg);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.neo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--ambient-cool), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.neo-card:hover::before {
+  opacity: 1;
 }
 
 .neo-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-lg);
   border-color: var(--primary);
 }
 
-/* Soft Button */
+/* Premium Buttons - Handcrafted with depth */
 .neo-button {
-  @apply font-bold uppercase tracking-wide px-6 py-3 bg-primary text-white rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:bg-indigo-600 hover:-translate-y-0.5 shadow-sm hover:shadow-md;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1rem 2rem;
+  background: var(--foreground);
+  color: var(--background-solid);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.neo-button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.neo-button:active {
+  transform: scale(0.95);
+}
+
+.neo-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.neo-button:hover::after {
+  left: 100%;
 }
 
 .neo-button-secondary {
-  @apply font-bold uppercase tracking-wide px-6 py-3 bg-white dark:bg-gray-800 text-foreground border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer inline-flex items-center justify-center gap-2 transition-all duration-200 hover:border-primary hover:text-primary hover:-translate-y-0.5 shadow-sm;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
 }
 
-/* High Density Dot Grid */
+.neo-button-secondary:hover {
+  border-color: var(--foreground);
+  background: var(--surface-1);
+}
+
+.neo-button-secondary:active {
+  transform: scale(0.95);
+}
+
+/* Subtle Pattern Texture - Sophisticated grain */
+.bg-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.dark .bg-noise {
+  opacity: 0.05;
+}
+
+/* Premium dot pattern background */
 .bg-dots {
-  background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
-  background-size: 16px 16px; /* Tighter grid */
-  opacity: 0.07; /* Very subtle */
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-/* Typography Overrides */
+/* Typography Refinements */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: 0.02em; /* Reduced spacing */
+  letter-spacing: -0.03em;
+  font-weight: 700;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+/* Smooth Animations */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: 100% 50%;
+  }
 }
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(20px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(30px);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 5px;
+  background: var(--border-color);
+  border-radius: 10px;
+  transition: background 0.3s ease;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
-}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Selection styling */
+::selection {
   background: var(--primary);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--primary);
+  color: white;
 }
 

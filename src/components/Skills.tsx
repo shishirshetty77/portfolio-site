@@ -2,112 +2,171 @@
 
 import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
+// Color mapping for vibrant gradients
+const colorMap: { [key: string]: { from: string; to: string; glow: string; shadow: string } } = {
+  'text-cyan-400': { from: '#06B6D4', to: '#0891B2', glow: 'rgba(6, 182, 212, 0.4)', shadow: 'rgba(6, 182, 212, 0.3)' },
+  'text-blue-500': { from: '#3B82F6', to: '#2563EB', glow: 'rgba(59, 130, 246, 0.4)', shadow: 'rgba(59, 130, 246, 0.3)' },
+  'text-pink-400': { from: '#F472B6', to: '#EC4899', glow: 'rgba(244, 114, 182, 0.4)', shadow: 'rgba(244, 114, 182, 0.3)' },
+  'text-red-400': { from: '#F87171', to: '#EF4444', glow: 'rgba(248, 113, 113, 0.4)', shadow: 'rgba(248, 113, 113, 0.3)' },
+  'text-green-400': { from: '#4ADE80', to: '#22C55E', glow: 'rgba(74, 222, 128, 0.4)', shadow: 'rgba(74, 222, 128, 0.3)' },
+  'text-purple-400': { from: '#C084FC', to: '#A855F7', glow: 'rgba(192, 132, 252, 0.4)', shadow: 'rgba(192, 132, 252, 0.3)' },
+  'text-orange-400': { from: '#FB923C', to: '#F97316', glow: 'rgba(251, 146, 60, 0.4)', shadow: 'rgba(251, 146, 60, 0.3)' },
+  'text-pink-600': { from: '#DB2777', to: '#BE185D', glow: 'rgba(219, 39, 119, 0.4)', shadow: 'rgba(219, 39, 119, 0.3)' },
+  'text-yellow-400': { from: '#FACC15', to: '#EAB308', glow: 'rgba(250, 204, 21, 0.4)', shadow: 'rgba(250, 204, 21, 0.3)' },
+  'text-blue-300': { from: '#93C5FD', to: '#60A5FA', glow: 'rgba(147, 197, 253, 0.4)', shadow: 'rgba(147, 197, 253, 0.3)' },
+  'text-indigo-400': { from: '#818CF8', to: '#6366F1', glow: 'rgba(129, 140, 248, 0.4)', shadow: 'rgba(129, 140, 248, 0.3)' },
+  'text-blue-600': { from: '#2563EB', to: '#1D4ED8', glow: 'rgba(37, 99, 235, 0.4)', shadow: 'rgba(37, 99, 235, 0.3)' },
+  'text-green-500': { from: '#22C55E', to: '#16A34A', glow: 'rgba(34, 197, 94, 0.4)', shadow: 'rgba(34, 197, 94, 0.3)' },
+  'text-red-500': { from: '#EF4444', to: '#DC2626', glow: 'rgba(239, 68, 68, 0.4)', shadow: 'rgba(239, 68, 68, 0.3)' },
+  'text-pink-500': { from: '#EC4899', to: '#DB2777', glow: 'rgba(236, 72, 153, 0.4)', shadow: 'rgba(236, 72, 153, 0.3)' },
+  'text-teal-400': { from: '#2DD4BF', to: '#14B8A6', glow: 'rgba(45, 212, 191, 0.4)', shadow: 'rgba(45, 212, 191, 0.3)' },
+};
 
 export function Skills() {
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  const glowColors = [
-    '#ef4444', // red
-    '#3b82f6', // blue
-    '#f97316', // orange
-    '#a855f7', // purple
-    '#22c55e', // green
-    '#ec4899', // pink
-    '#06b6d4', // cyan
-    '#eab308', // yellow
-  ];
-
   return (
-    <section id="skills" className="py-20 px-4 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="skills" className="py-32 relative overflow-hidden">
+      {/* Ambient background elements */}
+      <div className="absolute inset-0 bg-dots opacity-30" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <div className="inline-block mb-4">
-            <div className="bg-tertiary/10 text-tertiary px-4 py-1 font-mono font-bold text-sm uppercase tracking-widest rounded-full">
-              Arsenal
-            </div>
-          </div>
-          <motion.h2
-            className="text-5xl md:text-6xl font-oswald font-bold text-foreground mb-4 uppercase tracking-tight"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            TECH STACK
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-gray-600 dark:text-gray-300 font-medium max-w-2xl mx-auto text-lg"
-          >
-            My arsenal of tools for building digital worlds.
-          </motion.p>
+          <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
+            DEVOPS & CLOUD <span className="text-gray-400 font-light">STACK</span>
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            Production-proven tools and technologies I leverage to build, deploy, and scale cloud-native infrastructure with enterprise-grade reliability.
+          </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-          {skillsData.map((skill, index) => {
-            const color = glowColors[index % glowColors.length];
-            
-            return (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                animate={{
-                  boxShadow: [
-                    `0 0 0px ${color}00`,
-                    `0 0 20px ${color}60`,
-                    `0 0 0px ${color}00`,
-                  ],
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: index * 0.1,
-                  ease: "easeInOut"
-                }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  boxShadow: `0 0 30px ${color}`,
-                  transition: { duration: 0.2 } 
-                }}
-                className="relative group cursor-pointer select-none rounded-2xl"
-              >
-                {/* Liquid Glass Container */}
-                <div 
-                  className="relative px-6 py-3 rounded-2xl border border-white/40 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl shadow-sm overflow-hidden"
-                >
-                  {/* Glossy Reflection Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 pointer-events-none" />
-                  
-                  <span 
-                    className="relative z-10 text-lg font-oswald font-bold text-gray-800 dark:text-white uppercase tracking-wide"
-                    style={{ textShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
-                  >
-                    {skill.name}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {skillsData.map((skill, index) => (
+            <SkillCard key={skill.name} skill={skill} index={index} />
+          ))}
         </div>
       </div>
     </section>
   )
+}
+
+function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const colors = colorMap[skill.color] || colorMap['text-blue-500'];
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.03 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-2xl hover:border-transparent transition-all duration-500 hover:scale-110 overflow-hidden cursor-default"
+      style={{
+        boxShadow: isHovered 
+          ? `0 20px 40px ${colors.shadow}, 0 0 30px ${colors.glow}` 
+          : '0 4px 12px rgba(0, 0, 0, 0.05)'
+      }}
+    >
+      {/* Vibrant gradient background on hover */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `linear-gradient(135deg, ${colors.from}15, ${colors.to}10)`
+        }}
+      />
+      
+      {/* Glowing orb effect - signature wow moment */}
+      <motion.div
+        animate={isHovered ? {
+          scale: [1, 1.4, 1],
+          opacity: [0.4, 0.8, 0.4],
+        } : {}}
+        transition={{
+          duration: 2,
+          repeat: isHovered ? Infinity : 0,
+          ease: "easeInOut"
+        }}
+        className="absolute -top-12 -right-12 w-40 h-40 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+        style={{
+          background: `radial-gradient(circle, ${colors.from}, ${colors.to})`
+        }}
+      />
+      
+      <div className="flex items-center gap-4 relative z-10">
+        {/* Animated icon/dot with gradient glow */}
+        <motion.div 
+          animate={isHovered ? {
+            scale: [1, 1.4, 1],
+            rotate: [0, 180, 360],
+          } : {}}
+          transition={{
+            duration: 2,
+            repeat: isHovered ? Infinity : 0,
+            ease: "easeInOut"
+          }}
+          className="relative w-3 h-3 rounded-full transition-transform duration-300"
+          style={{
+            background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
+            boxShadow: isHovered ? `0 0 20px ${colors.glow}, 0 0 40px ${colors.shadow}` : 'none'
+          }}
+        >
+          {/* Pulsing ring */}
+          {isHovered && (
+            <motion.div
+              animate={{
+                scale: [1, 2, 2],
+                opacity: [0.8, 0, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeOut"
+              }}
+              className="absolute inset-0 rounded-full"
+              style={{
+                border: `2px solid ${colors.from}`,
+              }}
+            />
+          )}
+        </motion.div>
+        
+        <span 
+          className="font-mono text-base font-bold transition-all duration-300"
+          style={{
+            color: isHovered ? colors.from : undefined
+          }}
+        >
+          {skill.name}
+        </span>
+      </div>
+      
+      {/* Enhanced corner shimmer */}
+      <motion.div
+        animate={isHovered ? {
+          opacity: [0, 0.8, 0],
+          scale: [0.5, 1.5, 0.5],
+          rotate: [0, 90, 0],
+        } : {}}
+        transition={{
+          duration: 1.5,
+          repeat: isHovered ? Infinity : 0,
+          ease: "easeInOut"
+        }}
+        className="absolute top-0 right-0 w-16 h-16 rounded-tr-2xl opacity-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(135deg, ${colors.from}40, transparent)`
+        }}
+      />
+    </motion.div>
+  );
 }

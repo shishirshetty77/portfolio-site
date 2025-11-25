@@ -1,12 +1,10 @@
-version: "3.9"
-
 services:
   # Development service with hot reloading
   dev:
     build:
       context: .
       dockerfile: dockerfile
-      target: base
+      target: deps
     command: npm run dev
     volumes:
       - .:/app
