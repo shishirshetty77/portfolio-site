@@ -55,7 +55,7 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
       <motion.div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: `linear-gradient(135deg, ${skill.color.replace('text-', 'rgb(var(--color-'))}20, transparent)`
+          background: `linear-gradient(135deg, ${skill.color.replace('text-', 'bg-').replace('bg-', 'rgba(59, 130, 246, ')}0.2), transparent)`
         }}
       />
       

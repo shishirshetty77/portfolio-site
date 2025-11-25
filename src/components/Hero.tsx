@@ -47,18 +47,20 @@ export function Hero() {
         
         {/* Ambient gradient orbs - premium depth */}
         <motion.div 
-          style={{ x: moveX, y: moveY }}
-          className="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-glow-pulse"
-          style={{
+          style={{ 
+            x: moveX, 
+            y: moveY,
             background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 100%)'
           }}
+          className="absolute top-[10%] left-[5%] w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-glow-pulse"
         />
         <motion.div 
-          style={{ x: moveXReverse, y: moveYReverse }}
-          className="absolute bottom-[5%] right-[10%] w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
-          style={{
+          style={{ 
+            x: moveXReverse, 
+            y: moveYReverse,
             background: 'radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%)'
           }}
+          className="absolute bottom-[5%] right-[10%] w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
         />
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
