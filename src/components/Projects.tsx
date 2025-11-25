@@ -10,30 +10,30 @@ import {
 
 export function Projects() {
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
+    <section id="projects" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
       {/* Multi-layered Background */}
       <div className="absolute inset-0 bg-dots opacity-20" />
-      <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 left-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] bg-secondary/5 rounded-full blur-3xl" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-20 text-center"
+          className="mb-12 sm:mb-16 md:mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 tracking-tight px-4">
             INFRASTRUCTURE <span className="text-gray-400 font-light">PROJECTS</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed px-4">
             Real-world DevOps and cloud infrastructure projects showcasing Kubernetes orchestration, CI/CD automation, Infrastructure as Code, and production-grade system architecture.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-6 xl:gap-8">
           {projectsData.map((project, index) => (
             <motion.div
               key={index}
@@ -47,7 +47,7 @@ export function Projects() {
               <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/0 via-secondary/0 to-tertiary/0 group-hover:from-primary/10 group-hover:via-secondary/5 group-hover:to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               {/* Card Header */}
-              <div className="p-8 pb-0 flex-grow relative z-10">
+              <div className="p-6 sm:p-8 pb-0 flex-grow relative z-10">
                 <div className="flex justify-between items-start mb-6">
                   <div className="p-4 rounded-2xl bg-gradient-to-br from-foreground/5 to-foreground/10 text-foreground group-hover:from-primary group-hover:to-secondary group-hover:text-white transition-all duration-500 shadow-lg">
                     {project.icon}
@@ -72,7 +72,7 @@ export function Projects() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-3 font-oswald tracking-wide group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 font-oswald tracking-wide group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
                 
@@ -82,7 +82,7 @@ export function Projects() {
               </div>
 
               {/* Card Footer - Tech Stack */}
-              <div className="p-8 pt-0 mt-auto relative z-10">
+              <div className="p-6 sm:p-8 pt-0 mt-auto relative z-10">
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent mb-6" />
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tag, tagIndex) => (
@@ -99,7 +99,7 @@ export function Projects() {
           ))}
         </div>
         
-        <div className="mt-20 text-center">
+        <div className="mt-12 sm:mt-16 md:mt-20 text-center">
           <a 
             href="https://github.com/shishirshetty77" 
             target="_blank" 
