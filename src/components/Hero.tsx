@@ -273,39 +273,3 @@ function FloatingCard({ icon: Icon, title, subtitle, delay, x, y, mouseX, mouseY
     </motion.div>
   );
 }
-}
-
-interface FloatingCardProps {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  color: string;
-  delay: number;
-  x: number;
-  y: number;
-  mouseX: MotionValue<number>;
-  mouseY: MotionValue<number>;
-}
-
-function FloatingCard({ icon: Icon, title, subtitle, color, delay, x, y, mouseX, mouseY }: FloatingCardProps) {
-  const xMotion = useTransform(mouseX, [0, 1], [x - 20, x + 20]);
-  const yMotion = useTransform(mouseY, [0, 1], [y - 20, y + 20]);
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay }}
-      style={{ x: xMotion, y: yMotion, left: '50%', top: '50%' }}
-      className="absolute p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl shadow-2xl flex items-center gap-4 w-64 z-20 hover:scale-105 transition-transform cursor-default"
-    >
-      <div className={`p-3 rounded-xl ${color} bg-opacity-10 text-white`}>
-        <Icon className={`w-6 h-6 ${color.replace('bg-', 'text-')}`} />
-      </div>
-      <div>
-        <h3 className="font-bold text-sm text-foreground">{title}</h3>
-        <p className="text-xs text-gray-500 dark:text-gray-400">{subtitle}</p>
-      </div>
-    </motion.div>
-  );
-}
