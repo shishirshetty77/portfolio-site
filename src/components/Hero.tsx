@@ -93,25 +93,32 @@ export function Hero() {
           </motion.div>
 
           {/* Headline - Premium Typography */}
-          <div className="relative">
+          <div className="relative overflow-hidden">
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-7xl md:text-9xl font-oswald font-bold tracking-tighter leading-[0.85] text-foreground"
+              className="text-7xl md:text-9xl font-oswald font-bold tracking-tighter leading-[0.85]"
             >
-              SHISHIR
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-gray-500 to-foreground animate-gradient-x bg-[length:200%_auto]">
+              <motion.div
+                initial={{ x: -200, opacity: 0, color: '#3B82F6' }}
+                animate={{ x: 0, opacity: 1, color: 'var(--foreground)' }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                SHISHIR
+              </motion.div>
+              <motion.span 
+                initial={{ x: 200, opacity: 0, filter: 'hue-rotate(180deg)' }}
+                animate={{ x: 0, opacity: 1, filter: 'hue-rotate(0deg)' }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-foreground via-gray-500 to-foreground animate-gradient-x bg-[length:200%_auto]"
+              >
                 SHETTY
-              </span>
+              </motion.span>
             </motion.h1>
             
             {/* Decorative line - Minimal */}
             <motion.div 
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: "circOut" }}
+              transition={{ duration: 1.2, delay: 0.6, ease: "circOut" }}
               className="h-px w-32 bg-gradient-to-r from-foreground to-transparent mt-8 origin-left opacity-50"
             />
           </div>
