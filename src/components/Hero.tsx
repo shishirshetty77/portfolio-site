@@ -1,12 +1,11 @@
 'use client';
 
 import { useTheme } from '@/components/ThemeProvider';
-import { AnimatePresence, motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion';
-import { Github, Linkedin, Mail, Terminal, Cpu, Globe, ArrowDown, Server, Cloud, Code, Database, Layers, Zap } from 'lucide-react';
+import { motion, useTransform, useSpring, useMotionValue, MotionValue } from 'framer-motion';
+import { Github, Linkedin, Mail, ArrowDown, Server, Cloud, Database, Zap, LucideIcon } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 
 export function Hero() {
-  const { theme } = useTheme();
   const [isClient, setIsClient] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -120,7 +119,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-wrap gap-3"
           >
-            {['Kubernetes', 'AWS', 'Terraform', 'CI/CD', 'Python'].map((tech, i) => (
+            {['Kubernetes', 'AWS', 'Terraform', 'CI/CD', 'Python'].map((tech) => (
               <span key={tech} className="px-3 py-1 text-sm font-mono border border-gray-200 dark:border-white/10 rounded-md text-gray-500 dark:text-gray-400 bg-white/30 dark:bg-white/5 backdrop-blur-sm">
                 {tech}
               </span>
@@ -249,7 +248,19 @@ export function Hero() {
   );
 }
 
-function FloatingCard({ icon: Icon, title, subtitle, color, delay, x, y, mouseX, mouseY }: any) {
+interface FloatingCardProps {
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  color: string;
+  delay: number;
+  x: number;
+  y: number;
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+}
+
+function FloatingCard({ icon: Icon, title, subtitle, color, delay, x, y, mouseX, mouseY }: FloatingCardProps) {
   const xMotion = useTransform(mouseX, [0, 1], [x - 20, x + 20]);
   const yMotion = useTransform(mouseY, [0, 1], [y - 20, y + 20]);
   

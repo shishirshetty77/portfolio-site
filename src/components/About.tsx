@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code, Download, User } from 'lucide-react';
-import { useState } from 'react';
+import { Download, User } from 'lucide-react';
+import Image from 'next/image';
 
 export function About() {
   return (
@@ -53,10 +53,11 @@ export function About() {
                   className="relative w-full h-full overflow-hidden rounded-xl"
                 >
                   {/* Profile Image */}
-                  <img
+                  <Image
                     src="/munnar.jpeg"
                     alt="Shishir Shetty"
-                    className="w-full h-full object-cover transition-all duration-300"
+                    fill
+                    className="object-cover transition-all duration-300"
                   />
                 </motion.div>
               </div>

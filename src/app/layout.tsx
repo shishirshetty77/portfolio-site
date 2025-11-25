@@ -113,39 +113,6 @@ export default function RootLayout({
     "description": DESC
   };
 
-  const projectsSchema = {
-    "@context": "https://schema.org",
-    "@type": "Collection",
-    "name": `${FULL_NAME} Projects`,
-    "url": SITE_URL,
-    "hasPart": [
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "Find – Gig Platform",
-        "description": "A full-stack gig economy platform connecting local service providers with users in real-time, featuring OTP-based login, secure payments, and role-based dashboards.",
-        "programmingLanguage": "TypeScript",
-        "codeRepository": "https://github.com/shishirshetty",
-        "url": "https://findonspot.com"
-      },
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "E-COMMERCE DEVOPS IMPLEMENTATION",
-        "description": "DevOps for an e-commerce demo: containerization, orchestration, IaC with Terraform, CI/CD automation and AWS infra.",
-        "programmingLanguage": "Shell / Terraform",
-        "codeRepository": "https://github.com/shishirshetty/ecommerce-devops",
-        "url": "https://demo.com/ecommerce"
-      },
-      {
-        "@type": "SoftwareSourceCode",
-        "name": "GITHUB JIRA Automation",
-        "description": "Automated JIRA ticket creation via GitHub webhooks using a Python Flask integration.",
-        "programmingLanguage": "Python",
-        "codeRepository": "https://github.com/shishirshetty/github-jira-automation",
-        "url": "https://demo.com/github-jira"
-      }
-    ]
-  };
-
   return (
     <html lang="en" className="scroll-smooth">
       <head>

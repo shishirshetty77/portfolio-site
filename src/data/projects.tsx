@@ -1,12 +1,8 @@
 import {
-  Box,
   Calculator,
   CheckCircle,
-  Code,
-  Cpu,
   Database,
   Server,
-  Smartphone,
 } from 'lucide-react';
 import { ReactNode } from 'react';
 

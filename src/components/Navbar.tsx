@@ -5,20 +5,20 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+const navItems = [
+  { id: 'home', label: 'Home', href: '#' },
+  { id: 'about', label: 'About', href: '#about' },
+  { id: 'projects', label: 'Projects', href: '#projects' },
+  { id: 'skills', label: 'Skills', href: '#skills' },
+  { id: 'experience', label: 'Experience', href: '#experience' },
+  { id: 'contact', label: 'Contact', href: '#contact' },
+];
+
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-
-  const navItems = [
-    { id: 'home', label: 'Home', href: '#' },
-    { id: 'about', label: 'About', href: '#about' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'skills', label: 'Skills', href: '#skills' },
-    { id: 'experience', label: 'Experience', href: '#experience' },
-    { id: 'contact', label: 'Contact', href: '#contact' },
-  ];
 
   // Handle scroll effect
   useEffect(() => {

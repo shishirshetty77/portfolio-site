@@ -2,15 +2,8 @@
 
 import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 
 export function Skills() {
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
   const glowColors = [
     '#ef4444', // red
     '#3b82f6', // blue

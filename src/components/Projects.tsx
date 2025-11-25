@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import {
   ExternalLink,
   Github,
-  Sparkles,
 } from 'lucide-react';
 
 export function Projects() {

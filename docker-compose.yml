@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-      target: base
+      target: deps
     command: npm run dev
     volumes:
       - .:/app
