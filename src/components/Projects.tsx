@@ -26,10 +26,10 @@ export function Projects() {
           className="mb-20 text-center"
         >
           <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
-            FEATURED <span className="text-gray-400 font-light">WORK</span>
+            INFRASTRUCTURE <span className="text-gray-400 font-light">PROJECTS</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            A selection of projects that demonstrate my passion for building scalable, resilient, and automated infrastructure.
+            Real-world DevOps and cloud infrastructure projects showcasing Kubernetes orchestration, CI/CD automation, Infrastructure as Code, and production-grade system architecture.
           </p>
         </motion.div>
 
@@ -76,7 +76,7 @@ export function Projects() {
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-700 dark:text-gray-400 mb-6 leading-relaxed text-sm font-medium">
+                <p className="text-gray-800 dark:text-gray-400 mb-6 leading-relaxed text-sm font-medium">
                   {project.description}
                 </p>
               </div>

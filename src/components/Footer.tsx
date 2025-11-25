@@ -42,9 +42,6 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center gap-6 mt-4 md:mt-0">
-            <span className="text-xs text-gray-400 font-mono">
-              Built with Next.js & Tailwind
-            </span>
             <motion.div 
               className="text-[10px] text-gray-300 dark:text-gray-700 font-mono cursor-help uppercase tracking-widest"
               whileHover={{ scale: 1.1, color: '#6366F1' }}

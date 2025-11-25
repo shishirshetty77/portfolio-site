@@ -81,13 +81,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/95 dark:bg-white/10 backdrop-blur-xl border-2 border-gray-300 dark:border-white/20 shadow-lg"
+            className="dark:inline-flex hidden items-center gap-3 px-5 py-2.5 rounded-full bg-white/95 dark:bg-white/10 backdrop-blur-xl border-2 border-gray-300 dark:border-white/20 shadow-lg"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-lg shadow-emerald-500/50"></span>
             </span>
-            <span className="text-xs font-mono font-semibold tracking-wider uppercase text-gray-700 dark:text-gray-200">
+            <span className="text-xs font-mono font-semibold tracking-wider uppercase text-gray-900 dark:text-gray-200">
               Available for new projects
             </span>
           </motion.div>
@@ -123,7 +123,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-xl"
           >
-            <span className="font-medium text-foreground">DevOps Engineer</span> & <span className="font-medium text-foreground">Cloud Architect</span> crafting scalable infrastructure and automating the future of software delivery.
+            <span className="font-medium text-foreground">DevOps Engineer</span> & <span className="font-medium text-foreground">Cloud Architect</span> specializing in Kubernetes, AWS, Terraform, and building production-grade cloud-native infrastructure.
           </motion.p>
 
           {/* Tech Stack Pills - Enhanced glass effect */}

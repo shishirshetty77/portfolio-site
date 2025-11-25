@@ -80,20 +80,10 @@ export function Navbar() {
         <div className="max-w-5xl mx-auto px-6">
           <div className={`relative flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ${
             isScrolled 
-              ? 'bg-white/80 dark:bg-black/80 backdrop-blur-2xl border border-black/10 dark:border-white/20 shadow-xl dark:shadow-2xl dark:shadow-primary/10' 
-              : 'bg-white/50 dark:bg-black/50 backdrop-blur-md border border-black/5 dark:border-white/10'
+              ? 'bg-[#F5E7C6]/60 dark:bg-black/80 backdrop-blur-2xl border border-[#E5D7B6]/30 dark:border-white/20 shadow-lg dark:shadow-2xl dark:shadow-primary/10' 
+              : 'bg-[#F5E7C6]/40 dark:bg-black/50 backdrop-blur-md border border-[#E5D7B6]/20 dark:border-white/10'
           }`}>
             
-            {/* Logo / Brand */}
-            <div className="flex-shrink-0">
-              <button 
-                onClick={() => handleNavClick('#')}
-                className="text-xl font-oswald font-bold uppercase tracking-tight text-foreground hover:opacity-70 transition-opacity"
-              >
-                SHISHIR<span className="text-primary">.</span>
-              </button>
-            </div>
-
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
               {navItems.map((item) => (
@@ -116,10 +106,12 @@ export function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-white/10 border border-black/10 dark:border-white/20 text-foreground hover:bg-white dark:hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-md"
+                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white/10 border border-gray-700 dark:border-white/20 hover:bg-gray-700 dark:hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-md"
                 aria-label="Toggle theme"
               >
+                <span className="text-lg">
                 {theme === 'dark' ? '🌙' : '☀️'}
+                </span>
               </button>
 
               {/* Mobile Menu Toggle */}
@@ -141,7 +133,7 @@ export function Navbar() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="lg:hidden absolute top-full left-0 right-0 mx-4 mt-2 rounded-2xl border border-black/5 dark:border-white/10 bg-white/90 dark:bg-black/90 backdrop-blur-xl overflow-hidden shadow-xl"
+              className="lg:hidden absolute top-full left-0 right-0 mx-4 mt-2 rounded-2xl border border-[#E5D7B6]/50 dark:border-white/10 bg-[#F5E7C6]/95 dark:bg-black/90 backdrop-blur-xl overflow-hidden shadow-xl"
             >
               <div className="p-2 space-y-1 flex flex-col">
                 {navItems.map((item) => (

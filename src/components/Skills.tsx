@@ -41,10 +41,10 @@ export function Skills() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-oswald font-bold mb-6 tracking-tight">
-            TECHNICAL <span className="text-gray-400 font-light">ARSENAL</span>
+            DEVOPS & CLOUD <span className="text-gray-400 font-light">STACK</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            A curated stack of technologies I use to build resilient, scalable, and automated systems.
+            Production-proven tools and technologies I leverage to build, deploy, and scale cloud-native infrastructure with enterprise-grade reliability.
           </p>
         </motion.div>
 

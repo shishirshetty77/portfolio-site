@@ -54,15 +54,15 @@ export function About() {
 
             <div className="space-y-6 text-lg text-gray-700 dark:text-gray-400 font-light leading-relaxed">
               <p>
-                I&apos;m a DevOps Engineer and Cloud Architect driven by a simple philosophy: <span className="text-foreground font-medium">automate everything that can be automated.</span>
+                I&apos;m a DevOps Engineer and Cloud Architect with a passion for <span className="text-foreground font-medium">infrastructure automation and cloud-native architecture</span>. I specialize in designing and implementing scalable, highly available systems that power mission-critical applications.
               </p>
               
               <p>
-                My journey started with a curiosity about how large-scale systems operate. That curiosity evolved into a career building resilient infrastructure, optimizing CI/CD pipelines, and ensuring that code moves from development to production with zero friction.
+                My expertise spans <span className="text-foreground font-medium">Kubernetes orchestration, multi-cloud deployments (AWS & GCP), Infrastructure as Code with Terraform</span>, and building robust CI/CD pipelines using GitOps principles. I&apos;ve architected solutions that reduced deployment times by 80% and improved system reliability to 99.9% uptime.
               </p>
 
               <p>
-                When I&apos;m not configuring Kubernetes clusters or writing Terraform modules, I&apos;m exploring new technologies, contributing to open source, or finding the perfect cup of coffee.
+                When I&apos;m not optimizing Kubernetes clusters, writing Terraform modules, or designing ArgoCD workflows, I&apos;m contributing to open-source DevOps tools, exploring emerging cloud technologies, and sharing knowledge with the engineering community.
               </p>
             </div>
 
