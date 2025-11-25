@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: shishir77/portfolio-site
   pullPolicy: IfNotPresent
-  tag: "15"
+  tag: "17"
 
 ingress:
   enabled: false
