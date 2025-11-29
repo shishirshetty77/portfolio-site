@@ -72,7 +72,7 @@ export function About() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() =>
                   window.open(
-                    'https://drive.google.com/file/d/18HrkA_pEJEOhqNaFsAsuC38xTU1R-DrJ/view?usp=drive_link'
+                    'https://drive.google.com/file/d/1aiIl9yEuoGpzx-Qa3Eh_njbCAjTIcAZw/view?usp=sharing'
                   )
                 }
                 className="neo-button"
