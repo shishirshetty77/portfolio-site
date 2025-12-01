@@ -394,6 +394,52 @@ h1, h2, h3, h4, h5, h6 {
   animation: glow-pulse 4s ease-in-out infinite;
 }
 
+/* Animated mesh gradient background */
+@keyframes mesh {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.bg-mesh-gradient {
+  background: linear-gradient(
+    -45deg,
+    rgba(59, 130, 246, 0.03),
+    rgba(139, 92, 246, 0.05),
+    rgba(16, 185, 129, 0.03),
+    rgba(245, 158, 11, 0.02)
+  );
+  background-size: 400% 400%;
+}
+
+.dark .bg-mesh-gradient {
+  background: linear-gradient(
+    -45deg,
+    rgba(59, 130, 246, 0.08),
+    rgba(139, 92, 246, 0.1),
+    rgba(16, 185, 129, 0.06),
+    rgba(245, 158, 11, 0.04)
+  );
+  background-size: 400% 400%;
+}
+
+.animate-mesh {
+  animation: mesh 15s ease infinite;
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Conic gradient utility */
+.bg-gradient-conic {
+  background: conic-gradient(var(--tw-gradient-stops));
+}
+
 /* Premium Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

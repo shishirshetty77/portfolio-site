@@ -3,8 +3,8 @@ import {
   CheckCircle,
   Database,
   Server,
+  LucideIcon,
 } from 'lucide-react';
-import { ReactNode } from 'react';
 
 export interface Project {
   title: string;
@@ -13,7 +13,7 @@ export interface Project {
   github: string;
   demo: string;
   featured: boolean;
-  icon: ReactNode;
+  Icon: LucideIcon;
   gradient: string;
 }
 
@@ -34,7 +34,7 @@ export const projectsData: Project[] = [
     github: 'https://github.com/shishirshetty77/ThreeTierAppDevOpsified',
     demo: 'https://github.com/shishirshetty77/ThreeTierAppDevOpsified',
     featured: true,
-    icon: <Database className="w-6 h-6" />,
+    Icon: Database,
     gradient: 'from-orange-400 to-red-400',
   },
   {
@@ -52,9 +52,9 @@ export const projectsData: Project[] = [
       'Terraform',
     ],
     github: 'https://github.com/shishirshetty77/microservices-multistack-app',
-    demo: 'https://github.com/shishirshetty77/microservices-multistack-app', // No live demo listed, pointing to repo
+    demo: 'https://github.com/shishirshetty77/microservices-multistack-app',
     featured: true,
-    icon: <Server className="w-6 h-6" />,
+    Icon: Server,
     gradient: 'from-blue-400 to-indigo-400',
   },
   {
@@ -72,9 +72,9 @@ export const projectsData: Project[] = [
       'Prometheus',
     ],
     github: 'https://github.com/shishirshetty77/microvoting-platform',
-    demo: 'https://github.com/shishirshetty77/microvoting-platform', // No live demo listed
+    demo: 'https://github.com/shishirshetty77/microvoting-platform',
     featured: true,
-    icon: <CheckCircle className="w-6 h-6" />,
+    Icon: CheckCircle,
     gradient: 'from-emerald-400 to-teal-400',
   },
   {
@@ -92,7 +92,7 @@ export const projectsData: Project[] = [
     github: 'https://github.com/shishirshetty77/cidr-calculator',
     demo: 'https://cidr-calculator.vercel.app/',
     featured: true,
-    icon: <Calculator className="w-6 h-6" />,
+    Icon: Calculator,
     gradient: 'from-purple-400 to-pink-400',
   },
 ];

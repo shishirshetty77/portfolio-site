@@ -31,7 +31,9 @@ export function About() {
                   src="/munnar.jpeg"
                   alt="Shishir Shetty"
                   fill
-                  className="object-cover hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={false}
+                  className="object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

@@ -1,20 +1,23 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const SITE_URL = 'https://shishirshetty.vercel.app'; // update if you have a custom domain
@@ -117,9 +120,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
-  other: {
-    'google-site-verification': 'add-your-verification-code-here',
-  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F8F8FA' },
+    { media: '(prefers-color-scheme: dark)', color: '#0D0D0E' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
 };
 
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -177,7 +186,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

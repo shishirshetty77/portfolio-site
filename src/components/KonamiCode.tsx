@@ -1,75 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
 export function KonamiCode() {
   const [showEasterEgg, setShowEasterEgg] = useState(false);
-  const [inputHistory, setInputHistory] = useState<string[]>([]);
+  const inputHistoryRef = useRef<string[]>([]);
+
+  const triggerEasterEgg = useCallback(() => {
+    setShowEasterEgg(true);
+    
+    // Single confetti burst for performance
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#6366F1', '#EC4899', '#14B8A6']
+    });
+
+    setTimeout(() => setShowEasterEgg(false), 4000);
+  }, []);
 
   useEffect(() => {
-    const konamiCode = [
-      'ArrowUp',
-      'ArrowUp',
-      'ArrowDown',
-      'ArrowDown',
-      'ArrowLeft',
-      'ArrowRight',
-      'ArrowLeft',
-      'ArrowRight',
-      'b',
-      'a',
-    ];
-
     const handleKeyDown = (e: KeyboardEvent) => {
-      const newHistory = [...inputHistory, e.key];
-      if (newHistory.length > konamiCode.length) {
-        newHistory.shift();
-      }
-      setInputHistory(newHistory);
-
-      if (JSON.stringify(newHistory) === JSON.stringify(konamiCode)) {
+      const newHistory = [...inputHistoryRef.current, e.key].slice(-KONAMI_CODE.length);
+      inputHistoryRef.current = newHistory;
+      
+      if (JSON.stringify(newHistory) === JSON.stringify(KONAMI_CODE)) {
         triggerEasterEgg();
-        setInputHistory([]);
+        inputHistoryRef.current = [];
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [inputHistory]);
-
-  const triggerEasterEgg = () => {
-    setShowEasterEgg(true);
-    
-    // Fire confetti
-    const duration = 3000;
-    const end = Date.now() + duration;
-
-    const frame = () => {
-      confetti({
-        particleCount: 2,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: ['#6366F1', '#EC4899', '#14B8A6']
-      });
-      confetti({
-        particleCount: 2,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: ['#6366F1', '#EC4899', '#14B8A6']
-      });
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    };
-    frame();
-
-    setTimeout(() => setShowEasterEgg(false), 5000);
-  };
+  }, [triggerEasterEgg]);
 
   return (
     <AnimatePresence>

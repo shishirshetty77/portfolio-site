@@ -9,7 +9,9 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
+  compress: true,
 };
 
 export default nextConfig;

@@ -2,8 +2,8 @@
 
 import { useTheme } from '@/components/ThemeProvider';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 const navItems = [
   { id: 'home', label: 'Home', href: '#' },
@@ -12,7 +12,7 @@ const navItems = [
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'experience', label: 'Experience', href: '#experience' },
   { id: 'contact', label: 'Contact', href: '#contact' },
-];
+] as const;
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -20,80 +20,88 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Handle scroll effect
+  // Handle scroll effect with throttling
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Handle active section highlighting
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => item.id);
-      const scrollPosition = window.scrollY + 100;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId === 'home' ? '' : sectionId);
-        if (element) {
-          const offsetTop = sectionId === 'home' ? 0 : element.offsetTop;
-          const offsetHeight = sectionId === 'home' ? window.innerHeight : element.offsetHeight;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
           
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
-            break;
+          // Update active section
+          const scrollPosition = window.scrollY + 100;
+          for (const item of navItems) {
+            const element = document.getElementById(item.id === 'home' ? '' : item.id);
+            if (element) {
+              const offsetTop = item.id === 'home' ? 0 : element.offsetTop;
+              const offsetHeight = item.id === 'home' ? window.innerHeight : element.offsetHeight;
+              
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(item.id);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = useCallback((href: string) => {
     setIsMobileMenuOpen(false);
     if (href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
+
+  const containerClass = useMemo(() => 
+    `relative flex items-center justify-between px-2 sm:px-3 py-2 rounded-2xl transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/20' 
+        : 'bg-white/50 dark:bg-gray-900/50 backdrop-blur-md border border-gray-200/30 dark:border-white/5'
+    }`
+  , [isScrolled]);
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'py-3 sm:py-4' : 'py-4 sm:py-6'
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'py-3' : 'py-4 sm:py-5'
         }`}
       >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className={`relative flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-500 ${
-            isScrolled 
-              ? 'bg-[#F5E7C6]/60 dark:bg-black/80 backdrop-blur-2xl border border-[#E5D7B6]/30 dark:border-white/20 shadow-lg dark:shadow-2xl dark:shadow-primary/10' 
-              : 'bg-[#F5E7C6]/40 dark:bg-black/50 backdrop-blur-md border border-[#E5D7B6]/20 dark:border-white/10'
-          }`}>
+        <div className="max-w-4xl mx-auto px-4">
+          <div className={containerClass}>
+            
+            {/* Logo / Name */}
+            <button 
+              onClick={() => handleNavClick('#')}
+              className="px-3 py-1.5 font-oswald font-bold text-sm tracking-tight hover:text-violet-500 transition-colors"
+            >
+              SS
+            </button>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item) => (
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.slice(1).map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.href)}
-                  className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
                     activeSection === item.id
-                      ? 'text-foreground bg-foreground/5'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-foreground hover:bg-foreground/5'
+                      ? 'text-violet-600 dark:text-violet-400 bg-violet-500/10'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-foreground hover:bg-gray-100 dark:hover:bg-white/5'
                   }`}
                 >
                   {item.label}
@@ -101,25 +109,24 @@ export function Navbar() {
               ))}
             </div>
             
-            {/* Theme & Mobile Menu Button */}
-            <div className="flex items-center gap-3">
+            {/* Right side controls */}
+            <div className="flex items-center gap-2">
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white/10 border border-gray-700 dark:border-white/20 hover:bg-gray-700 dark:hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-md"
+                className="p-2 rounded-lg text-gray-500 hover:text-foreground hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-200"
                 aria-label="Toggle theme"
               >
-                <span className="text-lg">
-                {theme === 'dark' ? '🌙' : '☀️'}
-                </span>
+                {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
               </button>
 
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-foreground hover:opacity-70 transition-opacity"
+                className="md:hidden p-2 rounded-lg text-gray-500 hover:text-foreground hover:bg-gray-100 dark:hover:bg-white/5 transition-all"
+                aria-label="Toggle menu"
               >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -132,32 +139,23 @@ export function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "circOut" }}
-              className="lg:hidden absolute top-full left-0 right-0 mx-4 mt-2 rounded-2xl border border-[#E5D7B6]/50 dark:border-white/10 bg-[#F5E7C6]/95 dark:bg-black/90 backdrop-blur-xl overflow-hidden shadow-xl"
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="md:hidden absolute top-full left-0 right-0 mx-4 mt-2 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl overflow-hidden shadow-xl"
             >
-              <div className="p-2 space-y-1 flex flex-col">
+              <div className="p-2 space-y-1">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.href)}
-                    className={`w-full text-left px-4 py-3 font-oswald font-bold uppercase text-sm rounded-xl transition-all ${
+                    className={`w-full text-left px-4 py-3 text-sm font-medium rounded-xl transition-all ${
                       activeSection === item.id
-                        ? 'bg-foreground/5 text-foreground'
-                        : 'text-gray-500 dark:text-gray-400 hover:bg-foreground/5 hover:text-foreground'
+                        ? 'bg-violet-500/10 text-violet-600 dark:text-violet-400'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5'
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
-                
-                <div className="pt-2 border-t border-black/5 dark:border-white/5 mt-2">
-                  <button
-                    onClick={toggleTheme}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 font-oswald font-bold uppercase text-sm rounded-xl hover:bg-foreground/5 transition-all"
-                  >
-                    {theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}
-                  </button>
-                </div>
               </div>
             </motion.div>
           )}
@@ -165,7 +163,7 @@ export function Navbar() {
       </motion.nav>
       
       {/* Spacer */}
-      <div className="h-20" />
+      <div className="h-16 sm:h-20" />
     </>
   );
 }

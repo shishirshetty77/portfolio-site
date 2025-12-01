@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -17,44 +17,35 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true)
-    const savedTheme = localStorage.getItem('theme') as Theme
+    const savedTheme = localStorage.getItem('theme') as Theme | null
+    const initialTheme = savedTheme || 'dark'
+    setTheme(initialTheme)
     
-    if (savedTheme) {
-      setTheme(savedTheme)
-    } else {
-      // Default to dark mode
-      setTheme('dark')
-    }
+    // Apply theme immediately
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark')
+    document.documentElement.classList.toggle('light', initialTheme === 'light')
   }, [])
 
   useEffect(() => {
-    if (mounted && typeof window !== 'undefined') {
-      localStorage.setItem('theme', theme)
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark')
-        document.documentElement.classList.remove('light')
-        document.body.classList.add('dark')
-        document.body.classList.remove('light')
-      } else {
-        document.documentElement.classList.remove('dark')
-        document.documentElement.classList.add('light')
-        document.body.classList.remove('dark')
-        document.body.classList.add('light')
-      }
-    }
+    if (!mounted) return
+    
+    localStorage.setItem('theme', theme)
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    document.documentElement.classList.toggle('light', theme === 'light')
   }, [theme, mounted])
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light')
+  }, [])
+
+  // Prevent flash by rendering children in dark mode until mounted
+  if (!mounted) {
+    return <div className="min-h-screen bg-black dark">{children}</div>
   }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {!mounted ? (
-        <div className="min-h-screen bg-black dark">{children}</div>
-      ) : (
-        children
-      )}
+      {children}
     </ThemeContext.Provider>
   )
 }
