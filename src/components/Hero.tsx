@@ -1,8 +1,9 @@
 'use client';
 
-import { motion, useTransform, useSpring, useMotionValue, MotionValue } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Server, Cloud, Database, Zap, LucideIcon, Terminal } from 'lucide-react';
+import { motion, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { Github, Linkedin, Mail, ArrowDown, Terminal } from 'lucide-react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import { DevOpsPipeline } from './DevOpsPipeline';
 
 export function Hero() {
   const [isClient, setIsClient] = useState(false);
@@ -39,24 +40,33 @@ export function Hero() {
       
       {/* Multi-layered Background System */}
       <div className="absolute inset-0 z-0">
-        {/* Base layer */}
-        <div className="absolute inset-0 bg-dots opacity-30" />
+        {/* Modern multi-color gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-violet-50/50 to-rose-50/30 dark:from-blue-950/40 dark:via-violet-950/30 dark:to-rose-950/20" />
+        
+        {/* Animated aurora effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-conic from-blue-500/20 via-violet-500/20 via-fuchsia-500/15 via-rose-500/10 to-blue-500/20 animate-spin-slow opacity-30 dark:opacity-40 blur-3xl" />
+          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-conic from-emerald-500/15 via-cyan-500/20 via-blue-500/15 to-emerald-500/15 animate-spin-slow-reverse opacity-25 dark:opacity-35 blur-3xl" />
+        </div>
+        
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 bg-dots opacity-20" />
         
         {/* Animated mesh gradient */}
-        <div className="absolute inset-0 opacity-60">
+        <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-mesh-gradient animate-mesh" />
         </div>
         
         {/* Ambient gradient orbs - premium depth */}
         <motion.div 
           style={{ x: moveX, y: moveY }}
-          className="absolute top-[10%] left-[5%] w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full opacity-40 blur-3xl bg-gradient-radial from-blue-500/30 via-purple-500/20 to-transparent animate-glow-pulse"
+          className="absolute top-[10%] left-[5%] w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full opacity-50 blur-3xl bg-gradient-radial from-blue-400/40 via-violet-500/25 to-transparent animate-glow-pulse"
         />
         <motion.div 
           style={{ x: moveXReverse, y: moveYReverse }}
-          className="absolute bottom-[5%] right-[10%] w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full opacity-30 blur-3xl bg-gradient-radial from-emerald-500/25 via-blue-500/15 to-transparent"
+          className="absolute bottom-[5%] right-[10%] w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full opacity-40 blur-3xl bg-gradient-radial from-fuchsia-400/30 via-rose-500/20 to-transparent"
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full opacity-20 blur-3xl bg-gradient-radial from-violet-500/20 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full opacity-25 blur-3xl bg-gradient-radial from-cyan-400/25 via-blue-500/15 to-transparent" />
       </div>
 
       {/* Main Content Container */}
@@ -122,7 +132,7 @@ export function Hero() {
           >
             <Terminal className="w-4 h-4 text-blue-500" />
             <span className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
-              DevOps Engineer & Cloud Architect
+              Cloud Engineer
             </span>
           </motion.div>
 
@@ -211,59 +221,9 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Column: Visual Element */}
+        {/* Right Column: DevOps Pipeline Visualization */}
         <div className="relative hidden lg:flex items-center justify-center h-[550px] w-full">
-          {/* Floating Cards */}
-          <FloatingCard 
-            icon={Server} 
-            title="Infrastructure" 
-            subtitle="IaC & Cloud Native" 
-            delay={0} 
-            x={-60} y={-100} 
-            mouseX={mouseX} mouseY={mouseY}
-            gradient="from-blue-500 to-cyan-500"
-          />
-          <FloatingCard 
-            icon={Cloud} 
-            title="Cloud" 
-            subtitle="AWS & GCP" 
-            delay={0.15} 
-            x={140} y={-50} 
-            mouseX={mouseX} mouseY={mouseY}
-            gradient="from-orange-500 to-yellow-500"
-          />
-          <FloatingCard 
-            icon={Zap} 
-            title="Automation" 
-            subtitle="CI/CD Pipelines" 
-            delay={0.3} 
-            x={-50} y={90} 
-            mouseX={mouseX} mouseY={mouseY}
-            gradient="from-violet-500 to-purple-500"
-          />
-          <FloatingCard 
-            icon={Database} 
-            title="Scale" 
-            subtitle="High Availability" 
-            delay={0.45} 
-            x={160} y={120} 
-            mouseX={mouseX} mouseY={mouseY}
-            gradient="from-emerald-500 to-teal-500"
-          />
-          
-          {/* Central glowing orb */}
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.15, 1],
-              opacity: [0.4, 0.7, 0.4],
-            }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-            className="absolute w-64 h-64 rounded-full blur-3xl pointer-events-none bg-gradient-conic from-blue-500/30 via-violet-500/30 via-purple-500/30 to-blue-500/30"
-          />
+          <DevOpsPipeline mouseX={mouseX} mouseY={mouseY} />
         </div>
       </div>
 
@@ -281,40 +241,5 @@ export function Hero() {
         </div>
       </motion.div>
     </section>
-  );
-}
-
-interface FloatingCardProps {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  delay: number;
-  x: number;
-  y: number;
-  mouseX: MotionValue<number>;
-  mouseY: MotionValue<number>;
-  gradient: string;
-}
-
-function FloatingCard({ icon: Icon, title, subtitle, delay, x, y, mouseX, mouseY, gradient }: FloatingCardProps) {
-  const xMotion = useTransform(mouseX, [0, 1], [x - 12, x + 12]);
-  const yMotion = useTransform(mouseY, [0, 1], [y - 12, y + 12]);
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-      transition={{ duration: 0.8, delay, ease: "easeOut" }}
-      style={{ x: xMotion, y: yMotion, left: '50%', top: '50%' }}
-      className="absolute p-4 bg-white/90 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-2xl shadow-xl flex items-center gap-4 w-56 z-20 hover:scale-105 hover:shadow-2xl transition-all duration-300 cursor-default group"
-    >
-      <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg`}>
-        <Icon className="w-5 h-5" />
-      </div>
-      <div>
-        <h3 className="font-bold text-sm text-foreground tracking-tight">{title}</h3>
-        <p className="text-xs text-gray-500 dark:text-gray-400">{subtitle}</p>
-      </div>
-    </motion.div>
   );
 }

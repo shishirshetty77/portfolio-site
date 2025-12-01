@@ -56,7 +56,7 @@ export function About() {
 
             <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-700 dark:text-gray-400 font-light leading-relaxed">
               <p>
-                I&apos;m a DevOps Engineer and Cloud Architect with a passion for <span className="text-foreground font-medium">infrastructure automation and cloud-native architecture</span>. I specialize in designing and implementing scalable, highly available systems that power mission-critical applications.
+                I&apos;m a Cloud Engineer with a passion for <span className="text-foreground font-medium">infrastructure automation and cloud-native architecture</span>. I specialize in designing and implementing scalable, highly available systems that power mission-critical applications.
               </p>
               
               <p>
