@@ -14,7 +14,7 @@ replicaCount: 2
 image:
   repository: shishir77/portfolio-site
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "24"
 
 imagePullSecrets: []
 nameOverride: ""
