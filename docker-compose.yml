@@ -37,6 +37,7 @@ services:
       dockerfile: dockerfile
       target: runner
     container_name: portfolio-prod
+    profiles: ["prod"]
     ports:
       - "8080:3000"
     environment:
