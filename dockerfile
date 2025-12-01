@@ -9,23 +9,23 @@
 FROM node:20-alpine AS base
 WORKDIR /app
 
-# Set environment for better caching
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
-
-# -----------------------------------------------------------------------------
-# Dependencies stage: Install production dependencies
-# -----------------------------------------------------------------------------
-FROM base AS deps
-
 # Add libc6-compat for Alpine compatibility with native modules
 RUN apk add --no-cache libc6-compat
+
+# Set environment for better caching
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# -----------------------------------------------------------------------------
+# Dependencies stage: Install ALL dependencies for build
+# -----------------------------------------------------------------------------
+FROM base AS deps
+WORKDIR /app
 
 # Copy package files for dependency installation
 COPY package.json package-lock.json* ./
 
-# Install dependencies with clean install for reproducible builds
-RUN npm ci --only=production && npm cache clean --force
+# Install ALL dependencies (including devDependencies for build)
+RUN npm ci
 
 # -----------------------------------------------------------------------------
 # Builder stage: Build the Next.js application
@@ -37,10 +37,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Install all dependencies (including devDependencies for build)
-RUN npm ci
-
 # Build the application with standalone output
+ENV NODE_ENV=production
 RUN npm run build
 
 # -----------------------------------------------------------------------------
