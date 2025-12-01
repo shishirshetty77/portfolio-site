@@ -2,7 +2,7 @@
 
 import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 // Color mapping for vibrant gradients
 const colorMap: { [key: string]: { from: string; to: string; glow: string; shadow: string } } = {
@@ -25,20 +25,8 @@ const colorMap: { [key: string]: { from: string; to: string; glow: string; shado
 };
 
 export function Skills() {
-  // Audio ref for playing the sound on skill click
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const playSound = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0; // Reset to beginning
-      audioRef.current.play().catch(err => console.error('Audio playback failed:', err));
-    }
-  };
-
   return (
     <section id="skills" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Audio element */}
-      <audio ref={audioRef} src="/jadu.mp3" preload="auto" />
       
       {/* Ambient background elements */}
       <div className="absolute inset-0 bg-dots opacity-30" />
@@ -63,7 +51,7 @@ export function Skills() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-4">
           {skillsData.map((skill, index) => (
-            <SkillCard key={skill.name} skill={skill} index={index} playSound={playSound} />
+            <SkillCard key={skill.name} skill={skill} index={index} />
           ))}
         </div>
       </div>
@@ -71,7 +59,7 @@ export function Skills() {
   )
 }
 
-function SkillCard({ skill, index, playSound }: { skill: typeof skillsData[0], index: number, playSound: () => void }) {
+function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: number }) {
   const [isHovered, setIsHovered] = useState(false);
   const colors = colorMap[skill.color] || colorMap['text-blue-500'];
   
@@ -80,11 +68,10 @@ function SkillCard({ skill, index, playSound }: { skill: typeof skillsData[0], i
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
+      transition={{ duration: 0.3, delay: Math.min(index * 0.02, 0.3) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={playSound}
-      className="group relative p-4 sm:p-5 md:p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-xl sm:rounded-2xl hover:border-transparent transition-all duration-500 hover:scale-105 sm:hover:scale-110 overflow-hidden cursor-pointer active:scale-95"
+      className="group relative p-4 sm:p-5 md:p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-xl sm:rounded-2xl hover:border-transparent transition-all duration-300 hover:scale-105 overflow-hidden cursor-default"
       style={{
         boxShadow: isHovered 
           ? `0 20px 40px ${colors.shadow}, 0 0 30px ${colors.glow}` 

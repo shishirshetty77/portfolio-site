@@ -1,58 +1,83 @@
+# =============================================================================
+# Portfolio Site - Production Dockerfile
+# Multi-stage build optimized for Next.js 16 with security best practices
+# =============================================================================
 
+# -----------------------------------------------------------------------------
+# Base stage: Alpine Node.js with minimal footprint
+# -----------------------------------------------------------------------------
 FROM node:20-alpine AS base
 WORKDIR /app
 
-# Install dependencies only when needed
+# Set environment for better caching
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+
+# -----------------------------------------------------------------------------
+# Dependencies stage: Install production dependencies
+# -----------------------------------------------------------------------------
 FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+
+# Add libc6-compat for Alpine compatibility with native modules
 RUN apk add --no-cache libc6-compat
-WORKDIR /app
 
-# Install dependencies based on the preferred package manager
+# Copy package files for dependency installation
 COPY package.json package-lock.json* ./
-RUN npm ci
 
-# Rebuild the source code only when needed
+# Install dependencies with clean install for reproducible builds
+RUN npm ci --only=production && npm cache clean --force
+
+# -----------------------------------------------------------------------------
+# Builder stage: Build the Next.js application
+# -----------------------------------------------------------------------------
 FROM base AS builder
 WORKDIR /app
+
+# Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED=1
+# Install all dependencies (including devDependencies for build)
+RUN npm ci
 
+# Build the application with standalone output
 RUN npm run build
 
-# Production image, copy all the files and run next
-FROM base AS runner
+# -----------------------------------------------------------------------------
+# Runner stage: Production-ready minimal image
+# -----------------------------------------------------------------------------
+FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Set production environment
 ENV NODE_ENV=production
-# Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Security: Create non-root user and group
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 
+# Copy public assets
 COPY --from=builder /app/public ./public
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+# Create .next directory with proper ownership
+RUN mkdir .next && chown nextjs:nodejs .next
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
+# Copy standalone build output with proper ownership
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Security: Switch to non-root user
 USER nextjs
 
+# Expose the application port
 EXPOSE 3000
 
-ENV PORT=3000
-# set hostname to localhost
-ENV HOSTNAME="0.0.0.0"
+# Health check for container orchestration
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))" || exit 1
 
+# Start the application
 CMD ["node", "server.js"]

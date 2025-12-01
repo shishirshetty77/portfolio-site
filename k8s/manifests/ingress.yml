@@ -1,11 +1,41 @@
+# =============================================================================
+# Portfolio Site - Kubernetes Ingress Manifest
+# Manages external access with TLS termination and routing
+# =============================================================================
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: portfolio-ingress
+  labels:
+    app: portfolio
+    app.kubernetes.io/name: portfolio-site
+    app.kubernetes.io/version: "2.0.0"
+    app.kubernetes.io/component: frontend
   annotations:
+    # Ingress class
     kubernetes.io/ingress.class: nginx
+    # SSL/TLS configuration
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # Proxy settings
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    # Security headers
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header X-XSS-Protection "1; mode=block" always;
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    # Cert-manager for automatic TLS certificates (uncomment when configured)
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  
+  ingressClassName: nginx
+  # TLS configuration (uncomment and configure for HTTPS)
+  # tls:
+  #   - hosts:
+  #       - shishirshetty.com
+  #     secretName: portfolio-tls
   rules:
     - host: portfolio.local
       http:

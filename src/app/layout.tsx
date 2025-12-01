@@ -1,33 +1,42 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const SITE_URL = 'https://shishirshetty.vercel.app'; // update if you have a custom domain
 const FULL_NAME = 'Shishir Shetty';
-const DESC = 'Senior DevOps Engineer & Cloud Architect specializing in Kubernetes, AWS, GCP, Terraform, CI/CD automation, and building production-grade cloud-native infrastructure. Expert in Docker, GitOps, ArgoCD, Jenkins, and Infrastructure as Code.';
+const DESC = 'Cloud Engineer specializing in Kubernetes, AWS, GCP, Terraform, CI/CD automation, and building production-grade cloud-native infrastructure. Expert in Docker, GitOps, ArgoCD, Jenkins, and Infrastructure as Code.';
 
 export const metadata: Metadata = {
   title: {
-    default: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect`,
+    default: `${FULL_NAME} — Cloud Engineer`,
     template: `%s | ${FULL_NAME}`,
   },
   description: DESC,
-  applicationName: "Shishir Shetty — DevOps Portfolio",
+  applicationName: "Shishir Shetty — Cloud Portfolio",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
   authors: [
     {
       name: FULL_NAME,
@@ -36,14 +45,14 @@ export const metadata: Metadata = {
   ],
   keywords: [
     // Primary Keywords
-    'shishir shetty devops engineer',
+    'shishir shetty cloud engineer',
     'shishir shetty cloud architect',
-    'senior devops engineer india',
+    'cloud engineer india',
     'kubernetes expert engineer',
     'aws cloud engineer india',
     
     // Technical Skills
-    'kubernetes devops engineer',
+    'kubernetes cloud engineer',
     'terraform infrastructure as code',
     'docker container orchestration',
     'aws gcp cloud engineer',
@@ -53,9 +62,9 @@ export const metadata: Metadata = {
     'ansible configuration management',
     
     // Location Based
-    'devops engineer bangalore',
+    'cloud engineer bangalore',
     'cloud architect udupi',
-    'devops engineer karnataka india',
+    'cloud engineer karnataka india',
     
     // Service Keywords
     'cloud migration specialist',
@@ -68,11 +77,11 @@ export const metadata: Metadata = {
     // Platform Specific
     'aws eks kubernetes',
     'gcp gke deployment',
-    'azure devops engineer',
+    'azure cloud engineer',
     'multi cloud architecture',
     
     // Portfolio Keywords
-    'devops portfolio projects',
+    'cloud portfolio projects',
     'cloud engineer resume',
     'infrastructure engineer portfolio',
     
@@ -81,16 +90,16 @@ export const metadata: Metadata = {
     'site:shishirshetty.vercel.app',
   ],
   openGraph: {
-    title: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect | Kubernetes, AWS, Terraform`,
+    title: `${FULL_NAME} — Cloud Engineer | Kubernetes, AWS, Terraform`,
     description: DESC,
     url: SITE_URL,
-    siteName: `${FULL_NAME} — DevOps & Cloud Engineering Portfolio`,
+    siteName: `${FULL_NAME} — Cloud Engineering Portfolio`,
     images: [
       {
         url: `${SITE_URL}/munnar.jpeg`,
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME} - DevOps Engineer & Cloud Architect`,
+        alt: `${FULL_NAME} - Cloud Engineer`,
       },
     ],
     locale: 'en_IN',
@@ -98,7 +107,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${FULL_NAME} — Senior DevOps Engineer & Cloud Architect`,
+    title: `${FULL_NAME} — Cloud Engineer`,
     description: DESC,
     images: [`${SITE_URL}/munnar.jpeg`],
   },
@@ -117,9 +126,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
-  other: {
-    'google-site-verification': 'add-your-verification-code-here',
-  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0D0D0E',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -142,13 +154,13 @@ export default function RootLayout({
       "https://www.linkedin.com/in/shishir-shetty-715028230/",
       SITE_URL
     ],
-    "jobTitle": "Senior DevOps Engineer & Cloud Architect",
+    "jobTitle": "Cloud Engineer",
     "worksFor": {
       "@type": "Organization",
       "name": "Cloud Infrastructure Specialist"
     },
     "knowsAbout": [
-      "DevOps Engineering",
+      "Cloud Engineering",
       "Cloud Architecture",
       "Kubernetes",
       "Docker",
@@ -177,7 +189,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

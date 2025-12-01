@@ -1,19 +1,51 @@
+{{- /*
+=============================================================================
+Portfolio Site - Kubernetes Ingress Template
+Manages external access to services with TLS termination
+=============================================================================
+*/ -}}
+{{- if .Values.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: portfolio-ingress
+  name: {{ include "portfolio-site-chart.fullname" . | default "portfolio-ingress" }}
+  labels:
+    app: portfolio
+    app.kubernetes.io/name: portfolio-site
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    kubernetes.io/ingress.class: nginx
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
   rules:
-    - host: portfolio.local
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
             backend:
               service:
-                name: portfolio-service
+                name: {{ include "portfolio-site-chart.fullname" $ | default "portfolio-service" }}
                 port:
-                  number: 80
+                  number: {{ $.Values.service.port }}
+          {{- end }}
+    {{- end }}
+{{- end }}
