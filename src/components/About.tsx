@@ -56,15 +56,15 @@ export function About() {
 
             <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-700 dark:text-gray-400 font-light leading-relaxed">
               <p>
-                I&apos;m a Cloud Engineer with a passion for <span className="text-foreground font-medium">infrastructure automation and cloud-native architecture</span>. I specialize in designing and implementing scalable, highly available systems that power mission-critical applications.
+                I&apos;m a Cloud Engineer focused on <span className="text-foreground font-medium">infrastructure automation and cloud-native architecture</span>. I design and implement scalable, highly available systems for mission-critical applications.
               </p>
               
               <p>
-                My expertise spans <span className="text-foreground font-medium">Kubernetes orchestration, multi-cloud deployments (AWS & GCP), Infrastructure as Code with Terraform</span>, and building robust CI/CD pipelines using GitOps principles. I&apos;ve architected solutions that reduced deployment times by 80% and improved system reliability to 99.9% uptime.
+                My core strengths include <span className="text-foreground font-medium">Kubernetes orchestration, multi-cloud deployments on AWS and GCP, Infrastructure as Code with Terraform</span>, and creating efficient CI/CD pipelines using GitOps practices. I&apos;ve delivered solutions that significantly reduced deployment time and improved system reliability.
               </p>
 
               <p>
-                When I&apos;m not optimizing Kubernetes clusters, writing Terraform modules, or designing ArgoCD workflows, I&apos;m contributing to open-source DevOps tools, exploring emerging cloud technologies, and sharing knowledge with the engineering community.
+                Outside of work, I contribute to DevOps open-source projects, explore new cloud technologies, and share knowledge with the engineering community.
               </p>
             </div>
 

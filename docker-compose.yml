@@ -1,28 +1,71 @@
+# =============================================================================
+# Portfolio Site - Docker Compose Configuration
+# Supports both development and production environments
+# =============================================================================
+
 services:
-  # Development service with hot reloading
+  # ---------------------------------------------------------------------------
+  # Development service with hot reloading and volume mounts
+  # ---------------------------------------------------------------------------
   dev:
     build:
       context: .
       dockerfile: dockerfile
       target: deps
-    command: npm run dev
+    container_name: portfolio-dev
+    command: sh -c "npm install && npm run dev"
     volumes:
       - .:/app
       - /app/node_modules
+      - /app/.next
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - WATCHPACK_POLLING=true
     restart: unless-stopped
+    stdin_open: true
+    tty: true
 
-  # Production service
+  # ---------------------------------------------------------------------------
+  # Production service - optimized standalone build
+  # ---------------------------------------------------------------------------
   prod:
     build:
       context: .
       dockerfile: dockerfile
+      target: runner
+    container_name: portfolio-prod
     ports:
       - "8080:3000"
     environment:
       - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
+# =============================================================================
+# Networks (optional - uses default bridge network)
+# =============================================================================
+networks:
+  default:
+    name: portfolio-network

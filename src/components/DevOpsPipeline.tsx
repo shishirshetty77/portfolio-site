@@ -14,13 +14,90 @@ interface DataPacket {
   progress: number;
 }
 
+interface Pod {
+  id: number;
+  x: number;
+  y: number;
+  status: 'running' | 'pending' | 'creating';
+  scale: number;
+}
+
+interface ClusterEvent {
+  id: number;
+  type: 'pod' | 'event' | 'workload' | 'service';
+  fromCluster: 'k8s' | 'server';
+  toCluster: 'k8s' | 'server';
+  progress: number;
+}
+
 export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
   const [packets, setPackets] = useState<DataPacket[]>([]);
   const [pipelineStage, setPipelineStage] = useState<'idle' | 'build' | 'test' | 'deploy'>('idle');
+  const [pods, setPods] = useState<Pod[]>([]);
+  const [podPulse, setPodPulse] = useState(0);
+  const [clusterEvents, setClusterEvents] = useState<ClusterEvent[]>([]);
 
   // Parallax effect
   const xMotion = useTransform(mouseX, [0, 1], [-12, 12]);
   const yMotion = useTransform(mouseY, [0, 1], [-12, 12]);
+
+  // Initialize cluster pods
+  useEffect(() => {
+    const initialPods: Pod[] = [
+      { id: 1, x: -22, y: -18, status: 'running', scale: 1 },
+      { id: 2, x: 22, y: -18, status: 'running', scale: 1 },
+      { id: 3, x: -22, y: 18, status: 'running', scale: 1 },
+      { id: 4, x: 22, y: 18, status: 'running', scale: 1 },
+      { id: 5, x: 0, y: 0, status: 'running', scale: 1.1 },
+    ];
+    setPods(initialPods);
+  }, []);
+
+  // Pod pulse animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPodPulse(prev => (prev + 1) % 100);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Cluster-to-cluster communication - pods, events, workloads, service traffic
+  useEffect(() => {
+    const createClusterEvent = () => {
+      const eventTypes: ('pod' | 'event' | 'workload' | 'service')[] = ['pod', 'event', 'workload', 'service'];
+      const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+      const direction = Math.random() > 0.5;
+      
+      const newEvent: ClusterEvent = {
+        id: Date.now() + Math.random(),
+        type: randomType,
+        fromCluster: direction ? 'k8s' : 'server',
+        toCluster: direction ? 'server' : 'k8s',
+        progress: 0,
+      };
+      setClusterEvents(prev => [...prev.slice(-8), newEvent]); // Keep max 8 events
+    };
+
+    const interval = setInterval(createClusterEvent, 1200);
+    setTimeout(createClusterEvent, 500);
+    setTimeout(() => createClusterEvent(), 900);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Animate cluster events
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setClusterEvents(prev => {
+        return prev.map(event => {
+          const newProgress = event.progress + 0.025;
+          if (newProgress >= 1) return null;
+          return { ...event, progress: newProgress };
+        }).filter(Boolean) as ClusterEvent[];
+      });
+    }, 40);
+    return () => clearInterval(interval);
+  }, []);
 
   // Main animation loop - creates continuous flow
   useEffect(() => {
@@ -39,6 +116,26 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Animate pods when packet arrives at K8s
+  useEffect(() => {
+    const hasK8sPacket = packets.some(p => p.stage === 'cicd-to-k8s' && p.progress > 0.8);
+    if (hasK8sPacket) {
+      setPods(prev => prev.map((pod, i) => ({
+        ...pod,
+        status: i === 4 ? 'creating' : pod.status,
+        scale: i === 4 ? 1.3 : pod.scale,
+      })));
+      
+      setTimeout(() => {
+        setPods(prev => prev.map(pod => ({
+          ...pod,
+          status: 'running',
+          scale: pod.id === 5 ? 1.1 : 1,
+        })));
+      }, 500);
+    }
+  }, [packets]);
 
   // Animate packets through the pipeline
   useEffect(() => {
@@ -122,6 +219,33 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
     }
   };
 
+  // Get cluster event position and styling
+  const getClusterEventPosition = useCallback((event: ClusterEvent) => {
+    const { fromCluster, toCluster, progress } = event;
+    const t = progress;
+    
+    const start = fromCluster === 'k8s' ? positions.k8s : positions.server;
+    const end = toCluster === 'k8s' ? positions.k8s : positions.server;
+    
+    // Create a curved path between clusters
+    const offsetY = (event.id % 3 - 1) * 15; // Slight vertical variation
+    
+    const x = start.x + (end.x - start.x) * t;
+    const y = start.y + (end.y - start.y) * t + Math.sin(t * Math.PI) * (-50 + offsetY);
+    
+    return { x, y };
+  }, []);
+
+  const getClusterEventStyle = (type: string) => {
+    switch (type) {
+      case 'pod': return { color: '#34d399', icon: '⬡', size: 8 };
+      case 'event': return { color: '#f59e0b', icon: '⚡', size: 6 };
+      case 'workload': return { color: '#3b82f6', icon: '◆', size: 7 };
+      case 'service': return { color: '#ec4899', icon: '●', size: 5 };
+      default: return { color: '#8b5cf6', icon: '●', size: 6 };
+    }
+  };
+
   return (
     <motion.div
       style={{ x: xMotion, y: yMotion }}
@@ -143,6 +267,12 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
             <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.7" />
             <stop offset="100%" stopColor="#ec4899" stopOpacity="0.5" />
           </linearGradient>
+          
+          {/* Pod gradient */}
+          <radialGradient id="podGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#34d399" />
+            <stop offset="100%" stopColor="#059669" />
+          </radialGradient>
           
           {/* Glow filters */}
           <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
@@ -166,6 +296,20 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
+          <filter id="podGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          
+          {/* Cluster event gradients */}
+          <linearGradient id="clusterEventGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#ec4899" stopOpacity="1" />
+            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.8" />
+          </linearGradient>
         </defs>
 
         {/* Connection paths - smooth curves */}
@@ -207,6 +351,116 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.7, ease: "easeOut" }}
         />
+
+        {/* Inter-cluster communication lines (within K8s cluster) */}
+        <g opacity={0.4}>
+          <motion.line
+            x1={positions.k8s.x - 22} y1={positions.k8s.y - 18}
+            x2={positions.k8s.x} y2={positions.k8s.y}
+            stroke="#34d399"
+            strokeWidth="1"
+            strokeDasharray="3,3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.line
+            x1={positions.k8s.x + 22} y1={positions.k8s.y - 18}
+            x2={positions.k8s.x} y2={positions.k8s.y}
+            stroke="#34d399"
+            strokeWidth="1"
+            strokeDasharray="3,3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+          />
+          <motion.line
+            x1={positions.k8s.x - 22} y1={positions.k8s.y + 18}
+            x2={positions.k8s.x} y2={positions.k8s.y}
+            stroke="#34d399"
+            strokeWidth="1"
+            strokeDasharray="3,3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+          />
+          <motion.line
+            x1={positions.k8s.x + 22} y1={positions.k8s.y + 18}
+            x2={positions.k8s.x} y2={positions.k8s.y}
+            stroke="#34d399"
+            strokeWidth="1"
+            strokeDasharray="3,3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.9 }}
+          />
+        </g>
+
+        {/* Cluster-to-Cluster Communication - bidirectional traffic line */}
+        <motion.path
+          d={`M ${positions.k8s.x + 50} ${positions.k8s.y} Q ${(positions.k8s.x + positions.server.x) / 2} ${positions.k8s.y - 70} ${positions.server.x - 38} ${positions.server.y}`}
+          fill="none"
+          stroke="url(#clusterEventGrad)"
+          strokeWidth="1.5"
+          strokeDasharray="4,4"
+          strokeLinecap="round"
+          filter="url(#lineGlow)"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.2, 0.5, 0.2], strokeDashoffset: [0, -20] }}
+          transition={{ opacity: { duration: 2, repeat: Infinity }, strokeDashoffset: { duration: 1.5, repeat: Infinity, ease: "linear" } }}
+        />
+        
+        {/* Reverse direction traffic line */}
+        <motion.path
+          d={`M ${positions.server.x - 38} ${positions.server.y + 10} Q ${(positions.k8s.x + positions.server.x) / 2} ${positions.server.y + 50} ${positions.k8s.x + 50} ${positions.k8s.y + 10}`}
+          fill="none"
+          stroke="url(#clusterEventGrad)"
+          strokeWidth="1.5"
+          strokeDasharray="4,4"
+          strokeLinecap="round"
+          filter="url(#lineGlow)"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.2, 0.4, 0.2], strokeDashoffset: [0, 20] }}
+          transition={{ opacity: { duration: 2.5, repeat: Infinity }, strokeDashoffset: { duration: 1.5, repeat: Infinity, ease: "linear" } }}
+        />
+
+        {/* Cluster-to-Cluster Event Particles */}
+        {clusterEvents.map((event) => {
+          const pos = getClusterEventPosition(event);
+          const style = getClusterEventStyle(event.type);
+          
+          return (
+            <g key={event.id}>
+              {/* Glow */}
+              <motion.circle
+                cx={pos.x}
+                cy={pos.y}
+                r={style.size + 4}
+                fill={style.color}
+                opacity={0.3}
+                filter="url(#packetGlow)"
+              />
+              {/* Main particle */}
+              <motion.circle
+                cx={pos.x}
+                cy={pos.y}
+                r={style.size}
+                fill={style.color}
+                initial={{ scale: 0 }}
+                animate={{ scale: [0.8, 1.1, 0.8] }}
+                transition={{ duration: 0.6, repeat: Infinity }}
+              />
+              {/* Trail effect */}
+              <motion.circle
+                cx={pos.x - (event.fromCluster === 'k8s' ? 8 : -8)}
+                cy={pos.y}
+                r={style.size * 0.6}
+                fill={style.color}
+                opacity={0.4}
+              />
+            </g>
+          );
+        })}
 
         {/* Animated data packets */}
         {packets.map((packet) => {
@@ -364,32 +618,70 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
         </div>
       </motion.div>
 
-      {/* Kubernetes Node */}
+      {/* Kubernetes Node with Visible Cluster */}
       <motion.div
         className="absolute"
-        style={{ left: positions.k8s.x - 40, top: positions.k8s.y - 40 }}
+        style={{ left: positions.k8s.x - 50, top: positions.k8s.y - 50 }}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="relative group cursor-default">
-          {/* Animated glow */}
+          {/* Cluster background glow */}
           <motion.div
-            animate={{ scale: [1, 1.12, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -inset-3 bg-violet-500/30 rounded-2xl blur-xl"
+            animate={{ scale: [1, 1.05, 1], opacity: [0.2, 0.35, 0.2] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -inset-4 bg-violet-500/20 rounded-3xl blur-lg"
           />
-          {/* Main node */}
-          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-400 via-violet-500 to-purple-600 shadow-2xl shadow-violet-500/40 flex items-center justify-center border border-white/30 group-hover:scale-105 transition-transform duration-300">
-            {/* Kubernetes icon - proper helm wheel */}
-            <svg viewBox="0 0 32 32" className="w-10 h-10 text-white drop-shadow-lg" fill="currentColor">
-              <path d="M15.9.5a2.1 2.1 0 0 0-.8.2l-11 5.4a2.1 2.1 0 0 0-1.1 1.4l-2.6 11.8a2.1 2.1 0 0 0 .3 1.7l7.6 9.4a2.1 2.1 0 0 0 1.6.8h12a2.1 2.1 0 0 0 1.6-.8l7.6-9.4a2.1 2.1 0 0 0 .3-1.7l-2.6-11.8a2.1 2.1 0 0 0-1.1-1.4l-11-5.4a2.1 2.1 0 0 0-.8-.2zm.1 5.7a1 1 0 0 1 1 .7l1.4 4.2 4.2 1.4a1 1 0 0 1 0 1.9l-4.2 1.4-1.4 4.2a1 1 0 0 1-1.9 0l-1.4-4.2-4.2-1.4a1 1 0 0 1 0-1.9l4.2-1.4 1.4-4.2a1 1 0 0 1 .9-.7z"/>
-            </svg>
+          
+          {/* Main K8s container with visible pods */}
+          <div className="relative w-[100px] h-[100px] rounded-2xl bg-gradient-to-br from-violet-900/80 via-violet-800/60 to-purple-900/80 shadow-2xl shadow-violet-500/30 flex items-center justify-center border border-violet-400/30 overflow-visible group-hover:scale-105 transition-transform duration-300">
+            
+            {/* Cluster pods visualization */}
+            {pods.map((pod) => (
+              <motion.div
+                key={pod.id}
+                className="absolute"
+                style={{
+                  left: `calc(50% + ${pod.x}px - 8px)`,
+                  top: `calc(50% + ${pod.y}px - 8px)`,
+                }}
+                animate={{
+                  scale: pod.status === 'creating' ? [1, 1.3, 1] : pod.scale,
+                  opacity: pod.status === 'pending' ? [0.5, 1, 0.5] : 1,
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <div 
+                  className={`w-4 h-4 rounded-md shadow-lg transition-all duration-300 ${
+                    pod.status === 'running' 
+                      ? 'bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-emerald-500/50' 
+                      : pod.status === 'creating'
+                      ? 'bg-gradient-to-br from-yellow-400 to-orange-500 shadow-yellow-500/50'
+                      : 'bg-gradient-to-br from-blue-400 to-blue-600 shadow-blue-500/50'
+                  }`}
+                  style={{
+                    transform: `scale(${0.9 + Math.sin((podPulse + pod.id * 20) * 0.1) * 0.1})`,
+                  }}
+                >
+                  {/* Pod inner dot */}
+                  <div className="absolute inset-1 rounded-sm bg-white/30" />
+                </div>
+              </motion.div>
+            ))}
+            
+            {/* K8s helm wheel overlay */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+              <svg viewBox="0 0 32 32" className="w-14 h-14 text-white" fill="currentColor">
+                <path d="M15.9.5a2.1 2.1 0 0 0-.8.2l-11 5.4a2.1 2.1 0 0 0-1.1 1.4l-2.6 11.8a2.1 2.1 0 0 0 .3 1.7l7.6 9.4a2.1 2.1 0 0 0 1.6.8h12a2.1 2.1 0 0 0 1.6-.8l7.6-9.4a2.1 2.1 0 0 0 .3-1.7l-2.6-11.8a2.1 2.1 0 0 0-1.1-1.4l-11-5.4a2.1 2.1 0 0 0-.8-.2z"/>
+              </svg>
+            </div>
           </div>
+          
           {/* Label */}
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <span className="text-[10px] font-mono font-bold tracking-wide text-violet-600 dark:text-violet-400 bg-violet-500/15 px-3 py-1 rounded-full border border-violet-500/25 backdrop-blur-sm">
-              K8S
+            <span className="text-[10px] font-mono font-bold tracking-wide text-violet-400 bg-violet-500/15 px-3 py-1 rounded-full border border-violet-500/25 backdrop-blur-sm">
+              K8S CLUSTER
             </span>
           </div>
         </div>
@@ -437,43 +729,52 @@ export function DevOpsPipeline({ mouseX, mouseY }: DevOpsPipelineProps) {
         </div>
       </motion.div>
 
-      {/* Orbiting pods around K8s */}
-      <OrbitingPods position={positions.k8s} />
+      {/* Orbiting service mesh indicators around K8s */}
+      <OrbitingServices position={positions.k8s} />
     </motion.div>
   );
 }
 
-// Separate component for orbiting pods with proper animation
-function OrbitingPods({ position }: { position: { x: number; y: number } }) {
+// Service mesh orbital indicators
+function OrbitingServices({ position }: { position: { x: number; y: number } }) {
   const [rotation, setRotation] = useState(0);
   
   useEffect(() => {
     const interval = setInterval(() => {
-      setRotation(prev => (prev + 1.5) % 360);
-    }, 30);
+      setRotation(prev => (prev + 1) % 360);
+    }, 35);
     return () => clearInterval(interval);
   }, []);
 
+  const services = [
+    { label: 'svc', color: 'from-cyan-400 to-cyan-600' },
+    { label: 'ing', color: 'from-amber-400 to-amber-600' },
+    { label: 'cfg', color: 'from-violet-400 to-violet-600' },
+  ];
+
   return (
     <>
-      {[0, 120, 240].map((offset, i) => {
+      {services.map((service, i) => {
+        const offset = i * 120;
         const angle = ((rotation + offset) * Math.PI) / 180;
-        const radius = 52;
+        const radius = 68;
         const x = position.x + Math.cos(angle) * radius;
         const y = position.y + Math.sin(angle) * radius;
         
         return (
           <motion.div
-            key={`orbit-pod-${i}`}
-            className="absolute w-3.5 h-3.5 rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 shadow-lg shadow-emerald-500/40 border border-white/40 pointer-events-none"
+            key={`orbit-service-${i}`}
+            className={`absolute w-6 h-6 rounded-lg bg-gradient-to-br ${service.color} shadow-lg border border-white/30 pointer-events-none flex items-center justify-center`}
             style={{
-              left: x - 7,
-              top: y - 7,
+              left: x - 12,
+              top: y - 12,
             }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 1 + i * 0.15, duration: 0.4 }}
-          />
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 1.2 + i * 0.15, duration: 0.4 }}
+          >
+            <span className="text-[7px] font-mono font-bold text-white uppercase">{service.label}</span>
+          </motion.div>
         );
       })}
     </>

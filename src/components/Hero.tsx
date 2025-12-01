@@ -5,8 +5,20 @@ import { Github, Linkedin, Mail, ArrowDown, Terminal } from 'lucide-react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { DevOpsPipeline } from './DevOpsPipeline';
 
+// Professional sentences for typewriter effect
+const typewriterSentences = [
+  "Building production-grade infrastructure with Kubernetes",
+  "Deploying scalable cloud systems on AWS",
+  "Automating environments with Terraform",
+  "Delivering modern CI/CD solutions",
+  "Orchestrating containers at scale",
+];
+
 export function Hero() {
   const [isClient, setIsClient] = useState(false);
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   
   // Mouse position for parallax
   const mouseX = useMotionValue(0.5);
@@ -22,6 +34,41 @@ export function Hero() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Typewriter effect
+  useEffect(() => {
+    if (!isClient) return;
+    
+    const currentSentence = typewriterSentences[currentSentenceIndex];
+    const typeSpeed = 50;
+    const deleteSpeed = 30;
+    const pauseTime = 2000;
+    
+    let timeout: NodeJS.Timeout;
+    
+    if (!isDeleting) {
+      if (displayedText.length < currentSentence.length) {
+        timeout = setTimeout(() => {
+          setDisplayedText(currentSentence.slice(0, displayedText.length + 1));
+        }, typeSpeed);
+      } else {
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
+      }
+    } else {
+      if (displayedText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1));
+        }, deleteSpeed);
+      } else {
+        setIsDeleting(false);
+        setCurrentSentenceIndex((prev) => (prev + 1) % typewriterSentences.length);
+      }
+    }
+    
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentSentenceIndex, isClient]);
 
   // Smooth parallax values - memoized config
   const springConfig = useMemo(() => ({ damping: 25, stiffness: 150 }), []);
@@ -41,12 +88,12 @@ export function Hero() {
       {/* Multi-layered Background System */}
       <div className="absolute inset-0 z-0">
         {/* Modern multi-color gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-violet-50/50 to-rose-50/30 dark:from-blue-950/40 dark:via-violet-950/30 dark:to-rose-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-violet-950/30 to-rose-950/20" />
         
         {/* Animated aurora effect */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-conic from-blue-500/20 via-violet-500/20 via-fuchsia-500/15 via-rose-500/10 to-blue-500/20 animate-spin-slow opacity-30 dark:opacity-40 blur-3xl" />
-          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-conic from-emerald-500/15 via-cyan-500/20 via-blue-500/15 to-emerald-500/15 animate-spin-slow-reverse opacity-25 dark:opacity-35 blur-3xl" />
+          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-conic from-blue-500/20 via-violet-500/20 via-fuchsia-500/15 via-rose-500/10 to-blue-500/20 animate-spin-slow opacity-40 blur-3xl" />
+          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-conic from-emerald-500/15 via-cyan-500/20 via-blue-500/15 to-emerald-500/15 animate-spin-slow-reverse opacity-35 blur-3xl" />
         </div>
         
         {/* Subtle dot pattern */}
@@ -80,19 +127,19 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 shadow-lg"
+                        className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-lg shadow-emerald-500/50"></span>
             </span>
-            <span className="text-xs font-mono font-medium tracking-wide text-gray-600 dark:text-gray-300">
+            <span className="text-xs font-mono font-medium tracking-wide text-gray-300">
               Open to opportunities
             </span>
           </motion.div>
 
           {/* Headline - Premium Typography with Gradient */}
-          <div className="relative">
+          <div className="relative py-4 sm:py-6">
             <motion.h1 
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-bold tracking-tighter leading-[0.9]"
             >
@@ -100,17 +147,43 @@ export function Hero() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="block"
+                className="block relative"
               >
-                SHISHIR
+                {/* Shimmer effect */}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 3, repeat: Infinity, repeatDelay: 4, ease: "easeInOut" }}
+                  style={{ WebkitBackgroundClip: 'text' }}
+                />
+                <motion.span
+                  animate={{ 
+                    textShadow: [
+                      '0 0 20px rgba(139, 92, 246, 0)',
+                      '0 0 40px rgba(139, 92, 246, 0.3)',
+                      '0 0 20px rgba(139, 92, 246, 0)',
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  SHISHIR
+                </motion.span>
               </motion.span>
               <motion.span 
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 dark:from-blue-400 dark:via-violet-400 dark:to-purple-400"
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 relative"
               >
-                SHETTY
+                <motion.span
+                  animate={{ 
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  className="bg-gradient-to-r from-blue-400 via-violet-400 via-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent bg-[length:200%_auto]"
+                >
+                  SHETTY
+                </motion.span>
               </motion.span>
             </motion.h1>
             
@@ -119,11 +192,9 @@ export function Hero() {
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5, ease: "circOut" }}
-              className="h-1 w-20 sm:w-24 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 mt-4 sm:mt-6 origin-left rounded-full"
+              className="h-1 w-20 sm:w-24 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 mt-6 sm:mt-8 origin-left rounded-full"
             />
-          </div>
-
-          {/* Role Badge */}
+          </div>          {/* Role Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -131,20 +202,28 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500/10 via-violet-500/10 to-purple-500/10 border border-blue-500/20"
           >
             <Terminal className="w-4 h-4 text-blue-500" />
-            <span className="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
+                        <span className="text-sm font-mono font-semibold text-blue-400">
               Cloud Engineer
             </span>
           </motion.div>
 
-          {/* Subheadline - Clean & Readable */}
-          <motion.p 
+          {/* Typewriter Animation */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-lg"
+            className="h-14 sm:h-16 flex items-center"
           >
-            Building <span className="font-medium text-foreground">production-grade infrastructure</span> with Kubernetes, AWS, Terraform, and modern CI/CD practices.
-          </motion.p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 font-light leading-relaxed max-w-lg font-mono">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400">&gt;</span>
+              <span className="ml-2">{displayedText}</span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                className="inline-block w-0.5 h-5 sm:h-6 bg-violet-400 ml-1 align-middle"
+              />
+            </p>
+          </motion.div>
 
           {/* Tech Stack Pills - Compact and elegant */}
           <motion.div 
@@ -153,12 +232,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-2"
           >
-            {[
-              { name: 'Kubernetes', color: 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-600 dark:text-blue-400' },
-              { name: 'AWS', color: 'from-orange-500/20 to-yellow-500/20 border-orange-500/30 text-orange-600 dark:text-orange-400' },
-              { name: 'Terraform', color: 'from-violet-500/20 to-purple-500/20 border-violet-500/30 text-violet-600 dark:text-violet-400' },
-              { name: 'CI/CD', color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' },
-              { name: 'Python', color: 'from-yellow-500/20 to-green-500/20 border-yellow-500/30 text-yellow-600 dark:text-yellow-400' },
+                        {[
+              { name: 'Kubernetes', color: 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-400' },
+              { name: 'AWS', color: 'from-orange-500/20 to-yellow-500/20 border-orange-500/30 text-orange-400' },
+              { name: 'Terraform', color: 'from-violet-500/20 to-purple-500/20 border-violet-500/30 text-violet-400' },
+              { name: 'CI/CD', color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-400' },
+              { name: 'Python', color: 'from-yellow-500/20 to-green-500/20 border-yellow-500/30 text-yellow-400' },
             ].map((tech, i) => (
               <motion.span 
                 key={tech.name}
@@ -177,7 +256,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-wrap gap-3 sm:gap-4 pt-2"
+            className="flex flex-wrap items-center gap-4 pt-2"
           >
             <a 
               href="#projects"
@@ -189,39 +268,36 @@ export function Hero() {
             </a>
             <a 
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-foreground bg-white/80 dark:bg-white/5 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-full hover:bg-white dark:hover:bg-white/10 hover:border-violet-500/50 hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-foreground bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 hover:border-violet-500/50 hover:scale-105 transition-all duration-300"
             >
               Let&apos;s Talk
             </a>
+            
+            {/* Social Links - Inline with CTAs */}
+            <div className="flex items-center gap-1 ml-2">
+              <div className="w-px h-6 bg-white/10 mr-3" />
+              {[
+                { icon: Github, href: 'https://github.com/shishirshetty77', label: 'GitHub', hoverColor: 'hover:text-white hover:bg-gray-800' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/shishir-shetty-715028230/', label: 'LinkedIn', hoverColor: 'hover:text-blue-400 hover:bg-blue-500/10' },
+                { icon: Mail, href: 'mailto:shishirshetty77@gmail.com', label: 'Email', hoverColor: 'hover:text-violet-400 hover:bg-violet-500/10' },
+              ].map((social, i) => (
+                <motion.a 
+                  key={social.label}
+                  href={social.href}
+                  target={social.label !== 'Email' ? "_blank" : undefined}
+                  rel={social.label !== 'Email' ? "noopener noreferrer" : undefined}
+                  aria-label={social.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.7 + i * 0.1 }}
+                  className={`p-2.5 rounded-xl text-gray-500 border border-transparent ${social.hoverColor} hover:border-white/10 transition-all duration-300`}
+                >
+                  <social.icon className="w-4 h-4" />
+                </motion.a>
+              ))}
+            </div>
           </motion.div>
-
-          {/* Social Links - Compact and stylish */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="flex gap-3 pt-2"
-          >
-            {[
-              { icon: Github, href: 'https://github.com/shishirshetty77', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/shishir-shetty-715028230/', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:shishirshetty77@gmail.com', label: 'Email' },
-            ].map((social) => (
-              <a 
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 text-gray-500 hover:text-violet-500 hover:border-violet-500/50 hover:bg-violet-500/5 transition-all duration-300"
-              >
-                <social.icon className="w-4 h-4" />
-              </a>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Right Column: DevOps Pipeline Visualization */}
+        </div>        {/* Right Column: DevOps Pipeline Visualization */}
         <div className="relative hidden lg:flex items-center justify-center h-[550px] w-full">
           <DevOpsPipeline mouseX={mouseX} mouseY={mouseY} />
         </div>

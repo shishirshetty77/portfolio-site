@@ -1,16 +1,156 @@
-replicaCount: 1
+# =============================================================================
+# Portfolio Site - Helm Values Configuration
+# Cloud-native deployment with security and scalability best practices
+# =============================================================================
 
+# -----------------------------------------------------------------------------
+# Replica Configuration
+# -----------------------------------------------------------------------------
+replicaCount: 2
+
+# -----------------------------------------------------------------------------
+# Image Configuration
+# -----------------------------------------------------------------------------
 image:
   repository: shishir77/portfolio-site
   pullPolicy: IfNotPresent
-  tag: "19"
+  tag: "latest"
 
-ingress:
-  enabled: false
-  className: ""
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# -----------------------------------------------------------------------------
+# Service Account Configuration
+# -----------------------------------------------------------------------------
+serviceAccount:
+  create: true
+  automount: true
   annotations: {}
+  name: ""
+
+# -----------------------------------------------------------------------------
+# Pod Security and Annotations
+# -----------------------------------------------------------------------------
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "3000"
+
+podLabels:
+  app.kubernetes.io/component: frontend
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1001
+  capabilities:
+    drop:
+      - ALL
+
+# -----------------------------------------------------------------------------
+# Service Configuration
+# -----------------------------------------------------------------------------
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+  annotations: {}
+
+# -----------------------------------------------------------------------------
+# Ingress Configuration
+# -----------------------------------------------------------------------------
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - host: chart-example.local
+    - host: shishirshetty.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
+  tls:
+    - secretName: portfolio-tls
+      hosts:
+        - shishirshetty.com
+
+# -----------------------------------------------------------------------------
+# Resource Limits and Requests
+# -----------------------------------------------------------------------------
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# -----------------------------------------------------------------------------
+# Horizontal Pod Autoscaler
+# -----------------------------------------------------------------------------
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# -----------------------------------------------------------------------------
+# Liveness and Readiness Probes
+# -----------------------------------------------------------------------------
+livenessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 10
+  periodSeconds: 15
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+# -----------------------------------------------------------------------------
+# Node Selection and Tolerations
+# -----------------------------------------------------------------------------
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - portfolio-site
+          topologyKey: kubernetes.io/hostname
+
+# -----------------------------------------------------------------------------
+# Environment Variables
+# -----------------------------------------------------------------------------
+env:
+  - name: NODE_ENV
+    value: "production"
+  - name: NEXT_TELEMETRY_DISABLED
+    value: "1"

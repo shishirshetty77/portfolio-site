@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, MotionValue } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
+import { motion, useTransform, MotionValue } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 interface KubernetesClusterProps {
   mouseX: MotionValue<number>;

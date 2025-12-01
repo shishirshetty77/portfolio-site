@@ -1,13 +1,24 @@
+# =============================================================================
+# Portfolio Site - Kubernetes Service Manifest
+# Exposes the portfolio application within the cluster
+# =============================================================================
 apiVersion: v1
 kind: Service
 metadata:
   name: portfolio-service
+  labels:
+    app: portfolio
+    app.kubernetes.io/name: portfolio-site
+    app.kubernetes.io/version: "2.0.0"
+    app.kubernetes.io/component: frontend
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: portfolio
+    app.kubernetes.io/name: portfolio-site
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 30080
+  sessionAffinity: None
