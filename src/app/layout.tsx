@@ -134,9 +134,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { KonamiCode } from '@/components/KonamiCode'
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -189,21 +186,15 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
-          // JSON-LD for personal branding / knowledge graph
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body
-        className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
-      >
-        <ThemeProvider>
-          <KonamiCode />
-          {children}
-        </ThemeProvider>
+      <body className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+        {children}
       </body>
     </html>
   );

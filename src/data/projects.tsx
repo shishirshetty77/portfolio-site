@@ -15,7 +15,6 @@ export interface Project {
   demo: string;
   featured: boolean;
   Icon: LucideIcon;
-  gradient: string;
 }
 
 export const projectsData: Project[] = [
@@ -37,7 +36,7 @@ export const projectsData: Project[] = [
     demo: 'https://github.com/shishirshetty77/eventflow-platform-for-event-driven-architecture.git',
     featured: true,
     Icon: Zap,
-    gradient: 'from-amber-400 to-orange-500',
+
   },
   {
     title: 'Microvoting Platform',
@@ -57,7 +56,7 @@ export const projectsData: Project[] = [
     demo: 'https://github.com/shishirshetty77/microvoting-platform',
     featured: true,
     Icon: CheckCircle,
-    gradient: 'from-emerald-400 to-teal-400',
+
   },
   {
     title: 'Microservices Multistack App',
@@ -77,7 +76,7 @@ export const projectsData: Project[] = [
     demo: 'https://github.com/shishirshetty77/microservices-multistack-app',
     featured: true,
     Icon: Server,
-    gradient: 'from-blue-400 to-indigo-400',
+
   },
   {
     title: 'Three-Tier App – GKE DevOps',
@@ -96,7 +95,7 @@ export const projectsData: Project[] = [
     demo: 'https://github.com/shishirshetty77/ThreeTierAppDevOpsified',
     featured: true,
     Icon: Database,
-    gradient: 'from-violet-400 to-purple-500',
+
   },
   {
     title: 'Two-Tier Flask App',
@@ -115,6 +114,6 @@ export const projectsData: Project[] = [
     demo: 'https://github.com/shishirshetty77/DevOps-Project-Two-Tier-Flask-App.git',
     featured: false,
     Icon: Layers,
-    gradient: 'from-rose-400 to-pink-500',
+
   },
 ];
