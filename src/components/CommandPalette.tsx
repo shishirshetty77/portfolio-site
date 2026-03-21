@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Terminal, Github, Briefcase, Mail, Code, X, Music } from 'lucide-react';
+import { Search, Terminal, Briefcase, Mail, Code, X, Music, ExternalLink } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -48,9 +48,8 @@ export function CommandPalette({ isOpen, setIsOpen }: CommandPaletteProps) {
     { id: 'bio', label: 'View Bio', icon: Terminal, action: () => dispatchNav('bio') },
     { id: 'experience', label: 'Work History', icon: Briefcase, action: () => dispatchNav('experience') },
     { id: 'projects', label: 'Explore Projects', icon: Code, action: () => dispatchNav('projects') },
-    { id: 'github-widget', label: 'GitHub Stats', icon: Github, action: () => dispatchNav('github') },
     { id: 'spotify-widget', label: 'Now Playing', icon: Music, action: () => dispatchNav('spotify') },
-    { id: 'github-link', label: 'Open GitHub Profile', icon: Github, action: () => window.open('https://github.com/shishirshetty77', '_blank') },
+    { id: 'github-link', label: 'Open GitHub Profile', icon: ExternalLink, action: () => window.open('https://github.com/shishirshetty77', '_blank') },
     { id: 'contact', label: 'Send Email', icon: Mail, action: () => { window.location.href = 'mailto:shishirshetty77@gmail.com'; } },
   ];
 

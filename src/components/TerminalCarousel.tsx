@@ -2,18 +2,16 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Code, Briefcase, Github, Music, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Terminal, Code, Briefcase, Music, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TerminalBioWidget } from './TerminalBioWidget';
 import { ProjectsWidget } from './ProjectsWidget';
 import { ExperienceWidget } from './ExperienceWidget';
-import { LiveGitHubWidget } from './LiveGitHubWidget';
 import { LiveSpotifyWidget } from './LiveSpotifyWidget';
 
 const VIEWS = [
   { id: 'bio', label: 'SYS.BIO', icon: Terminal, component: TerminalBioWidget },
   { id: 'experience', label: 'LOGS.WORK', icon: Briefcase, component: ExperienceWidget },
   { id: 'projects', label: 'DIR.PROJECTS', icon: Code, component: ProjectsWidget },
-  { id: 'github', label: 'NET.GITHUB', icon: Github, component: LiveGitHubWidget },
   { id: 'spotify', label: 'MEDIA.PLAY', icon: Music, component: LiveSpotifyWidget },
 ];
 
