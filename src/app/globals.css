@@ -61,20 +61,17 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-/* Physical, hard shadows instead of glows */
+/* Physical, hard shadows — no transforms to avoid breaking input focus */
 .tactical-shadow {
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tactical-shadow:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .tactical-shadow:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 .accent-text {
