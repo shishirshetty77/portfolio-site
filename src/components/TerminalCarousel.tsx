@@ -41,9 +41,13 @@ export function TerminalCarousel() {
     return () => window.removeEventListener('CMD_NAVIGATE', handleNav);
   }, [navigate]);
 
-  // Arrow key navigation
+  // Arrow key navigation — skip when user is focused on an input
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't navigate when user is typing in terminal or any input
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
       if (e.key === 'ArrowRight') {
         navigate(Math.min(activeIndex + 1, VIEWS.length - 1));
       } else if (e.key === 'ArrowLeft') {

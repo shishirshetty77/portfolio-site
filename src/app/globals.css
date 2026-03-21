@@ -234,35 +234,4 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--color-slate-500);
 }
 
-/* Audio progress bar */
-input[type='range'].audio-progress {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  background: var(--color-obsidian-600);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
 
-input[type='range'].audio-progress::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: var(--color-matrix-green);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
-}
-
-input[type='range'].audio-progress::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  background: var(--color-matrix-green);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
-}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { TacticalCard } from './TacticalCard';
-import { Terminal, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Terminal, Github, Linkedin, Mail, MapPin, FileText } from 'lucide-react';
 import { experienceData } from '@/data/experience';
 import { projectsData } from '@/data/projects';
 
@@ -309,11 +309,9 @@ const COMMANDS: Record<string, { description: string; output: () => string[] }> 
   },
 };
 
-// ── Boot sequence ────────────────────────────────────────────────────
+// ── Boot lines (shown immediately, no delay animation) ──────────────
 const BOOT_LINES = [
-  { text: '> LOADING KERNEL MODULES ████████████ OK', color: 'text-[#00ff41]' },
-  { text: '> SESSION READY — 15 commands loaded', color: 'text-[#00ff41]' },
-  { text: '', color: '' },
+  { text: '> SYSTEM READY — 15 commands loaded', color: 'text-[#00ff41]' },
   { text: '  Type "help" for all commands — or just start exploring.', color: 'text-[#525252]' },
   { text: '', color: '' },
 ];
@@ -418,6 +416,15 @@ function HeroIdentity() {
           <Mail className="w-3.5 h-3.5 group-hover:drop-shadow-[0_0_4px_rgba(251,191,36,0.5)]" />
           <span className="hidden sm:inline">Email</span>
         </a>
+        <a
+          href="https://drive.google.com/file/d/1rGzwLOcidpfb_YmYvg9nImgRJcbyzxa8/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-xs font-mono text-[#525252] hover:text-violet-400 transition-colors group"
+        >
+          <FileText className="w-3.5 h-3.5 group-hover:drop-shadow-[0_0_4px_rgba(167,139,250,0.5)]" />
+          <span className="hidden sm:inline">Resume</span>
+        </a>
         <span className="flex items-center gap-1.5 text-xs font-mono text-[#3a3a3a]">
           <MapPin className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Bangalore, IN</span>
@@ -429,8 +436,8 @@ function HeroIdentity() {
 
 // ── Main component ───────────────────────────────────────────────────
 export function TerminalBioWidget() {
-  const [bootLines, setBootLines] = useState<typeof BOOT_LINES>([]);
-  const [booted, setBooted] = useState(false);
+  // Start booted immediately — no animation delay
+  const [bootLines] = useState(BOOT_LINES);
   const [history, setHistory] = useState<{ type: 'cmd' | 'output'; lines: string[] }[]>([]);
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
@@ -438,39 +445,25 @@ export function TerminalBioWidget() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Boot sequence
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i >= BOOT_LINES.length) {
-        clearInterval(interval);
-        setBooted(true);
-        return;
-      }
-      const currentLine = BOOT_LINES[i];
-      setBootLines(prev => [...prev, currentLine]);
-      i++;
-    }, 100);
-    return () => clearInterval(interval);
-  }, []);
-
+  // Auto-scroll
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [bootLines, history]);
+  }, [history]);
 
+  // Focus input on mount — delay to let Framer Motion finish animating
   useEffect(() => {
-    if (booted && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [booted]);
+    const timer = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
 
   const executeCommand = useCallback((cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
 
     if (trimmed === 'clear') {
-      setBootLines([]);
       setHistory([]);
       return;
     }
@@ -584,8 +577,7 @@ export function TerminalBioWidget() {
           </div>
         ))}
 
-        {booted && (
-          <div className="flex items-center gap-0 mt-1">
+        <div className="flex items-center gap-0 mt-1">
             <span className="text-[#00ff41]">shishir@cloud</span>
             <span className="text-[#525252]">:</span>
             <span className="text-cyan-400">~</span>
@@ -596,13 +588,14 @@ export function TerminalBioWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
+              onFocus={() => scrollRef.current && (scrollRef.current.scrollTop = scrollRef.current.scrollHeight)}
               className="flex-1 bg-transparent text-[#d4d4d4] outline-none caret-[#00ff41] font-mono text-xs md:text-sm"
               autoComplete="off"
               spellCheck="false"
               autoCapitalize="off"
+              autoFocus
             />
           </div>
-        )}
       </div>
     </TacticalCard>
   );
