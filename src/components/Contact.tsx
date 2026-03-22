@@ -9,14 +9,13 @@ import {
   Phone,
   ArrowUpRight
 } from 'lucide-react';
+import { useState } from 'react';
 
 export function Contact() {
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="absolute inset-0 bg-dots opacity-20" />
-      <div className="absolute top-1/3 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] bg-secondary/5 rounded-full blur-3xl" />
+    <section id="contact" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden bg-background border-t-2 border-border-color">
+      {/* Brutalist Background Elements */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -24,71 +23,53 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-12 sm:mb-16 md:mb-20 text-center"
+          className="mb-12 sm:mb-16 md:mb-20 text-center flex flex-col items-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 tracking-tight px-4">
-            GET IN <span className="text-gray-400 font-light">TOUCH</span>
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-3 w-8 bg-tertiary" />
+            <span className="text-sm font-mono font-bold tracking-widest text-tertiary uppercase">Connect</span>
+            <div className="h-3 w-8 bg-tertiary" />
+          </div>
+
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-oswald font-black mb-4 sm:mb-6 tracking-tight uppercase">
+            GET IN <span className="text-tertiary" style={{ textShadow: '4px 4px 0px rgba(163,230,53,0.2)' }}>TOUCH</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed px-4">
+          <p className="text-gray-300 max-w-2xl text-lg md:text-xl font-mono leading-relaxed bg-black/40 p-4 border border-white/10 mt-6 inline-block">
+            <span className="text-tertiary font-bold mr-2">{'>_'}</span>
             Have a project in mind or just want to say hello? I&apos;m always open to discussing new opportunities and ideas.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
           {/* Email Card */}
-          <motion.a
+          <ContactCard 
             href="mailto:shishirshetty77@gmail.com"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="group relative p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
-          >
-            <div className="flex justify-between items-start mb-8">
-              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <Mail className="w-6 h-6" />
-              </div>
-              <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-            </div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Email</h3>
-            <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground break-all">shishirshetty77@gmail.com</p>
-          </motion.a>
+            icon={Mail}
+            title="Email"
+            detail="shishirshetty77@gmail.com"
+            colorClass="primary"
+            shadowColor="rgba(255,69,0,1)"
+          />
 
           {/* Phone Card */}
-          <motion.a
+          <ContactCard 
             href="tel:+919483243509"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="group relative p-6 sm:p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-2xl sm:rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
-          >
-            <div className="flex justify-between items-start mb-6 sm:mb-8">
-              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <Phone className="w-6 h-6" />
-              </div>
-              <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-            </div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Phone</h3>
-            <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">+91 9483243509</p>
-          </motion.a>
+            icon={Phone}
+            title="Phone"
+            detail="+91 9483243509"
+            colorClass="secondary"
+            shadowColor="rgba(234,179,8,1)"
+          />
 
           {/* Location Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="group relative p-6 sm:p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-2xl sm:rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden"
-          >
-            <div className="flex justify-between items-start mb-6 sm:mb-8">
-              <div className="p-3 rounded-xl bg-foreground/5 text-foreground group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <MapPin className="w-6 h-6" />
-              </div>
-            </div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Location</h3>
-            <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Udupi, Karnataka</p>
-          </motion.div>
+          <ContactCard 
+            icon={MapPin}
+            title="Location"
+            detail="Mangalore, Karnataka"
+            colorClass="tertiary"
+            shadowColor="rgba(163,230,53,1)"
+          />
 
           {/* Socials Card */}
           <motion.div
@@ -96,14 +77,17 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="group relative p-6 sm:p-8 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 rounded-2xl sm:rounded-3xl hover:border-primary/50 hover:bg-white dark:hover:bg-white/10 hover:shadow-2xl dark:hover:shadow-primary/20 transition-all duration-500 overflow-hidden flex flex-col justify-between"
+            className="group relative p-8 bg-background border-2 border-border-color hover:border-foreground transition-all duration-200 flex flex-col justify-between"
+            style={{
+              boxShadow: '4px 4px 0px rgba(255,255,255,0.1)'
+            }}
           >
-            <div className="flex gap-4 mb-6 sm:mb-8">
+            <div className="flex gap-4 mb-8">
               <a 
                 href="https://github.com/shishirshetty77" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-foreground/5 text-foreground hover:bg-primary hover:text-white transition-colors duration-300"
+                className="p-4 border-2 border-border-color bg-background text-foreground hover:bg-white hover:text-black hover:border-white transition-colors duration-200"
               >
                 <Github className="w-6 h-6" />
               </a>
@@ -111,18 +95,68 @@ export function Contact() {
                 href="https://www.linkedin.com/in/shishir-shetty-715028230/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-foreground/5 text-foreground hover:bg-primary hover:text-white transition-colors duration-300"
+                className="p-4 border-2 border-border-color bg-background text-foreground hover:bg-white hover:text-black hover:border-white transition-colors duration-200"
               >
                 <Linkedin className="w-6 h-6" />
               </a>
             </div>
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2">Social Profiles</h3>
-              <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Connect with me</p>
+              <h3 className="text-xs sm:text-sm font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">Profiles</h3>
+              <p className="text-base sm:text-lg font-black font-oswald text-foreground uppercase tracking-wide">Social Links</p>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactCard({ 
+  href, 
+  icon: Icon, 
+  title, 
+  detail, 
+  colorClass, 
+  shadowColor 
+}: { 
+  href?: string; 
+  icon: any; 
+  title: string; 
+  detail: string; 
+  colorClass: string; 
+  shadowColor: string 
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const CardWrapper = href ? motion.a : motion.div;
+  
+  return (
+    <CardWrapper
+      href={href}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`group relative p-6 sm:p-8 bg-background border-2 transition-all duration-200 block ${isHovered ? `border-${colorClass}` : 'border-border-color'}`}
+      style={{
+        boxShadow: isHovered ? `8px 8px 0px ${shadowColor}` : '4px 4px 0px rgba(255,255,255,0.1)',
+        transform: isHovered ? 'translate(-4px, -4px)' : 'none'
+      }}
+    >
+      <div className="flex justify-between items-start mb-8">
+        <div className={`p-4 border-2 transition-colors duration-200 ${isHovered ? `bg-${colorClass} text-background border-${colorClass}` : 'bg-transparent text-foreground border-border-color'}`}>
+          <Icon className="w-6 h-6" />
+        </div>
+        {href && (
+          <ArrowUpRight className={`w-8 h-8 transition-transform duration-200 ${isHovered ? `text-${colorClass} translate-x-1 -translate-y-1` : 'text-gray-500'}`} />
+        )}
+      </div>
+      <div>
+        <h3 className="text-xs sm:text-sm font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">{title}</h3>
+        <p className="text-xs xs:text-sm sm:text-base md:text-lg font-black font-oswald text-foreground uppercase tracking-wide whitespace-nowrap overflow-hidden">{detail}</p>
+      </div>
+    </CardWrapper>
   );
 }

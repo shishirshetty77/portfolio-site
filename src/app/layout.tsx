@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     
     // Location Based
     'cloud engineer bangalore',
-    'cloud architect udupi',
+    'cloud architect mangalore',
     'cloud engineer karnataka india',
     
     // Service Keywords
@@ -129,7 +129,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0D0D0E',
+  themeColor: '#0C0A09',
   width: 'device-width',
   initialScale: 1,
 };
@@ -179,7 +179,7 @@ export default function RootLayout({
     ],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Udupi",
+      "addressLocality": "Mangalore",
       "addressRegion": "Karnataka",
       "addressCountry": "IN"
     },

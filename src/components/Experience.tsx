@@ -3,7 +3,7 @@
 import { experienceData } from '@/data/experience';
 import { motion } from 'framer-motion';
 import { MapPin } from 'lucide-react';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 const ExperienceCard = memo(function ExperienceCard({ 
   exp, 
@@ -12,6 +12,18 @@ const ExperienceCard = memo(function ExperienceCard({
   exp: typeof experienceData[0]; 
   index: number 
 }) {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Assign brutalist accent colors cyclically
+  const brutalColors = ['border-primary text-primary', 'border-secondary text-secondary', 'border-tertiary text-tertiary'];
+  const bgColors = ['bg-primary', 'bg-secondary', 'bg-tertiary'];
+  const shadowColors = ['rgba(255,69,0,1)', 'rgba(234,179,8,1)', 'rgba(163,230,53,1)'];
+  
+  const colorIndex = index % 3;
+  const borderColor = brutalColors[colorIndex];
+  const bgColor = bgColors[colorIndex];
+  const shadowColor = shadowColors[colorIndex];
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -19,52 +31,66 @@ const ExperienceCard = memo(function ExperienceCard({
       transition={{ duration: 0.4, delay: index * 0.1 }}
       viewport={{ once: true }}
       className="relative pl-8 md:pl-12 group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Timeline Dot */}
-      <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-primary to-secondary ring-4 ring-background group-hover:ring-primary/20 transition-all duration-300 shadow-lg shadow-primary/50" />
+      {/* Brutalist Timeline Square */}
+      <div 
+        className={`absolute -left-[11px] top-2 w-5 h-5 border-2 bg-background z-10 transition-colors duration-200 ${isHovered ? bgColor + ' border-current' : 'border-border-color'}`} 
+      />
 
-      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-4 gap-2">
-        <h3 className="text-xl sm:text-2xl font-bold font-oswald tracking-wide text-foreground group-hover:text-primary transition-colors duration-300">
-          {exp.title}
-        </h3>
-        <span className="font-mono text-sm text-gray-600 dark:text-gray-300 bg-white/70 dark:bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-black/10 dark:border-white/20 shadow-sm">
-          {exp.period}
-        </span>
-      </div>
-
-      <div className="mb-6">
-        <div className="text-lg font-medium text-primary mb-1">
-          {exp.company}
-        </div>
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 font-mono">
-          <span className="flex items-center gap-1">
-            <MapPin className="w-3 h-3" /> {exp.location}
+      <div className={`p-6 border-2 transition-all duration-200 bg-background ${isHovered ? borderColor.split(' ')[0] : 'border-border-color'}`}
+        style={{
+          boxShadow: isHovered 
+            ? `6px 6px 0px ${shadowColor}` 
+            : '0px 0px 0px transparent',
+          transform: isHovered ? 'translate(-2px, -2px)' : 'none'
+        }}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-4 gap-4">
+          <h3 className={`text-2xl sm:text-3xl font-black font-oswald tracking-wide uppercase transition-colors duration-200 ${isHovered ? borderColor.split(' ')[1] : 'text-foreground'}`}>
+            {exp.title}
+          </h3>
+          <span className="font-mono text-xs sm:text-sm font-bold text-gray-300 bg-black/40 px-3 py-1 border border-white/10 uppercase tracking-widest self-start sm:self-center">
+            {exp.period}
           </span>
-          <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700" />
-          <span>{exp.type}</span>
         </div>
-      </div>
 
-      <ul className="space-y-3 mb-6">
-        {exp.description.map((item, itemIndex) => (
-          <li
-            key={itemIndex}
-            className="text-gray-700 dark:text-gray-400 leading-relaxed text-base pl-4 border-l-2 border-gray-300 dark:border-white/10 hover:border-primary/50 hover:text-foreground transition-all duration-300"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+        <div className="mb-6">
+          <div className="text-xl font-black text-foreground mb-2 uppercase tracking-wide">
+            {exp.company}
+          </div>
+          <div className="flex items-center gap-4 text-sm font-mono font-bold text-gray-400 uppercase">
+            <span className="flex items-center gap-1">
+              <MapPin className="w-4 h-4" /> {exp.location}
+            </span>
+            <span className="w-2 h-2 bg-border-color" />
+            <span>{exp.type}</span>
+          </div>
+        </div>
 
-      <div className="flex flex-wrap gap-2">
-        {exp.technologies.map((tech) => (
-          <span
-            key={tech}
-            className="px-3 py-1.5 text-xs font-mono font-semibold text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-white/10 backdrop-blur-sm rounded-full border border-black/10 dark:border-white/20 hover:border-primary/50 hover:scale-105 transition-all duration-300"
-          >
-            {tech}
-          </span>
-        ))}
+        <ul className="space-y-3 mb-8">
+          {exp.description.map((item, itemIndex) => (
+            <li
+              key={itemIndex}
+              className="text-gray-300 font-mono leading-relaxed text-sm sm:text-base pl-4 border-l-4 border-border-color hover:border-current transition-colors duration-200 flex items-start"
+            >
+              <span className="mr-3 mt-1 text-current font-bold">{'>'}</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2">
+          {exp.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 text-xs font-mono font-bold text-gray-300 border-2 border-border-color uppercase hover:border-current transition-colors duration-200 cursor-default"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
@@ -72,11 +98,9 @@ const ExperienceCard = memo(function ExperienceCard({
 
 export function Experience() {
   return (
-    <section id="experience" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="absolute inset-0 bg-dots opacity-20" />
-      <div className="absolute top-1/4 left-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-[500px] md:h-[500px] bg-secondary/5 rounded-full blur-3xl" />
+    <section id="experience" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden bg-background border-t-2 border-border-color">
+      {/* Brutalist Background Elements */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -86,15 +110,22 @@ export function Experience() {
           viewport={{ once: true }}
           className="mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 tracking-tight">
-            CAREER <span className="text-gray-400 font-light">JOURNEY</span>
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-3 w-8 bg-current text-white" />
+            <span className="text-sm font-mono font-bold tracking-widest text-white uppercase">History</span>
+          </div>
+
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-oswald font-black mb-4 sm:mb-6 tracking-tight uppercase">
+            CAREER <span className="text-primary" style={{ textShadow: '4px 4px 0px rgba(255,69,0,0.2)' }}>JOURNEY</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl text-base sm:text-lg md:text-xl font-light leading-relaxed">
+          <p className="text-gray-300 max-w-2xl text-lg md:text-xl font-mono leading-relaxed bg-black/40 p-4 border border-white/10 mt-6">
+            <span className="text-primary font-bold mr-2">{'>_'}</span>
             My professional path through the digital landscape, building systems and leading teams.
           </p>
         </motion.div>
 
-        <div className="relative border-l-2 border-gradient-to-b from-primary/20 via-secondary/20 to-tertiary/20 ml-3 md:ml-6 space-y-12 md:space-y-16">
+        <div className="relative border-l-4 border-border-color ml-3 md:ml-6 space-y-8 md:space-y-12">
           {experienceData.map((exp, index) => (
             <ExperienceCard key={index} exp={exp} index={index} />
           ))}

@@ -4,34 +4,14 @@ import { skillsData } from '@/data/skills'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-// Color mapping for vibrant gradients
-const colorMap: { [key: string]: { from: string; to: string; glow: string; shadow: string } } = {
-  'text-cyan-400': { from: '#06B6D4', to: '#0891B2', glow: 'rgba(6, 182, 212, 0.4)', shadow: 'rgba(6, 182, 212, 0.3)' },
-  'text-blue-500': { from: '#3B82F6', to: '#2563EB', glow: 'rgba(59, 130, 246, 0.4)', shadow: 'rgba(59, 130, 246, 0.3)' },
-  'text-pink-400': { from: '#F472B6', to: '#EC4899', glow: 'rgba(244, 114, 182, 0.4)', shadow: 'rgba(244, 114, 182, 0.3)' },
-  'text-red-400': { from: '#F87171', to: '#EF4444', glow: 'rgba(248, 113, 113, 0.4)', shadow: 'rgba(248, 113, 113, 0.3)' },
-  'text-green-400': { from: '#4ADE80', to: '#22C55E', glow: 'rgba(74, 222, 128, 0.4)', shadow: 'rgba(74, 222, 128, 0.3)' },
-  'text-purple-400': { from: '#C084FC', to: '#A855F7', glow: 'rgba(192, 132, 252, 0.4)', shadow: 'rgba(192, 132, 252, 0.3)' },
-  'text-orange-400': { from: '#FB923C', to: '#F97316', glow: 'rgba(251, 146, 60, 0.4)', shadow: 'rgba(251, 146, 60, 0.3)' },
-  'text-pink-600': { from: '#DB2777', to: '#BE185D', glow: 'rgba(219, 39, 119, 0.4)', shadow: 'rgba(219, 39, 119, 0.3)' },
-  'text-yellow-400': { from: '#FACC15', to: '#EAB308', glow: 'rgba(250, 204, 21, 0.4)', shadow: 'rgba(250, 204, 21, 0.3)' },
-  'text-blue-300': { from: '#93C5FD', to: '#60A5FA', glow: 'rgba(147, 197, 253, 0.4)', shadow: 'rgba(147, 197, 253, 0.3)' },
-  'text-indigo-400': { from: '#818CF8', to: '#6366F1', glow: 'rgba(129, 140, 248, 0.4)', shadow: 'rgba(129, 140, 248, 0.3)' },
-  'text-blue-600': { from: '#2563EB', to: '#1D4ED8', glow: 'rgba(37, 99, 235, 0.4)', shadow: 'rgba(37, 99, 235, 0.3)' },
-  'text-green-500': { from: '#22C55E', to: '#16A34A', glow: 'rgba(34, 197, 94, 0.4)', shadow: 'rgba(34, 197, 94, 0.3)' },
-  'text-red-500': { from: '#EF4444', to: '#DC2626', glow: 'rgba(239, 68, 68, 0.4)', shadow: 'rgba(239, 68, 68, 0.3)' },
-  'text-pink-500': { from: '#EC4899', to: '#DB2777', glow: 'rgba(236, 72, 153, 0.4)', shadow: 'rgba(236, 72, 153, 0.3)' },
-  'text-teal-400': { from: '#2DD4BF', to: '#14B8A6', glow: 'rgba(45, 212, 191, 0.4)', shadow: 'rgba(45, 212, 191, 0.3)' },
-};
-
 export function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden bg-background border-t-2 border-border-color">
       
-      {/* Ambient background elements */}
-      <div className="absolute inset-0 bg-dots opacity-30" />
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-secondary/5 rounded-full blur-3xl" />
+      {/* Brutalist Background Elements */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      <div className="absolute top-20 left-10 w-32 h-32 border-4 border-primary/20 rotate-12" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 border-4 border-secondary/20 -rotate-6" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -39,17 +19,24 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16 md:mb-20"
+          className="text-left mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-oswald font-bold mb-4 sm:mb-6 tracking-tight px-4">
-            DEVOPS & CLOUD <span className="text-gray-400 font-light">STACK</span>
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-3 w-8 bg-tertiary" />
+            <span className="text-sm font-mono font-bold tracking-widest text-tertiary uppercase">Arsenal</span>
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-oswald font-black mb-4 sm:mb-6 tracking-tight uppercase">
+            DEVOPS & CLOUD <span className="text-primary block sm:inline mt-2 sm:mt-0" style={{ textShadow: '4px 4px 0px rgba(255,69,0,0.2)' }}>STACK</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed px-4">
+          <p className="text-gray-300 max-w-2xl text-base sm:text-lg md:text-xl font-mono leading-relaxed mt-6 bg-black/40 border border-white/10 p-4">
+            <span className="text-primary font-bold mr-2">{'>_'}</span>
             Production-proven tools and technologies I leverage to build, deploy, and scale cloud-native infrastructure with enterprise-grade reliability.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
           {skillsData.map((skill, index) => (
             <SkillCard key={skill.name} skill={skill} index={index} />
           ))}
@@ -61,7 +48,16 @@ export function Skills() {
 
 function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: number }) {
   const [isHovered, setIsHovered] = useState(false);
-  const colors = colorMap[skill.color] || colorMap['text-blue-500'];
+  
+  // Assign brutalist accent colors cyclically
+  const brutalColors = ['border-primary text-primary', 'border-secondary text-secondary', 'border-tertiary text-tertiary'];
+  const hoverBgs = ['bg-primary', 'bg-secondary', 'bg-tertiary'];
+  const shadows = ['rgba(255,69,0,1)', 'rgba(234,179,8,1)', 'rgba(163,230,53,1)'];
+  
+  const colorIndex = index % 3;
+  const borderColor = brutalColors[colorIndex];
+  const hoverBg = hoverBgs[colorIndex];
+  const shadowColor = shadows[colorIndex];
   
   return (
     <motion.div
@@ -71,103 +67,39 @@ function SkillCard({ skill, index }: { skill: typeof skillsData[0], index: numbe
       transition={{ duration: 0.3, delay: Math.min(index * 0.02, 0.3) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative p-4 sm:p-5 md:p-6 bg-white/90 dark:bg-white/5 backdrop-blur-md border-2 border-gray-200/80 dark:border-white/10 rounded-xl sm:rounded-2xl hover:border-transparent transition-all duration-300 hover:scale-105 overflow-hidden cursor-default"
+      className={`group relative p-4 sm:p-5 md:p-6 bg-background border-2 border-border-color transition-all duration-200 cursor-default overflow-hidden ${isHovered ? borderColor : ''}`}
       style={{
         boxShadow: isHovered 
-          ? `0 20px 40px ${colors.shadow}, 0 0 30px ${colors.glow}` 
-          : '0 4px 12px rgba(0, 0, 0, 0.05)'
+          ? `4px 4px 0px ${shadowColor}` 
+          : 'none',
+        transform: isHovered ? 'translate(-2px, -2px)' : 'none'
       }}
     >
-      {/* Vibrant gradient background on hover */}
+      {/* Sharp grid overlay on hover */}
       <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: `linear-gradient(135deg, ${colors.from}15, ${colors.to}10)`
-        }}
+        className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-200 ${hoverBg}`}
       />
       
-      {/* Glowing orb effect - signature wow moment */}
-      <motion.div
-        animate={isHovered ? {
-          scale: [1, 1.4, 1],
-          opacity: [0.4, 0.8, 0.4],
-        } : {}}
-        transition={{
-          duration: 2,
-          repeat: isHovered ? Infinity : 0,
-          ease: "easeInOut"
-        }}
-        className="absolute -top-12 -right-12 w-32 h-32 sm:w-40 sm:h-40 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(circle, ${colors.from}, ${colors.to})`
-        }}
-      />
-      
-      <div className="flex items-center gap-2 sm:gap-3 md:gap-4 relative z-10">
-        {/* Animated icon/dot with gradient glow */}
+      <div className="flex items-center gap-3 relative z-10">
+        {/* Geometric marker */}
         <motion.div 
           animate={isHovered ? {
-            scale: [1, 1.4, 1],
-            rotate: [0, 180, 360],
+            rotate: [0, 90],
           } : {}}
           transition={{
-            duration: 2,
-            repeat: isHovered ? Infinity : 0,
+            duration: 0.3,
             ease: "easeInOut"
           }}
-          className="relative w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-transform duration-300 flex-shrink-0"
-          style={{
-            background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
-            boxShadow: isHovered ? `0 0 20px ${colors.glow}, 0 0 40px ${colors.shadow}` : 'none'
-          }}
-        >
-          {/* Pulsing ring */}
-          {isHovered && (
-            <motion.div
-              animate={{
-                scale: [1, 2, 2],
-                opacity: [0.8, 0, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeOut"
-              }}
-              className="absolute inset-0 rounded-full"
-              style={{
-                border: `2px solid ${colors.from}`,
-              }}
-            />
-          )}
-        </motion.div>
+          className={`w-3 h-3 border-2 border-current transition-colors duration-200 ${isHovered ? hoverBg.replace('bg-', 'bg-') : 'bg-transparent text-gray-400'}`}
+        />
         
-        <span 
-          className="font-mono text-xs sm:text-sm md:text-base font-bold transition-all duration-300 break-words"
-          style={{
-            color: isHovered ? colors.from : undefined
-          }}
-        >
+        <span className={`font-mono text-sm sm:text-base font-bold uppercase tracking-wider transition-colors duration-200 ${isHovered ? '' : 'text-gray-300'}`}>
           {skill.name}
         </span>
       </div>
       
-      {/* Enhanced corner shimmer */}
-      <motion.div
-        animate={isHovered ? {
-          opacity: [0, 0.8, 0],
-          scale: [0.5, 1.5, 0.5],
-          rotate: [0, 90, 0],
-        } : {}}
-        transition={{
-          duration: 1.5,
-          repeat: isHovered ? Infinity : 0,
-          ease: "easeInOut"
-        }}
-        className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 rounded-tr-xl sm:rounded-tr-2xl opacity-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(135deg, ${colors.from}40, transparent)`
-        }}
-      />
+      {/* Decorative corner slice */}
+      <div className={`absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${borderColor}`} />
     </motion.div>
   );
 }

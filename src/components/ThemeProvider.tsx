@@ -30,64 +30,40 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     <ThemeContext.Provider value={{ theme: 'dark' }}>
       {/* Loading Animation */}
       {showLoader && (
-        <div className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#0D0D0E] transition-opacity duration-500 ${mounted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-          style={{ transitionDelay: '1.2s' }}
+        <div className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#0C0A09] transition-opacity duration-500 ${mounted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          style={{ transitionDelay: '1.4s' }}
         >
-          <div className="relative flex flex-col items-center gap-6">
-            {/* Animated Logo */}
-            <div className="relative">
-              <svg
-                width="80"
-                height="80"
-                viewBox="0 0 100 100"
-                className="animate-pulse"
-              >
-                <defs>
-                  <linearGradient id="loader-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#3B82F6" />
-                    <stop offset="50%" stopColor="#8B5CF6" />
-                    <stop offset="100%" stopColor="#A855F7" />
-                  </linearGradient>
-                </defs>
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  fill="none"
-                  stroke="url(#loader-gradient)"
-                  strokeWidth="2"
-                  strokeDasharray="283"
-                  strokeDashoffset="283"
-                  strokeLinecap="round"
-                  className="animate-loader-circle"
-                />
-                <text
-                  x="50"
-                  y="58"
-                  textAnchor="middle"
-                  fill="url(#loader-gradient)"
-                  fontSize="32"
-                  fontWeight="bold"
-                  fontFamily="var(--font-oswald)"
-                  className="animate-loader-text"
-                >
-                  SS
-                </text>
-              </svg>
-              
-              {/* Glow effect */}
-              <div className="absolute inset-0 blur-xl opacity-50 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 animate-pulse" />
+          <div className="relative flex flex-col items-center gap-8 max-w-xs w-full px-6">
+            {/* Brutalist Logo Block */}
+            <div className="relative p-6 border-4 border-primary bg-background shadow-[8px_8px_0_rgba(255,69,0,0.3)] animate-brutalist-pulse">
+              <span className="text-6xl font-oswald font-black text-primary tracking-tighter uppercase">
+                SS
+              </span>
+              {/* Corner Accents */}
+              <div className="absolute -top-2 -left-2 w-4 h-4 bg-tertiary" />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-secondary" />
             </div>
             
-            {/* Loading dots */}
-            <div className="flex gap-1.5">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 animate-loader-dot"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                />
-              ))}
+            <div className="w-full space-y-4">
+              {/* Terminal Text */}
+              <div className="font-mono text-xs font-bold tracking-widest text-primary/80 uppercase flex flex-col gap-1">
+                <span className="flex items-center gap-2">
+                  <span className="text-tertiary">{">"}</span> INITIALIZING_SYSTEM...
+                </span>
+                <span className="flex items-center gap-2 animate-terminal-flicker" style={{ animationDelay: '0.4s' }}>
+                  <span className="text-tertiary">{">"}</span> CLOUD_ENGINEER_BOOTLOADER_v2.0
+                </span>
+              </div>
+
+              {/* Progress Bar Container */}
+              <div className="w-full h-4 border-2 border-border-strong bg-background p-0.5">
+                <div className="h-full bg-primary animate-loader-block" />
+              </div>
+
+              <div className="flex justify-between font-mono text-[10px] font-bold text-gray-500 uppercase">
+                <span>Memory: OK</span>
+                <span className="animate-pulse">Status: Syncing...</span>
+              </div>
             </div>
           </div>
         </div>
