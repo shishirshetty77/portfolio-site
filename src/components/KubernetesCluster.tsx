@@ -140,35 +140,17 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
   return (
     <motion.div 
       style={{ x: xMotion, y: yMotion }}
-      className="relative w-[380px] h-[380px] flex items-center justify-center"
+      className="relative w-[380px] h-[380px] flex items-center justify-center p-4 bg-background border-2 border-border-color"
     >
-      {/* Outer ring decoration */}
-      <div className="absolute w-[340px] h-[340px] rounded-full border border-dashed border-blue-500/20 dark:border-blue-400/15" />
-      <div className="absolute w-[280px] h-[280px] rounded-full border border-blue-500/10 dark:border-blue-400/10" />
+      {/* Brutalist structural background grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]" />
+      
+      {/* Outer sharp geometric decorations instead of circles */}
+      <div className="absolute w-[300px] h-[300px] border-2 border-dashed border-tertiary/40 rotate-[15deg]" />
+      <div className="absolute w-[240px] h-[240px] border-2 border-primary/20 -rotate-[15deg]" />
       
       {/* Connection lines from master to workers */}
-      <svg className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }}>
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="rgb(139, 92, 246)" stopOpacity="0.25" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <filter id="softGlow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        
+      <svg className="absolute inset-0 w-full h-full z-0" style={{ overflow: 'visible' }}>
         {workers.map((worker) => {
           const angle = (worker.angle * Math.PI) / 180;
           const x2 = 190 + Math.cos(angle) * workerDistance;
@@ -176,35 +158,35 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
           
           return (
             <g key={`line-${worker.id}`}>
-              {/* Base line */}
+              {/* Base line - strict dotted brutalist format */}
               <motion.line
                 x1="190"
                 y1="190"
                 x2={x2}
                 y2={y2}
-                stroke="url(#lineGradient)"
-                strokeWidth="1.5"
-                strokeDasharray="6 3"
+                stroke="#FAFAF9"
+                strokeWidth="2"
+                strokeDasharray="6 6"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 1.2, delay: worker.id * 0.15, ease: "easeOut" }}
               />
               
-              {/* Animated pulse along the line */}
-              <motion.circle
-                r="2.5"
-                fill="rgb(139, 92, 246)"
-                filter="url(#softGlow)"
+              {/* Animated pulse block along the line */}
+              <motion.rect
+                width="8"
+                height="8"
+                fill="#FF4500"
                 animate={{
-                  cx: [190, x2],
-                  cy: [190, y2],
-                  opacity: [0.8, 0.3],
+                  x: [186, x2 - 4],
+                  y: [186, y2 - 4],
+                  opacity: [1, 0.2],
                 }}
                 transition={{
                   duration: 2.5,
                   repeat: Infinity,
                   delay: worker.id * 0.4,
-                  ease: "easeInOut"
+                  ease: "linear"
                 }}
               />
             </g>
@@ -221,16 +203,19 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
           const currentY = 190 + (endY - 190) * packet.progress;
           
           return (
-            <motion.circle
+            <motion.rect
               key={packet.id}
-              cx={currentX}
-              cy={currentY}
-              r="4"
-              fill="rgb(52, 211, 153)"
-              filter="url(#softGlow)"
+              x={currentX - 6}
+              y={currentY - 6}
+              width="12"
+              height="12"
+              fill="#A3E635"
+              stroke="#000"
+              strokeWidth="2"
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1 - packet.progress * 0.7, scale: 1 }}
-              transition={{ duration: 0.2 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.1 }}
             />
           );
         })}
@@ -244,20 +229,13 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
         className="absolute z-30"
         style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
       >
-        <div className="relative">
-          {/* Outer glow ring */}
-          <motion.div
-            animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 w-18 h-18 -m-1.5 rounded-full bg-gradient-to-r from-blue-500/25 to-violet-500/25 blur-xl"
-          />
-          
-          {/* Main node */}
-          <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 shadow-xl shadow-blue-500/30 flex items-center justify-center border border-white/30">
+        <div className="relative group hover:-translate-y-1 transition-transform">
+          {/* Main brutalist node */}
+          <div className="relative w-16 h-16 bg-primary border-4 border-white shadow-[8px_8px_0px_#000] flex items-center justify-center">
             {/* Kubernetes wheel icon */}
-            <svg viewBox="0 0 32 32" className="w-8 h-8 text-white" fill="currentColor">
+            <svg viewBox="0 0 32 32" className="w-10 h-10 text-black" fill="currentColor">
               <path d="M16 2.5l-1.5 0.9v2.1l-1.8-1.1-1.1 1.8 1.8 1.1-2.1 0.2-0.2 2.1 2.1-0.2-0.9 1.9 1.9 0.9 0.9-1.9 0.9 1.9 1.9-0.9-0.9-1.9 2.1 0.2-0.2-2.1-2.1-0.2 1.8-1.1-1.1-1.8-1.8 1.1v-2.1l-1.5-0.9zM16 11c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zM16 19c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/>
-              <circle cx="16" cy="16" r="2"/>
+              <rect x="15" y="15" width="2" height="2" fill="white" />
             </svg>
           </div>
           
@@ -266,9 +244,9 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap"
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap"
           >
-            <span className="text-[9px] font-mono font-semibold text-blue-500 dark:text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20">
+            <span className="text-[10px] uppercase font-mono font-bold text-black bg-primary px-3 py-1 border-2 border-white shadow-[2px_2px_0_#000]">
               control-plane
             </span>
           </motion.div>
@@ -304,14 +282,11 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.5 }}
-        className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-200/50 dark:border-white/10 rounded-full shadow-lg"
+        className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 px-4 py-2 bg-black border-2 border-white shadow-[4px_4px_0_#FFF]"
       >
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-        </span>
-        <span className="text-[10px] font-mono font-medium text-gray-600 dark:text-gray-300">
-          {workers.reduce((acc, w) => acc + w.pods.filter(p => p.status !== 'terminating').length, 0)} pods
+        <div className="w-3 h-3 bg-tertiary border-2 border-white animate-pulse" />
+        <span className="text-xs font-mono font-black text-white uppercase tracking-widest">
+          {workers.reduce((acc, w) => acc + w.pods.filter(p => p.status !== 'terminating').length, 0)} PODS
         </span>
       </motion.div>
     </motion.div>
@@ -320,27 +295,22 @@ export function KubernetesCluster({ mouseX, mouseY }: KubernetesClusterProps) {
 
 function WorkerNodeComponent({ worker }: { worker: WorkerNode }) {
   return (
-    <div className="relative group">
-      {/* Hover glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-violet-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      {/* Node container */}
-      <div className="relative w-16 h-16 rounded-xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border border-gray-200/80 dark:border-gray-700/80 shadow-lg flex flex-col items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-blue-500/30 group-hover:shadow-xl">
-        {/* Inner gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900" />
+    <div className="relative group hover:-translate-y-1 transition-transform">
+      {/* Node container - brutalist style */}
+      <div className="relative w-16 h-16 bg-secondary border-2 border-white shadow-[4px_4px_0_#000] flex flex-col items-center justify-center overflow-hidden">
         
         {/* Node icon */}
-        <div className="relative z-10 w-5 h-5 rounded-md bg-gradient-to-br from-gray-400 to-gray-500 dark:from-gray-500 dark:to-gray-600 flex items-center justify-center mb-1">
-          <svg viewBox="0 0 24 24" className="w-3 h-3 text-white" fill="currentColor">
-            <rect x="3" y="3" width="7" height="7" rx="1" />
-            <rect x="14" y="3" width="7" height="7" rx="1" />
-            <rect x="3" y="14" width="7" height="7" rx="1" />
-            <rect x="14" y="14" width="7" height="7" rx="1" />
+        <div className="relative z-10 w-6 h-6 border-2 border-black flex items-center justify-center mb-1 bg-white">
+          <svg viewBox="0 0 24 24" className="w-4 h-4 text-black" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
           </svg>
         </div>
         
-        {/* Pods visualization */}
-        <div className="relative z-10 flex flex-wrap gap-0.5 justify-center max-w-[48px]">
+        {/* Pods visualization - strict grid logic */}
+        <div className="relative z-10 flex flex-wrap gap-1 justify-center max-w-[48px] px-1">
           {worker.pods.map((pod) => (
             <motion.div
               key={pod.id}
@@ -351,12 +321,12 @@ function WorkerNodeComponent({ worker }: { worker: WorkerNode }) {
                   : { scale: 1, opacity: 1 }
               }
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`w-1.5 h-1.5 rounded-full ${
+              className={`w-2 h-2 border border-black ${
                 pod.status === 'running' 
-                  ? 'bg-emerald-500 shadow-sm shadow-emerald-500/50' 
+                  ? 'bg-tertiary' 
                   : pod.status === 'spawning'
-                  ? 'bg-blue-500 shadow-sm shadow-blue-500/50'
-                  : 'bg-red-400 shadow-sm shadow-red-400/50'
+                  ? 'bg-white'
+                  : 'bg-primary'
               }`}
             />
           ))}
@@ -368,9 +338,9 @@ function WorkerNodeComponent({ worker }: { worker: WorkerNode }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap"
+        className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap"
       >
-        <span className="text-[8px] font-mono text-gray-400 dark:text-gray-500">
+        <span className="text-[9px] font-mono font-bold text-black bg-secondary border border-white px-2 py-0.5 uppercase shadow-[2px_2px_0_#FFF]">
           {worker.label}
         </span>
       </motion.div>

@@ -7,26 +7,31 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="w-full py-16 sm:py-20 md:py-24 px-4 relative overflow-hidden">
-      {/* Top gradient border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
-      
-      {/* Ambient footer background */}
-      <div className="absolute inset-0 bg-dots opacity-10" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-violet-500/5 rounded-full blur-3xl" />
+    <footer className="w-full py-16 sm:py-20 md:py-24 px-4 relative overflow-hidden bg-background border-t-8 border-primary">
+      {/* Brutalist Background Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
       
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Main CTA Section */}
         <div className="text-center mb-16 sm:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 mb-6 bg-primary/10 border-2 border-primary px-4 py-2"
+          >
+            <div className="w-3 h-3 bg-primary animate-pulse" />
+            <span className="text-sm font-mono font-bold tracking-widest text-primary uppercase">Ready for deployment</span>
+          </motion.div>
+
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-oswald font-bold tracking-tighter mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-oswald font-black tracking-tighter mb-6 uppercase text-foreground"
           >
             LET&apos;S BUILD
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500">
+            <span className="block text-primary mt-2" style={{ textShadow: '6px 6px 0px rgba(255,69,0,0.2)' }}>
               SOMETHING GREAT
             </span>
           </motion.h2>
@@ -36,8 +41,9 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-md mx-auto"
+            className="text-gray-300 font-mono text-lg mb-10 max-w-lg mx-auto bg-black/40 p-4 border border-white/10"
           >
+            <span className="text-primary font-bold mr-2">{'>_'}</span>
             Got a project in mind? Let&apos;s discuss how I can help bring your infrastructure to life.
           </motion.p>
           
@@ -47,21 +53,21 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             href="mailto:shishirshetty77@gmail.com"
-            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 rounded-full shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/30 hover:scale-105 transition-all duration-300 group"
+            className="neo-button text-lg group inline-flex"
           >
-            Get in Touch
-            <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+            <span>Get in Touch</span>
+            <ArrowUpRight className="w-6 h-6 ml-2 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
           </motion.a>
         </div>
 
         {/* Links & Info */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-8 border-t border-gray-200/50 dark:border-white/5">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-8 border-t-2 border-border-color">
           {/* Social Links */}
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             {[
-              { icon: Github, href: 'https://github.com/shishirshetty77', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/shishir-shetty-715028230/', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:shishirshetty77@gmail.com', label: 'Email' },
+              { icon: Github, href: 'https://github.com/shishirshetty77', label: 'GitHub', hoverColor: 'hover:border-primary hover:text-primary hover:bg-primary/10' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/shishir-shetty-715028230/', label: 'LinkedIn', hoverColor: 'hover:border-secondary hover:text-secondary hover:bg-secondary/10' },
+              { icon: Mail, href: 'mailto:shishirshetty77@gmail.com', label: 'Email', hoverColor: 'hover:border-tertiary hover:text-tertiary hover:bg-tertiary/10' },
             ].map((social) => (
               <a
                 key={social.label}
@@ -69,7 +75,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="p-3 rounded-xl bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 text-gray-500 hover:text-violet-500 hover:border-violet-500/50 hover:bg-violet-500/5 transition-all duration-300"
+                className={`p-3 border-2 border-border-color bg-background text-gray-400 transition-all duration-200 ${social.hoverColor}`}
               >
                 <social.icon className="w-5 h-5" />
               </a>
@@ -77,14 +83,16 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-sm text-gray-400 dark:text-gray-500 font-mono">
-            © {currentYear} Shishir Shetty
-          </p>
+          <div className="p-3 border-2 border-border-color bg-black/40">
+            <p className="text-sm text-gray-400 font-mono uppercase tracking-widest font-bold">
+              © {currentYear} Shishir Shetty
+            </p>
+          </div>
 
           {/* Easter egg hint */}
           <motion.div 
-            className="text-[10px] text-gray-300 dark:text-gray-700 font-mono cursor-help uppercase tracking-widest hidden md:block"
-            whileHover={{ scale: 1.05, color: '#8B5CF6' }}
+            className="text-xs text-secondary font-mono font-bold cursor-help uppercase tracking-widest hidden md:block border-2 border-secondary/30 p-2 bg-secondary/10"
+            whileHover={{ scale: 1.05, borderColor: '#EAB308', backgroundColor: 'rgba(234,179,8,0.2)' }}
             title="Try: ↑ ↑ ↓ ↓ ← → ← → B A"
           >
             ↑↑↓↓←→←→BA

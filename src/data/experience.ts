@@ -13,7 +13,7 @@ export const experienceData: Experience[] = [
     title: 'Cloud Associate',
     company: 'Niveus Solutions (Part of NTT DATA)',
     period: 'Feb 2026 - Present',
-    location: 'Remote / India',
+    location: 'Mangalore / India',
     type: 'Full-time',
     description: [
       'Architecting and implementing scalable Google Cloud Platform (GCP) infrastructure for enterprise clients.',

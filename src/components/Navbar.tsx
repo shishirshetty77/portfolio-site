@@ -18,16 +18,13 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Handle scroll effect with throttling
   useEffect(() => {
     let ticking = false;
-    
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           setIsScrolled(window.scrollY > 20);
           
-          // Update active section
           const scrollPosition = window.scrollY + 100;
           for (const item of navItems) {
             const element = document.getElementById(item.id === 'home' ? '' : item.id);
@@ -61,14 +58,6 @@ export function Navbar() {
     }
   }, []);
 
-  const containerClass = useMemo(() => 
-    `relative flex items-center justify-between px-3 py-1.5 rounded-full transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-gray-900/90 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20' 
-        : 'bg-gray-900/60 backdrop-blur-md border border-white/5'
-    }`
-  , [isScrolled]);
-
   return (
     <>
       <motion.nav
@@ -76,30 +65,30 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'py-2' : 'py-3'
+          isScrolled ? 'bg-background border-b-2 border-primary shadow-[0_4px_0_rgba(255,69,0,0.2)] py-2' : 'bg-transparent py-4'
         }`}
       >
-        <div className="max-w-3xl mx-auto px-4">
-          <div className={containerClass}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
             
-            {/* Logo / Name */}
+            {/* Logo */}
             <button 
               onClick={() => handleNavClick('#')}
-              className="px-2.5 py-1 font-oswald font-bold text-sm tracking-tight hover:text-violet-400 transition-colors"
+              className="px-4 py-2 bg-primary text-background font-oswald font-black text-xl tracking-tighter uppercase transition-transform hover:-translate-y-1 hover:shadow-[4px_4px_0_#000]"
             >
               SS
             </button>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-2 bg-background border-2 border-border-color p-1">
               {navItems.slice(1).map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.href)}
-                  className={`px-3 py-1 text-[11px] font-medium tracking-wide uppercase transition-all duration-200 ${
+                  className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase transition-all duration-200 hover:bg-white hover:text-black ${
                     activeSection === item.id
-                      ? 'text-violet-400'
-                      : 'text-gray-500 hover:text-white'
+                      ? 'bg-secondary text-background'
+                      : 'text-gray-400'
                   }`}
                 >
                   {item.label}
@@ -110,10 +99,10 @@ export function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 rounded-full text-gray-500 hover:text-white hover:bg-white/5 transition-all"
+              className="md:hidden p-2 border-2 border-border-color bg-background text-foreground hover:bg-white hover:text-black transition-colors"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -126,17 +115,17 @@ export function Navbar() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="md:hidden absolute top-full left-0 right-0 mx-4 mt-2 rounded-2xl border border-white/10 bg-gray-900/95 backdrop-blur-xl overflow-hidden shadow-xl"
+              className="md:hidden border-b-2 border-primary bg-background overflow-hidden"
             >
-              <div className="p-2 space-y-0.5">
+              <div className="p-4 flex flex-col gap-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.href)}
-                    className={`w-full text-left px-4 py-2.5 text-xs font-medium tracking-wide uppercase rounded-xl transition-all ${
+                    className={`w-full text-left px-4 py-3 text-sm font-mono font-bold tracking-widest uppercase transition-all border-2 ${
                       activeSection === item.id
-                        ? 'bg-violet-500/10 text-violet-400'
-                        : 'text-gray-400 hover:bg-white/5'
+                        ? 'bg-primary text-background border-primary'
+                        : 'text-gray-400 border-border-color hover:bg-white hover:text-black'
                     }`}
                   >
                     {item.label}
@@ -147,9 +136,6 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </motion.nav>
-      
-      {/* Spacer */}
-      <div className="h-14" />
     </>
   );
 }

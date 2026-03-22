@@ -1,78 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark Mode Only - Rich charcoal with depth, not flat black */
-  --background: linear-gradient(135deg, #0F0F10 0%, #0A0A0B 50%, #050506 100%);
-  --background-solid: #0D0D0E;
-  --foreground: #F5F5F7;
+  /* Dark Mode Only - Deep Warm Stone */
+  --background: #0C0A09;
+  --background-solid: #0C0A09;
+  --foreground: #FAFAF9;
   
   /* Layered depth colors */
-  --surface-1: rgba(255, 255, 255, 0.06);
-  --surface-2: rgba(255, 255, 255, 0.04);
-  --surface-3: rgba(255, 255, 255, 0.02);
+  --surface-1: rgba(255, 255, 255, 0.05);
+  --surface-2: rgba(255, 255, 255, 0.03);
+  --surface-3: rgba(255, 255, 255, 0.01);
   
-  /* Refined Accents - brighter for dark mode */
-  --primary: #60A5FA;
-  --primary-light: #93C5FD;
-  --primary-dark: #3B82F6;
-  --secondary: #A78BFA;
-  --secondary-light: #C4B5FD;
-  --tertiary: #34D399;
-  --tertiary-light: #6EE7B7;
+  /* Refined Bold Accents */
+  --primary: #FF4500;
+  --primary-light: #FF662A;
+  --primary-dark: #CC3700;
+  --secondary: #EAB308;
+  --secondary-light: #FDE047;
+  --tertiary: #A3E635;
+  --tertiary-light: #BEF264;
   
   /* Ambient colors for depth */
-  --ambient-warm: rgba(251, 191, 36, 0.04);
-  --ambient-cool: rgba(59, 130, 246, 0.06);
-  --ambient-purple: rgba(139, 92, 246, 0.05);
+  --ambient-warm: rgba(255, 69, 0, 0.08);
+  --ambient-cool: rgba(163, 230, 53, 0.06);
+  --ambient-purple: rgba(234, 179, 8, 0.05); /* Marigold glow */
   
   /* UI Elements */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --card-bg: rgba(255, 255, 255, 0.04);
-  --radius: 20px;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --radius: 0px; /* Brutalist sharp corners */
   
-  /* Shadows - glow-based for dark mode */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 8px rgba(96, 165, 250, 0.04);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 16px rgba(96, 165, 250, 0.06);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(96, 165, 250, 0.08);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 32px rgba(96, 165, 250, 0.1);
+  /* Shadows - sharper and bolder */
+  --shadow-sm: 4px 4px 0px rgba(255, 69, 0, 0.2);
+  --shadow-md: 8px 8px 0px rgba(255, 69, 0, 0.2);
+  --shadow-lg: 12px 12px 0px rgba(255, 69, 0, 0.15);
+  --shadow-xl: 16px 16px 0px rgba(255, 69, 0, 0.1);
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
-  --gradient-warm: linear-gradient(135deg, #FBBF24 0%, #F87171 100%);
-  --gradient-cool: linear-gradient(135deg, #22D3EE 0%, #60A5FA 100%);
-  --gradient-glow: radial-gradient(circle at center, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+  --gradient-primary: linear-gradient(135deg, #FF4500 0%, #EAB308 100%);
+  --gradient-warm: linear-gradient(135deg, #EAB308 0%, #FF4500 100%);
+  --gradient-cool: linear-gradient(135deg, #A3E635 0%, #0C0A09 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, transparent 70%);
 }
 
 /* Keep .dark class for compatibility but values are same */
 .dark {
-  --background: linear-gradient(135deg, #0F0F10 0%, #0A0A0B 50%, #050506 100%);
-  --background-solid: #0D0D0E;
-  --foreground: #F5F5F7;
-  --surface-1: rgba(255, 255, 255, 0.06);
-  --surface-2: rgba(255, 255, 255, 0.04);
-  --surface-3: rgba(255, 255, 255, 0.02);
-  --primary: #60A5FA;
-  --primary-light: #93C5FD;
-  --primary-dark: #3B82F6;
-  --secondary: #A78BFA;
-  --secondary-light: #C4B5FD;
-  --tertiary: #34D399;
-  --tertiary-light: #6EE7B7;
-  --ambient-warm: rgba(251, 191, 36, 0.04);
-  --ambient-cool: rgba(59, 130, 246, 0.06);
-  --ambient-purple: rgba(139, 92, 246, 0.05);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --card-bg: rgba(255, 255, 255, 0.04);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 8px rgba(96, 165, 250, 0.04);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 16px rgba(96, 165, 250, 0.06);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(96, 165, 250, 0.08);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 32px rgba(96, 165, 250, 0.1);
-  --gradient-primary: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
-  --gradient-warm: linear-gradient(135deg, #FBBF24 0%, #F87171 100%);
-  --gradient-cool: linear-gradient(135deg, #22D3EE 0%, #60A5FA 100%);
-  --gradient-glow: radial-gradient(circle at center, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+  --background: #0C0A09;
+  --background-solid: #0C0A09;
+  --foreground: #FAFAF9;
+  --surface-1: rgba(255, 255, 255, 0.05);
+  --surface-2: rgba(255, 255, 255, 0.03);
+  --surface-3: rgba(255, 255, 255, 0.01);
+  --primary: #FF4500;
+  --primary-light: #FF662A;
+  --primary-dark: #CC3700;
+  --secondary: #EAB308;
+  --secondary-light: #FDE047;
+  --tertiary: #A3E635;
+  --tertiary-light: #BEF264;
+  --ambient-warm: rgba(255, 69, 0, 0.08);
+  --ambient-cool: rgba(163, 230, 53, 0.06);
+  --ambient-purple: rgba(234, 179, 8, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --shadow-sm: 4px 4px 0px rgba(255, 69, 0, 0.2);
+  --shadow-md: 8px 8px 0px rgba(255, 69, 0, 0.2);
+  --shadow-lg: 12px 12px 0px rgba(255, 69, 0, 0.15);
+  --shadow-xl: 16px 16px 0px rgba(255, 69, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #FF4500 0%, #EAB308 100%);
+  --gradient-warm: linear-gradient(135deg, #EAB308 0%, #FF4500 100%);
+  --gradient-cool: linear-gradient(135deg, #A3E635 0%, #0C0A09 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, transparent 70%);
 }
 
 @theme inline {
@@ -200,24 +200,25 @@ body::after {
   border-color: var(--primary);
 }
 
-/* Premium Buttons - Handcrafted with depth */
+/* Premium Buttons - Brutalist Human */
 .neo-button {
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.875rem 1.75rem;
-  background: var(--foreground);
-  color: var(--background-solid);
-  border-radius: 9999px;
+  background: var(--primary);
+  color: #0C0A09;
+  border-radius: 0;
+  border: 2px solid transparent;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   font-size: 0.875rem;
 }
 
@@ -236,12 +237,14 @@ body::after {
 }
 
 .neo-button:hover {
-  transform: scale(1.05);
-  box-shadow: var(--shadow-lg);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+  background: var(--primary-light);
 }
 
 .neo-button:active {
-  transform: scale(0.95);
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }
 
 .neo-button::after {
@@ -260,21 +263,22 @@ body::after {
 }
 
 .neo-button-secondary {
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.875rem 1.75rem;
   background: transparent;
   color: var(--foreground);
-  border: 1px solid var(--border-color);
-  border-radius: 9999px;
+  border: 2px solid var(--border-color);
+  border-radius: 0;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-size: 0.875rem;
+  box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 640px) {
@@ -292,12 +296,16 @@ body::after {
 }
 
 .neo-button-secondary:hover {
-  border-color: var(--foreground);
-  background: var(--surface-1);
+  border-color: var(--tertiary);
+  color: var(--tertiary);
+  background: rgba(163, 230, 53, 0.05); /* Lime tint */
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px rgba(163, 230, 53, 0.2);
 }
 
 .neo-button-secondary:active {
-  transform: scale(0.95);
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }
 
 /* Subtle Pattern Texture - Sophisticated grain */
