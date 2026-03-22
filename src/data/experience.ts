@@ -6,33 +6,75 @@ export interface Experience {
   type: string;
   description: string[];
   technologies: string[];
-  color: string;
 }
 
 export const experienceData: Experience[] = [
   {
+    title: 'Cloud Associate',
+    company: 'Niveus Solutions (Part of NTT DATA)',
+    period: 'Feb 2026 - Present',
+    location: 'Remote / India',
+    type: 'Full-time',
+    description: [
+      'Architecting and implementing scalable Google Cloud Platform (GCP) infrastructure for enterprise clients.',
+      'Designing robust cloud-native modernization workflows utilizing Kubernetes, Docker, and Terraform.',
+      'Automating deployment pipelines using CI/CD best practices to ensure highly resilient, zero-downtime application delivery.',
+      'Collaborating with teams to deliver specialized data and cloud solutions in alignment with NTT DATA\'s cloud portfolio.'
+    ],
+    technologies: [
+      'GCP',
+      'Kubernetes',
+      'Terraform',
+      'Docker',
+      'CI/CD',
+      'GitOps'
+    ],
+
+  },
+  {
+    title: 'Cloud Engineer',
+    company: 'Cloud Cover',
+    period: 'Jun 2025 - Dec 2025',
+    location: 'Remote',
+    type: 'Full-time',
+    description: [
+      'Engineered multi-cloud solutions and automated infrastructure workflows using Terraform and Kubernetes.',
+      'Managed and optimized CI/CD pipelines utilizing GitHub Actions and ArgoCD for reliable GitOps deployments.',
+      'Implemented robust monitoring, logging, and observability practices for highly available systems.',
+    ],
+    technologies: [
+      'AWS',
+      'Kubernetes',
+      'ArgoCD',
+      'Terraform',
+      'Prometheus',
+      'Grafana',
+      'Docker',
+    ],
+
+  },
+  {
     title: 'Software Developer',
     company: 'Headway',
-    period: 'Jan 2025 - Jul 2025',
+    period: 'Jan 2025 - May 2025',
     location: 'Mangalore',
     type: 'Full-time',
     description: [
       'Developed responsive web features using Next.js, improving navigation speed and reducing bounce rate.',
-      'Implemented secure REST APIs with token-based authentication and Redis caching, achieving 35% faster response times during peak traffic Automated deployments via CI/CD pipelines (GitHub Actions + ArgoCD), reducing deployment errors by 25%',
+      'Implemented secure REST APIs with token-based authentication and Redis caching, achieving 35% faster response times.',
+      'Automated deployments via CI/CD pipelines (GitHub Actions + ArgoCD), reducing deployment errors by 25%.',
       'Integrated Razorpay payment gateway with encrypted workflows, enabling secure transactions and boosting customer trust.',
     ],
     technologies: [
       'Next.js',
-      'ArgoCD',
       'Node.js',
       'Redis',
       'Razorpay',
       'AWS',
-      'GitHub Actions',
       'Docker',
       'Kubernetes',
     ],
-    color: 'from-blue-500 to-purple-500',
+
   },
   {
     title: 'Project Intern – Frontend Developer',
@@ -46,7 +88,7 @@ export const experienceData: Experience[] = [
       'Enhanced validation & input handling, cutting user errors.',
     ],
     technologies: ['React', 'JavaScript', 'PostgreSQL', 'HTML5', 'Git'],
-    color: 'from-emerald-500 to-teal-500',
+
   },
   {
     title: 'Software Developer Intern',
@@ -61,6 +103,6 @@ export const experienceData: Experience[] = [
       'Participated in daily standups and project planning sessions',
     ],
     technologies: ['JavaScript', 'HTML', 'CSS', 'Git', 'React'],
-    color: 'from-purple-500 to-pink-500',
+
   },
 ];
