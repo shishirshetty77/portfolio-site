@@ -41,16 +41,18 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-          {/* Email Card */}
-          <ContactCard 
-            href="mailto:shishirshetty77@gmail.com"
-            icon={Mail}
-            title="Email"
-            detail="shishirshetty77@gmail.com"
-            colorClass="primary"
-            shadowColor="rgba(255,69,0,1)"
-          />
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+          {/* Email Card - Span full width to accommodate full address */}
+          <div className="md:col-span-2">
+            <ContactCard 
+              href="mailto:shishirshetty77@gmail.com"
+              icon={Mail}
+              title="Email"
+              detail="shishirshetty77@gmail.com"
+              colorClass="primary"
+              shadowColor="rgba(255,69,0,1)"
+            />
+          </div>
 
           {/* Phone Card */}
           <ContactCard 
@@ -66,7 +68,7 @@ export function Contact() {
           <ContactCard 
             icon={MapPin}
             title="Location"
-            detail="Udupi, Karnataka"
+            detail="Mangalore, Karnataka"
             colorClass="tertiary"
             shadowColor="rgba(163,230,53,1)"
           />
@@ -155,7 +157,7 @@ function ContactCard({
       </div>
       <div>
         <h3 className="text-lg font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">{title}</h3>
-        <p className="text-2xl sm:text-3xl font-black font-oswald text-foreground break-all uppercase tracking-wide">{detail}</p>
+        <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-black font-oswald text-foreground uppercase tracking-wide whitespace-nowrap overflow-hidden">{detail}</p>
       </div>
     </CardWrapper>
   );

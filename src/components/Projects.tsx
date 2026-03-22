@@ -38,7 +38,7 @@ const ProjectCard = memo(function ProjectCard({
     >
       {/* Brutalist Card container */}
       <div 
-        className={`relative h-full bg-background border-2 transition-all duration-200 ${isHovered ? borderColor.split(' ')[0] : 'border-border-color'} ${isFirst ? 'p-8 md:p-10' : 'p-6 md:p-8'}`}
+        className={`relative h-full bg-background border-2 transition-all duration-200 ${isHovered ? borderColor.split(' ')[0] : 'border-border-color'} ${isFirst ? 'p-6 sm:p-8 md:p-10' : 'p-4 sm:p-6 md:p-8'}`}
         style={{
           boxShadow: isHovered 
             ? `8px 8px 0px ${shadowColor}` 

@@ -124,7 +124,7 @@ export function Hero() {
           {/* Headline - Brutalist Typography */}
           <div className="relative py-4 sm:py-6">
             <motion.h1 
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-black tracking-tighter leading-[0.9] uppercase"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-oswald font-black tracking-tighter leading-[0.9] uppercase"
             >
               <motion.span
                 initial={{ opacity: 0, x: -40 }}
@@ -172,7 +172,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="h-14 sm:h-16 flex items-center bg-black/40 border border-white/10 p-4 w-full max-w-lg"
+            className="min-h-[4rem] sm:min-h-[4.5rem] flex items-center bg-black/40 border border-white/10 p-4 w-full max-w-lg"
           >
             <p className="text-sm sm:text-base text-gray-300 font-mono tracking-tight">
               <span className="text-primary font-bold mr-3">{'>_'}</span>

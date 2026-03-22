@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     
     // Location Based
     'cloud engineer bangalore',
-    'cloud architect udupi',
+    'cloud architect mangalore',
     'cloud engineer karnataka india',
     
     // Service Keywords
@@ -179,7 +179,7 @@ export default function RootLayout({
     ],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Udupi",
+      "addressLocality": "Mangalore",
       "addressRegion": "Karnataka",
       "addressCountry": "IN"
     },

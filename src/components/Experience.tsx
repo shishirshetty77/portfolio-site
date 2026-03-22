@@ -51,7 +51,7 @@ const ExperienceCard = memo(function ExperienceCard({
           <h3 className={`text-2xl sm:text-3xl font-black font-oswald tracking-wide uppercase transition-colors duration-200 ${isHovered ? borderColor.split(' ')[1] : 'text-foreground'}`}>
             {exp.title}
           </h3>
-          <span className="font-mono text-sm font-bold text-gray-300 bg-black/40 px-3 py-1 border border-white/10 uppercase tracking-widest">
+          <span className="font-mono text-xs sm:text-sm font-bold text-gray-300 bg-black/40 px-3 py-1 border border-white/10 uppercase tracking-widest self-start sm:self-center">
             {exp.period}
           </span>
         </div>
