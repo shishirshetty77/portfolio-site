@@ -474,48 +474,34 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
 }
 
-/* Loading Animation Keyframes */
-@keyframes loader-circle {
-  0% {
-    stroke-dashoffset: 283;
-  }
-  50% {
-    stroke-dashoffset: 70;
-  }
-  100% {
-    stroke-dashoffset: 283;
-  }
+/* Brutalist Loading Animation Keyframes */
+@keyframes loader-block {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
 }
 
-@keyframes loader-text {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
+@keyframes terminal-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  52% { opacity: 0.9; }
+  54% { opacity: 0.7; }
 }
 
-@keyframes loader-dot {
-  0%, 80%, 100% {
-    transform: scale(0.6);
-    opacity: 0.4;
-  }
-  40% {
-    transform: scale(1);
-    opacity: 1;
-  }
+@keyframes brutalist-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
 }
 
-.animate-loader-circle {
-  animation: loader-circle 2s ease-in-out infinite;
+.animate-loader-block {
+  animation: loader-block 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-loader-text {
-  animation: loader-text 1.5s ease-in-out infinite;
+.animate-terminal-flicker {
+  animation: terminal-flicker 0.15s infinite;
 }
 
-.animate-loader-dot {
-  animation: loader-dot 1.4s ease-in-out infinite;
+.animate-brutalist-pulse {
+  animation: brutalist-pulse 0.4s steps(2) infinite;
 }
 
