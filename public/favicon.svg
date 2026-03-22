@@ -1,14 +1,10 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Brutalist Shadow -->
-  <rect x="64" y="64" width="400" height="400" fill="#A3E635" />
-  
-  <!-- Main Block -->
-  <rect x="24" y="24" width="400" height="400" fill="#0C0A09" stroke="#FF4500" stroke-width="32" />
-  
-  <!-- Text "SS" -->
-  <text x="224" y="260" font-family="monospace, sans-serif" font-weight="900" font-size="220" fill="#FAFAF9" text-anchor="middle" dominant-baseline="central">SS</text>
-  
-  <!-- Accent Geometric Blocks -->
-  <rect x="56" y="328" width="64" height="64" fill="#FF4500" />
-  <rect x="328" y="56" width="64" height="64" fill="#EAB308" />
+  <rect width="512" height="512" fill="#0C0A09"/>
+  <!-- Brutalist "S" Shape - Big, Bold, Blocky -->
+  <path d="M128 128H384V224H224V288H384V384H128V288H288V224H128V128Z" fill="#FF4500"/>
+  <!-- Accent corner squares -->
+  <rect x="0" y="0" width="64" height="64" fill="#A3E635"/>
+  <rect x="448" y="448" width="64" height="64" fill="#EAB308"/>
+  <!-- Sharp Border -->
+  <rect x="16" y="16" width="480" height="480" stroke="#FAFAF9" stroke-width="8" fill="none"/>
 </svg>
