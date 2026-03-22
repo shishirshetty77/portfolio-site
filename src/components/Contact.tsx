@@ -101,8 +101,8 @@ export function Contact() {
               </a>
             </div>
             <div>
-              <h3 className="text-lg font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">Profiles</h3>
-              <p className="text-2xl font-black font-oswald text-foreground uppercase tracking-wide">Social Links</p>
+              <h3 className="text-xs sm:text-sm font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">Profiles</h3>
+              <p className="text-base sm:text-lg font-black font-oswald text-foreground uppercase tracking-wide">Social Links</p>
             </div>
           </motion.div>
         </div>
@@ -154,8 +154,8 @@ function ContactCard({
         )}
       </div>
       <div>
-        <h3 className="text-lg font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">{title}</h3>
-        <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-black font-oswald text-foreground uppercase tracking-wide whitespace-nowrap overflow-hidden">{detail}</p>
+        <h3 className="text-xs sm:text-sm font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">{title}</h3>
+        <p className="text-xs xs:text-sm sm:text-base md:text-lg font-black font-oswald text-foreground uppercase tracking-wide whitespace-nowrap overflow-hidden">{detail}</p>
       </div>
     </CardWrapper>
   );
