@@ -42,17 +42,15 @@ export function Contact() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          {/* Email Card - Span full width to accommodate full address */}
-          <div className="md:col-span-2">
-            <ContactCard 
-              href="mailto:shishirshetty77@gmail.com"
-              icon={Mail}
-              title="Email"
-              detail="shishirshetty77@gmail.com"
-              colorClass="primary"
-              shadowColor="rgba(255,69,0,1)"
-            />
-          </div>
+          {/* Email Card */}
+          <ContactCard 
+            href="mailto:shishirshetty77@gmail.com"
+            icon={Mail}
+            title="Email"
+            detail="shishirshetty77@gmail.com"
+            colorClass="primary"
+            shadowColor="rgba(255,69,0,1)"
+          />
 
           {/* Phone Card */}
           <ContactCard 
@@ -103,8 +101,8 @@ export function Contact() {
               </a>
             </div>
             <div>
-              <h3 className="text-lg font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">Social Profiles</h3>
-              <p className="text-2xl font-black font-oswald text-foreground uppercase tracking-wide">Connect with me</p>
+              <h3 className="text-lg font-mono font-bold text-gray-400 mb-2 uppercase tracking-widest">Profiles</h3>
+              <p className="text-2xl font-black font-oswald text-foreground uppercase tracking-wide">Social Links</p>
             </div>
           </motion.div>
         </div>
