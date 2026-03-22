@@ -1,6 +1,6 @@
 # =============================================================================
 # Portfolio Site - Kubernetes Ingress Manifest
-# Manages external access with TLS termination and routing
+# Manages external access with TLS termination and routing and also https
 # =============================================================================
 apiVersion: networking.k8s.io/v1
 kind: Ingress
