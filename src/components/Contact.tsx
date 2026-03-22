@@ -139,7 +139,7 @@ function ContactCard({
       transition={{ duration: 0.5 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`group relative p-8 bg-background border-2 transition-all duration-200 block ${isHovered ? `border-${colorClass}` : 'border-border-color'}`}
+      className={`group relative p-6 sm:p-8 bg-background border-2 transition-all duration-200 block ${isHovered ? `border-${colorClass}` : 'border-border-color'}`}
       style={{
         boxShadow: isHovered ? `8px 8px 0px ${shadowColor}` : '4px 4px 0px rgba(255,255,255,0.1)',
         transform: isHovered ? 'translate(-4px, -4px)' : 'none'
